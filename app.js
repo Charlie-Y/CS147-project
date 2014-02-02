@@ -6,13 +6,15 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
-var handlebars = require('express3-handlebars')
+var handlebars = require('express3-handlebars');
 var sass = require('node-sass');
 
 
 
 
 var index = require('./routes/index');
+var video = require('./routes/video');
+var sandbox = require('./routes/sandbox');
 // Example route
 // var user = require('./routes/user');
 
@@ -49,6 +51,9 @@ if ('development' == app.get('env')) {
 
 // Add routes here
 app.get('/', index.view);
+app.get('/video/:id', video.watchVideo);
+app.get('/sandbox', sandbox.view);
+
 // Example route
 // app.get('/users', user.list);
 
