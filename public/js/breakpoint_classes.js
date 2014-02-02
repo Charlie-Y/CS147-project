@@ -283,6 +283,7 @@ function onYouTubeIframeAPIReady() {
         height: '390',
         width: '640',
         videoId: 'moSFlvxnbgk',
+        playerVars: {controls: 0},
         events: {
             'onReady': video.onPlayerReady,
             'onPlayerStateChange': video.onPlayerStateChange
