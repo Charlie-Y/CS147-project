@@ -1,0 +1,24 @@
+#container {
+  background: #1b1b1b; }
+
+#player {
+  display: inline-block; }
+
+.breakpoints-ul {
+  color: white;
+  list-style: none;
+  padding: 1.3em;
+  background: #1b1b1b; }
+
+.breakpoint-header-li {
+  font-size: 1.3em; }
+
+.breakpoint {
+  display: block;
+  font-size: 1em;
+  padding: 1.3em;
+  color: white; }
+  .breakpoint:hover {
+    text-decoration: none; }
+  .breakpoint .breakpoint-time {
+    font-size: 1.4em; }

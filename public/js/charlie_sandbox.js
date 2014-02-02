@@ -33,12 +33,16 @@ var video; // GLOBAL MUAHHAHAHA
 function initializePage() {
     // add any functionality and listeners you want here
     // this is global. ew
+
     video = new BreakPointVideo('player');
     BreakPointVideo.setMainInstance(video);
     video.renderOnPage();
 }
 
 
+function shoot(){
+
+}
 
 
 

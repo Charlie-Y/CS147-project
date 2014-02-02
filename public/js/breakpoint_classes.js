@@ -40,6 +40,9 @@ var BreakPointVideo = new JS.Class({
     toString: function() {
         return "Player for " + this.elementId;
     },
+
+    // ===== Youtube API methods ====== //
+
     setPlayer: function(ytPlayer) {
         this.player = ytPlayer
     },
@@ -76,12 +79,15 @@ var BreakPointVideo = new JS.Class({
         this.breakpointsById = {}
         for (var i = rawBreakpoints.length - 1; i >= 0; i--) {
             raw = rawBreakpoints[i]
-            var bp = new BreakPoint(raw.time, raw.desc, raw.breakPointId);
+            var bp = BreakPoint.initFromData(raw);
             devBreakpoints.push(bp)
             this.breakpointsById[bp.breakPointId] = bp;
         }
 
         this.breakpoints = devBreakpoints;
+        this.breakpoints.sort( function(a,b){
+            return a.startTime - b.startTime;
+        });
     },
 
     getBreakPoint: function(id){
@@ -100,7 +106,7 @@ var BreakPointVideo = new JS.Class({
     // TODO -refactor
     // 
     renderList: function(){
-        var list = $("<ul class='breakpoints-ul'><li>Breakpoint list</li></ul>");
+        var list = $("<ul class='breakpoints-ul'><li class='breakpoint-header-li'>Breakpoints</li></ul>");
         for (var i =0; i < this.breakpoints.length; i++){
             var breakpoint = this.breakpoints[i]
             var bpstring = "<li>" + breakpoint.htmlString() + "</li>";
@@ -109,7 +115,7 @@ var BreakPointVideo = new JS.Class({
         }
         var player = $('#' + this.elementId);
         // console.log(player);
-        list.appendTo($('body'));
+        list.appendTo($("#breakpoint-container"));
         // console.log(list);
     },
 
@@ -148,15 +154,7 @@ var BreakPoint = new JS.Class({
         initializeBreakPointListeners: function() {
 
         },
-        timeInMinsSeconds: function(timeInSeconds) {
-            mins = Math.floor(timeInSeconds / 60)
-            seconds = timeInSeconds % 60
-            // return {'mins': mins, 'seconds': seconds}
-            if (seconds < 10){
-                seconds = "0" + seconds
-            }
-            return mins + " : " + seconds
-        },
+        
         devBreakpoints: function() {
             breakpoints = [
                 {
@@ -176,6 +174,9 @@ var BreakPoint = new JS.Class({
                 }
             ];
             return breakpoints;
+        },
+        initFromData: function(data){
+            return  new BreakPoint(raw.time, raw.desc, raw.breakPointId);
         }
 
     },
@@ -187,6 +188,8 @@ var BreakPoint = new JS.Class({
         this.desc = desc;
         this.breakPointId = breakPointId;
     },
+
+
 
     // ====== Instance Variables ====== //
     // this.startTime - in seconds
@@ -207,11 +210,21 @@ var BreakPoint = new JS.Class({
         return "Time: " + this.startTime + ", Desc: " + this.desc + ", Id: " + this.breakPointId;
     },
 
+    timeInMinsSeconds: function(timeInSeconds) {
+        mins = Math.floor(timeInSeconds / 60)
+        seconds = timeInSeconds % 60
+        // return {'mins': mins, 'seconds': seconds}
+        if (seconds < 10){
+            seconds = "0" + seconds
+        }
+        return mins + " : " + seconds
+    },
+
     displayStartTime: function(){
-        return Breakpoint.timeInMinsSeconds(this.startTime);
+        return this.timeInMinsSeconds(this.startTime);
     },
     displayEndTime: function(){
-        return Breakpoint.timeInMinsSeconds(this.endTime);
+        return this.timeInMinsSeconds(this.endTime);
     },
 
     duration: function(){
@@ -224,15 +237,24 @@ var BreakPoint = new JS.Class({
 
     // this is going to be fun
     // somehow this needs to work
+    // THIS SUCKS AND IS GOING TO BE A LOT OF WORK
     getImage: function(){
+
+
+
+
+
+
         console.log("TODO get image thumbnails working");
     },
 
     // ===== html instance methods === ///
     // using jquery, because laziness > speed of site
+    // also i would like some kind of templating because this is awful and annoying
 
     timeDivString: function(){
-        var div =  "<div class='breakpoint-time'>"+ this.startTime + "</div>";
+        var time = this.displayStartTime();
+        var div =  "<div class='breakpoint-time'>"+  time + "</div>";
         return div;
     },
 

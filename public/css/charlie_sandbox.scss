@@ -1,0 +1,40 @@
+
+$slate-grey: #1b1b1b;
+
+#container{
+    background: $slate-grey;
+}
+
+#player{
+    display: inline-block;
+}
+
+
+.breakpoints-ul{
+    color:white;
+    list-style: none;
+    padding: 1.3em;
+    background: $slate-grey;
+}
+
+.breakpoint-header-li{
+    font-size: 1.3em;
+}
+
+
+
+.breakpoint{
+    display: block;
+    font-size: 1em;
+    padding: 1.3em;
+    color: white;
+    &:hover{
+        text-decoration: none;
+
+    }
+    .breakpoint-time{
+        font-size:1.4em;
+    }
+    .breakpoint-name{
+    }
+}
