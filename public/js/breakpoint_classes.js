@@ -1,4 +1,13 @@
-// todo refactor the html class names properly
+// TODO -refactor, controls and listeners seem all over the place right now
+
+// TODO - error checking to make sure that nothing breaks
+    // like breakpoints giving bad times
+// todo make sure the js controls the html and widths etc
+// todo make a poper control system after first agreeing on what it should look like
+// and how it should respond
+// Todo make the loaders and savers hit the database - first set up a database
+// todo - maybe impossibly get image thumbnails. based on the dimensions of the final,
+// this might not actually be necessary
 
 
 
@@ -174,7 +183,6 @@ var BreakPointVideo = new JS.Class({
         this.seekTo(timeInSeconds, true);
     },
 
-    // Todo make this hit the database
     addBreakPoint: function() {
 
     },
@@ -183,7 +191,6 @@ var BreakPointVideo = new JS.Class({
 
     // ========= Html related methods ====== //
 
-    // TODO -refactor, controls and listeners seem all over the place right now
     renderList: function(){
         var list = $("<ul class='breakpoints-ul'></ul>");
         // var list = $("<ul class='breakpoints-ul'><li class='breakpoint-header-li'>Breakpoints</li></ul>");
@@ -261,7 +268,7 @@ var BreakPoint = new JS.Class({
         initializeBreakPointListeners: function() {
 
         },
-        
+
         devBreakpoints: function() {
             breakpoints = [
                 {
@@ -281,7 +288,7 @@ var BreakPoint = new JS.Class({
                 },
                 {
                     time: 235,
-                    desc: 'Random title',
+                    desc: 'Break me!',
                     breakPointId: 4
                 },
                 {
@@ -387,13 +394,6 @@ var BreakPoint = new JS.Class({
     // THIS SUCKS AND IS GOING TO BE A LOT OF WORK
     // and is also nearly impossible
     getImage: function(){
-
-
-
-
-
-
-        console.log("TODO get image thumbnails working");
     },
 
     // ===== html instance methods === ///

@@ -49,10 +49,11 @@
   background: #1b1b1b; }
 
 .breakpoint-li {
-  background: #191919;
   max-height: 45px;
   overflow: hidden; }
-  .breakpoint-li:nth-child(odd) {
+  .breakpoint-li .breakpoint {
+    background: #191919; }
+  .breakpoint-li:nth-child(odd) .breakpoint {
     background: #222222; }
 
 .breakpoint {

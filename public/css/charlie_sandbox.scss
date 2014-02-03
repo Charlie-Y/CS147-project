@@ -58,7 +58,7 @@ $BREAKPOINT_HEIGHT: 45px;
     }
     .player-slider{
         width: 100%;
-        
+
     }
     .player-iframe{
         width: $VIDEO_WIDTH;
@@ -101,13 +101,14 @@ $BREAKPOINT_HEIGHT: 45px;
 }
 
 .breakpoint-li{
-    background:#191919;
-    &:nth-child(odd){
+    .breakpoint{
+        background:#191919;
+    }
+    &:nth-child(odd) .breakpoint{
         background:#222222;
     }    
     max-height: $BREAKPOINT_HEIGHT;
     overflow:hidden;
-
 }
 
 .breakpoint{
