@@ -18,9 +18,11 @@ $(document).ready(function() {
  */
 function initializePage() {
     // add any functionality and listeners you want here
-    var video; 
-    video = new BreakPointVideo('player-iframe');
-    BreakPointVideo.setMainInstance(video);
+    if($('#player').length > 0){
+        var video; 
+        video = new BreakPointVideo('player-iframe');
+        BreakPointVideo.setMainInstance(video);
+    }
 }
 
 

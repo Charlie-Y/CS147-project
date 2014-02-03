@@ -30,7 +30,7 @@ var BreakPointPlayer = new JS.Class({
         VIDEO_HEIGHT: '250', // landscape, confusing i know
         VIDEO_CONTROL_HEIGHT: '70',
 
-        CONTROLS: 0 // 0 for no default youtube controls, 1 for youtube controls
+        CONTROLS: 1 // 0 for no default youtube controls, 1 for youtube controls
 
 
         
