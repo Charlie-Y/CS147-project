@@ -1,3 +1,61 @@
+// todo refactor the html class names properly
+
+
+
+// handles the various UI of the vidoe player
+// needs to make sure that the video player is the right size depending on 
+// the device. 
+// this will initialize all the random things 
+var BreakPointPlayer = new JS.Class({
+    
+
+    extend: {
+        // ====== Class variables ====== //
+
+        // these are being moved to the css
+        // or they should be the same across
+        SMARTPHONE_HEIGHT: '480', //in portrait orientation
+        SMARTPHONE_WIDTH: '320', // also in portrait orientation
+        SIDE_NAV_WIDTH: '130',
+        VIDEO_WIDTH: '350', // landscape
+        VIDEO_HEIGHT: '250', // landscape, confusing i know
+        VIDEO_CONTROL_HEIGHT: '70',
+
+        CONTROLS: 0 // 0 for no default youtube controls, 1 for youtube controls
+
+
+        
+        // ====== Class methods ====== //
+
+    },
+
+    // ====== Instance Variables ==== ///
+    // does this make sense to mirror the html with the js?
+    // i mean, how much do i care?
+    // the goal of the refactoring is to make this easier for myself 
+    // and others to work with...
+
+    // this.video
+    // this.control
+    // this.menu
+    // this.breakpoints
+
+    // ====== Constructor ==== //
+
+    initialize: function(){
+
+    },
+
+})
+
+var BreakPointVideoControls = new JS.Class({
+
+});
+
+
+
+// handles the video loading playing controls 
+// and also events based on the Youtube Player object
 var BreakPointVideo = new JS.Class({
 
     // ======= Class variables ==== //
@@ -20,7 +78,7 @@ var BreakPointVideo = new JS.Class({
 
     /* ===== Instance Variables ====== */
     // this.elementId
-    // this.player 
+    // this.youtubePlayer 
     // this.breakpoints []
     // this.breakpointsById {}
     // this.breakpointsegments
@@ -34,7 +92,7 @@ var BreakPointVideo = new JS.Class({
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
         this.elementId = elementId;
         this.done = false;
-        this.initializeBreakPoints();
+        this.breakpoints = [];
     },
     // "instance" methods
     toString: function() {
@@ -43,27 +101,44 @@ var BreakPointVideo = new JS.Class({
 
     // ===== Youtube API methods ====== //
 
-    setPlayer: function(ytPlayer) {
-        this.player = ytPlayer
+    setPlayer: function(youtubePlayer) {
+        this.youtubePlayer = youtubePlayer;
     },
     onPlayerReady: function (event) {
         // console.log("onPlayerReady");
         // console.log(event.target.breakPointVideo.toString());
         // event.target.stopVideo();   
-        // event.target.playVideo();   
-        event.target.seekTo(13, true);
+        // event.target.playVideo();  
+        player = event.target
+        player.breakPointVideo = BreakPointVideo.getMainInstance();
+        var video = BreakPointVideo.getMainInstance();
+        video.setPlayer(player);
+        video.onVideoLoaded();
+        video.renderOnPage();
+ 
+        player.seekTo(13, true);
     },
     // this is really important
     onPlayerStateChange: function (event) {
     },
+    onVideoLoaded: function(){
+        this.initializeBreakPoints();
+        this.initializeControls();
+    },
     stopVideo: function () {
-        this.player.stopVideo();
+        this.youtubePlayer.stopVideo();
     },
     playVideo: function() {
-        this.player.playVideo();
+        this.youtubePlayer.playVideo();
     },
     seekTo: function(time) {
-        this.player.seekTo(time, true);
+        this.youtubePlayer.seekTo(time, true);
+    },
+    getTime: function(){
+        return this.youtubePlayer.getCurrentTime();
+    },
+    getVideoLength: function(){
+        return this.youtubePlayer.getDuration();
     },
 
 
@@ -99,23 +174,28 @@ var BreakPointVideo = new JS.Class({
         this.seekTo(timeInSeconds, true);
     },
 
+    // Todo make this hit the database
+    addBreakPoint: function() {
+
+    },
+
 
 
     // ========= Html related methods ====== //
 
-    // TODO -refactor
-    // 
+    // TODO -refactor, controls and listeners seem all over the place right now
     renderList: function(){
-        var list = $("<ul class='breakpoints-ul'><li class='breakpoint-header-li'>Breakpoints</li></ul>");
+        var list = $("<ul class='breakpoints-ul'></ul>");
+        // var list = $("<ul class='breakpoints-ul'><li class='breakpoint-header-li'>Breakpoints</li></ul>");
         for (var i =0; i < this.breakpoints.length; i++){
             var breakpoint = this.breakpoints[i]
-            var bpstring = "<li>" + breakpoint.htmlString() + "</li>";
+            var bpstring = "<li class='breakpoint-li'>" + breakpoint.htmlString() + "</li>";
             // console.log(bpstring);
             $(bpstring).appendTo(list);
         }
         var player = $('#' + this.elementId);
         // console.log(player);
-        list.appendTo($("#breakpoint-container"));
+        list.appendTo($("#player-breakpoints"));
         // console.log(list);
     },
 
@@ -129,6 +209,34 @@ var BreakPointVideo = new JS.Class({
             console.log("Clicked: " + bp.toString());
         });
     },
+
+    // I will refactor this out into something else...
+    initializeControls: function(){
+        $slider = $('#player-slider')
+        thisVideo = this;
+        // also this won't work because you need multiple inputs and sliders/markers
+        // but maybe this is a starting point...
+
+
+        // setup the correct min and max time
+        $slider.attr('min',0);
+        $slider.attr('max', this.getVideoLength());
+
+        // make it change according to the video time
+        // this needs to be stopped or something when necessary
+        window.setInterval(function(){
+            $slider.val(thisVideo.getTime());
+        }, 300)
+        // make it respond to time changes
+        $slider.on('change', function(){
+            thisSlider = $(this);
+            var val = thisSlider.val();
+            $slider.val(val);
+
+            thisVideo.seekTo(val);
+
+        });
+    },  
 
     // this is the best part, that draws everything to the canvas
     // make sure this happens on an event or something
@@ -146,7 +254,6 @@ var BreakPointVideo = new JS.Class({
 // its more like a breakpoint segment
 var BreakPoint = new JS.Class({
     
-
     // ===== Class methods ====== //
     extend: {
         // sets up the breakpoint listeners
@@ -171,6 +278,46 @@ var BreakPoint = new JS.Class({
                     time: 143,
                     desc: 'So badass',
                     breakPointId: 3
+                },
+                {
+                    time: 235,
+                    desc: 'Random title',
+                    breakPointId: 4
+                },
+                {
+                    time: 44,
+                    desc: 'Foobar',
+                    breakPointId: 5
+                },
+                {
+                    time: 30,
+                    desc: 'More bar',
+                    breakPointId: 6
+                },
+                {
+                    time: 30,
+                    desc: 'More bar',
+                    breakPointId: 7
+                },
+                {
+                    time: 30,
+                    desc: 'More bar',
+                    breakPointId: 8
+                },
+                {
+                    time: 30,
+                    desc: 'More bar',
+                    breakPointId: 9
+                },
+                {
+                    time: 30,
+                    desc: 'More bar',
+                    breakPointId: 10
+                },
+                {
+                    time: 30,
+                    desc: 'More bar',
+                    breakPointId: 11
                 }
             ];
             return breakpoints;
@@ -238,6 +385,7 @@ var BreakPoint = new JS.Class({
     // this is going to be fun
     // somehow this needs to work
     // THIS SUCKS AND IS GOING TO BE A LOT OF WORK
+    // and is also nearly impossible
     getImage: function(){
 
 
@@ -280,15 +428,17 @@ function onYouTubeIframeAPIReady() {
     var player;
     var video = BreakPointVideo.getMainInstance();
     player = new YT.Player(video.elementId, {
-        height: '390',
-        width: '640',
+        height: BreakPointPlayer.VIDEO_HEIGHT,
+        width: BreakPointPlayer.VIDEO_WIDTH,
         videoId: 'moSFlvxnbgk',
-        playerVars: {controls: 0},
+        playerVars: {controls: BreakPointPlayer.CONTROLS},
         events: {
             'onReady': video.onPlayerReady,
             'onPlayerStateChange': video.onPlayerStateChange
         }
         });
-    player.breakPointVideo = video;
-    video.setPlayer(player);
+    // player.breakPointVideo = video;
+    // video.setPlayer(player);
+    // video.onVideoLoaded();
+    // video.renderOnPage();
 }

@@ -17,16 +17,29 @@
 <body id="container">
 
 <!-- All the html and stuff goes here -->
-<div class="col-xs-8">
-    <div id="player"> Video loading! Sit tight</div>
-</div>
-<div class="col-xs-4">
-    <div id="breakpoint-container"></div>
-</div>
-<div class="col-xs-12">
-    <div class="complaint">And then we implement our own video controls!</div>
-</div>
+<div class="smartphone-landscape" id="player">
 
+    <div class="player-main">
+        <div class="player-iframe" id="player-iframe"> Video loading! Sit tight</div>
+        <div class="player-controls">
+            <input class="player-slider" id="player-slider" type='range'>
+        </div>
+    </div>
+    <div class="player-sidenav">
+        <div class="player-menu">
+            Menu 
+        </div>
+        <div class="player-breakpoints" id="player-breakpoints"> 
+
+        </div>
+    </div>
+
+    <!--     <div class="complaint">
+            And then we implement our own video controls!
+            http://www.unheap.com/section/inputs-forms/input-sliders/
+        </div>
+     -->
+</div>
 <!-- Scripts go at the bottom here -->
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="/js/bootstrap.min.js"></script>

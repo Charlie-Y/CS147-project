@@ -1,41 +1,130 @@
-
 $slate-grey: #1b1b1b;
 
 #container{
     background: $slate-grey;
 }
+/* Smartphones (portrait and landscape) ----------- */
+// @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+// /* Styles */
+// }
+
+/* Smartphones (landscape) ----------- */
+// @media only screen and (min-width : 321px) {
+// /* Styles */
+//     #container{
+//         background: blue !mportant;
+//     }
+// }
+
+/* Smartphones (portrait) ----------- */
+// @media only screen and (max-width : 320px) {
+// /* Styles */
+// }
+
+// RIght now these are in the breakpoint_classes js folder as well...
+// TODO - these will be set dynamically sooner or later
+// so that they look right on all the smartphones
+$SMARTPHONE_HEIGHT: 480px; //in portrait orientation
+$SMARTPHONE_WIDTH: 320px; // also in portrait orientation
+
+$VIDEO_WIDTH: 350px;
+$VIDEO_HEIGHT: 270px;
+
+// this logic is useful and can end up in the js
+$SIDE_NAV_WIDTH: $SMARTPHONE_HEIGHT - $VIDEO_WIDTH;
+$VIDEO_CONTROL_HEIGHT: $SMARTPHONE_WIDTH - $VIDEO_HEIGHT;
+
+$MENU_HEIGHT: 30px;
+$BREAKPOINTS_HEIGHT: $SMARTPHONE_WIDTH - $MENU_HEIGHT;
+$BREAKPOINT_HEIGHT: 45px;
+
+.smartphone-landscape{
+    width:$SMARTPHONE_HEIGHT;
+    height: $SMARTPHONE_WIDTH;
+    background: black;
+}
 
 #player{
-    display: inline-block;
+    position: absolute;
+
+    // Video and controls
+    .player-main{
+        width: $VIDEO_WIDTH;
+        height: $SMARTPHONE_WIDTH;
+        display: inline-block;
+        background: #4c4c4c;
+        position: absolute;
+
+    }
+    .player-slider{
+        width: 100%;
+        
+    }
+    .player-iframe{
+        width: $VIDEO_WIDTH;
+        height: $VIDEO_HEIGHT;
+    }
+    // Side nav
+    .player-sidenav{
+        width: $SIDE_NAV_WIDTH;
+        height: $SMARTPHONE_WIDTH;
+        background: #7f7f7f;
+        // display: inline-block;
+        position: absolute;
+        top:0;
+        right:0;
+    }
+    .player-menu{
+        height: $MENU_HEIGHT;
+        // padding: 5px
+        color: #cccccc;
+        text-align:center;
+        padding-top:5px;
+        padding-bottom:5px;
+        background:#333333;
+    }
+    .player-breakpoints{
+        display: block;
+        overflow-y: auto;
+        height: $BREAKPOINTS_HEIGHT;
+        width: $SIDE_NAV_WIDTH;
+    }
+
 }
 
 
 .breakpoints-ul{
     color:white;
+    padding:0;
     list-style: none;
-    padding: 1.3em;
     background: $slate-grey;
 }
 
-.breakpoint-header-li{
-    font-size: 1.3em;
+.breakpoint-li{
+    background:#191919;
+    &:nth-child(odd){
+        background:#222222;
+    }    
+    max-height: $BREAKPOINT_HEIGHT;
+    overflow:hidden;
+
 }
-
-
 
 .breakpoint{
     display: block;
-    font-size: 1em;
-    padding: 1.3em;
-    color: white;
+    font-size: .8em;
+    color: #e6e6e6;
+    padding: 8px 5px;
     &:hover{
         text-decoration: none;
-
     }
     .breakpoint-time{
-        font-size:1.4em;
+        display: inline;
     }
     .breakpoint-name{
+        color:#666666;
+        margin-left: 6px;
+        display: inline;
     }
 }
 

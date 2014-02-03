@@ -1,27 +1,73 @@
 #container {
   background: #1b1b1b; }
 
+/* Smartphones (portrait and landscape) ----------- */
+/* Smartphones (landscape) ----------- */
+/* Smartphones (portrait) ----------- */
+.smartphone-landscape {
+  width: 480px;
+  height: 320px;
+  background: black; }
+
 #player {
-  display: inline-block; }
+  position: absolute; }
+  #player .player-main {
+    width: 350px;
+    height: 320px;
+    display: inline-block;
+    background: #4c4c4c;
+    position: absolute; }
+  #player .player-slider {
+    width: 100%; }
+  #player .player-iframe {
+    width: 350px;
+    height: 270px; }
+  #player .player-sidenav {
+    width: 130px;
+    height: 320px;
+    background: #7f7f7f;
+    position: absolute;
+    top: 0;
+    right: 0; }
+  #player .player-menu {
+    height: 30px;
+    color: #cccccc;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background: #333333; }
+  #player .player-breakpoints {
+    display: block;
+    overflow-y: auto;
+    height: 290px;
+    width: 130px; }
 
 .breakpoints-ul {
   color: white;
+  padding: 0;
   list-style: none;
-  padding: 1.3em;
   background: #1b1b1b; }
 
-.breakpoint-header-li {
-  font-size: 1.3em; }
+.breakpoint-li {
+  background: #191919;
+  max-height: 45px;
+  overflow: hidden; }
+  .breakpoint-li:nth-child(odd) {
+    background: #222222; }
 
 .breakpoint {
   display: block;
-  font-size: 1em;
-  padding: 1.3em;
-  color: white; }
+  font-size: 0.8em;
+  color: #e6e6e6;
+  padding: 8px 5px; }
   .breakpoint:hover {
     text-decoration: none; }
   .breakpoint .breakpoint-time {
-    font-size: 1.4em; }
+    display: inline; }
+  .breakpoint .breakpoint-name {
+    color: #666666;
+    margin-left: 6px;
+    display: inline; }
 
 .complaint {
   color: white; }
