@@ -2,6 +2,11 @@
 
 
 exports.view = function(req, res){
-    res.render('charlie_sandbox');
+    var videoId = req.params.videoId; 
+    res.render('charlie_sandbox',
+        {
+            'videoId': videoId
+        });
+
 };
 

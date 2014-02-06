@@ -30,7 +30,7 @@ var BreakPointPlayer = new JS.Class({
         VIDEO_HEIGHT: '250', // landscape, confusing i know
         VIDEO_CONTROL_HEIGHT: '70',
 
-        CONTROLS: 1 // 0 for no default youtube controls, 1 for youtube controls
+        CONTROLS: 0 // 0 for no default youtube controls, 1 for youtube controls
 
 
         
@@ -87,6 +87,7 @@ var BreakPointVideo = new JS.Class({
 
     /* ===== Instance Variables ====== */
     // this.elementId
+    // this.ytId - the youtube id
     // this.youtubePlayer 
     // this.breakpoints []
     // this.breakpointsById {}
@@ -99,8 +100,20 @@ var BreakPointVideo = new JS.Class({
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        
+
+
+        $iframe = $('.player-video-id'); // TODO refactor this
+        // finds the video from the url and plays it
+        ytId = $iframe.attr('data-video-id');
+        if (ytId.length > 0 ){
+            this.ytId = ytId;
+        } else {
+            this.ytId = 'moSFlvxnbgk';
+        }
+
         this.elementId = elementId;
-        this.done = false;
+        this.firstTimePlayed = false;
         this.breakpoints = [];
     },
     // "instance" methods
@@ -135,10 +148,23 @@ var BreakPointVideo = new JS.Class({
             // console.log("video ended");
             player.playVideo();
         }
+        if (event.data == YT.PlayerState.CUED){
+            player.breakPointVideo.onVideoCued();
+            console.log("Cued");
+        }
 
     },
     onVideoLoaded: function(){
         this.initializeBreakPoints();
+        
+        var thisPlayer = this;
+        // setInterval(function(){
+        //     console.log("Duration: " + thisPlayer.getVideoLength());
+        // }, 200);
+        
+    },
+    onVideoCued: function ()
+    {
         this.initializeControls();
     },
     stopVideo: function () {
@@ -154,7 +180,11 @@ var BreakPointVideo = new JS.Class({
         return this.youtubePlayer.getCurrentTime();
     },
     getVideoLength: function(){
-        return this.youtubePlayer.getDuration();
+        if (this.youtubePlayer){
+            return this.youtubePlayer.getDuration();
+        } else {
+            return -1;
+        }
     },
 
 
@@ -234,7 +264,10 @@ var BreakPointVideo = new JS.Class({
 
         // setup the correct min and max time
         $slider.attr('min',0);
-        $slider.attr('max', this.getVideoLength());
+
+        var maxLength = this.getVideoLength();
+        console.log("maxLength: " + maxLength);
+        $slider.attr('max', maxLength);
 
         // make it change according to the video time
         // this needs to be stopped or something when necessary
@@ -437,7 +470,7 @@ function onYouTubeIframeAPIReady() {
     player = new YT.Player(video.elementId, {
         height: BreakPointPlayer.VIDEO_HEIGHT,
         width: BreakPointPlayer.VIDEO_WIDTH,
-        videoId: 'moSFlvxnbgk',
+        videoId: video.ytId,
         playerVars: {controls: BreakPointPlayer.CONTROLS},
         events: {
             'onReady': video.onPlayerReady,

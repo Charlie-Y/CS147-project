@@ -53,6 +53,7 @@ if ('development' == app.get('env')) {
 app.get('/', index.view);
 app.get('/video/:id', video.watchVideo);
 app.get('/sandbox', sandbox.view);
+app.get('/sandbox/:videoId', sandbox.view);
 
 // Example route
 // app.get('/users', user.list);
