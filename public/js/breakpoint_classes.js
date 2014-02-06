@@ -129,6 +129,13 @@ var BreakPointVideo = new JS.Class({
     },
     // this is really important
     onPlayerStateChange: function (event) {
+        var player = event.target;
+        // console.log("State changed");
+        if (event.data == YT.PlayerState.ENDED ){
+            // console.log("video ended");
+            player.playVideo();
+        }
+
     },
     onVideoLoaded: function(){
         this.initializeBreakPoints();
@@ -434,7 +441,8 @@ function onYouTubeIframeAPIReady() {
         playerVars: {controls: BreakPointPlayer.CONTROLS},
         events: {
             'onReady': video.onPlayerReady,
-            'onPlayerStateChange': video.onPlayerStateChange
+            'onStateChange': video.onPlayerStateChange
+            // 'onPlayerStateChange': function(){ console.log("change");}
         }
         });
     // player.breakPointVideo = video;
