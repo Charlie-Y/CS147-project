@@ -16,3 +16,29 @@ h1, h2, h3, h4, h5, h6, p {
      border-radius: 10px;
      padding: 10px;
 }
+
+.menubar {
+     background-color:#33CCFF;
+     height: 40px;
+     text-align: center;
+}
+
+.menubar a {
+     color: white;
+}
+
+.menubar span {
+     height: 40px;
+}
+
+.helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.menubar img {
+     height: 30px;
+     line-height: 40px;
+     vertical-align: middle;
+}
