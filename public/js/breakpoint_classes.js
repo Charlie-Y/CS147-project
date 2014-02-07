@@ -92,6 +92,7 @@ var BreakPointVideo = new JS.Class({
     // this.breakpoints []
     // this.breakpointsById {}
     // this.breakpointsegments
+    // this.firstPlay 
 
 
     // ===== Constructor ===== //
@@ -113,7 +114,7 @@ var BreakPointVideo = new JS.Class({
         }
 
         this.elementId = elementId;
-        this.firstTimePlayed = false;
+        this.firstPlay = false;
         this.breakpoints = [];
     },
     // "instance" methods
@@ -143,27 +144,35 @@ var BreakPointVideo = new JS.Class({
     // this is really important
     onPlayerStateChange: function (event) {
         var player = event.target;
-        // console.log("State changed");
+        var video = player.breakPointVideo
+        // console.log("State changed: " + event.data);
+        // console.log("Duration : " + player.getDuration());
+        // console.log("State Cued: " + YT.PlayerState.CUED);
         if (event.data == YT.PlayerState.ENDED ){
             // console.log("video ended");
             player.playVideo();
         }
-        if (event.data == YT.PlayerState.CUED){
-            player.breakPointVideo.onVideoCued();
-            console.log("Cued");
+        if (event.data == YT.PlayerState.PLAYING && !video.firstPlay){
+            video.onVideoFirstPlay();
+            video.firstPlay = true;
+            // console.log("firstPlay");
         }
+        // if (event.data == YT.PlayerState.CUED){
+        //     player.breakPointVideo.onVideoCued();
+        //     console.log("Cued");
+        // }
 
     },
     onVideoLoaded: function(){
         this.initializeBreakPoints();
         
-        var thisPlayer = this;
+        // var thisPlayer = this;
         // setInterval(function(){
         //     console.log("Duration: " + thisPlayer.getVideoLength());
         // }, 200);
         
     },
-    onVideoCued: function ()
+    onVideoFirstPlay: function ()
     {
         this.initializeControls();
     },
@@ -266,7 +275,7 @@ var BreakPointVideo = new JS.Class({
         $slider.attr('min',0);
 
         var maxLength = this.getVideoLength();
-        console.log("maxLength: " + maxLength);
+        // console.log("maxLength: " + maxLength);
         $slider.attr('max', maxLength);
 
         // make it change according to the video time
