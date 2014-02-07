@@ -6,7 +6,7 @@
 
 .thumbnail {
 	height: 90px;
-	width: 100px;
+	width: 140px;
 	border: 2px;
 }
 
@@ -24,6 +24,7 @@ hr {
 
 .description {
 	line-height: 1.0;
+	font-size: 80%;
 }
 
 h4 {
