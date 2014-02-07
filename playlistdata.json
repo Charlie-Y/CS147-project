@@ -4,6 +4,15 @@
 			"title": "How to Dougie",
 			"description": "Learn some moves inspired by Zendaya's 'Replay' Music Video Dance on Clevver Breakdown!",
 			"vidid": "1",
+			"duration": "07:56",
+            "breakpoints": [
+                {
+                    "name": "A",
+                    "start": "01:33",
+                    "end": "01:56"
+                }
+            ],
+            "videoURL": "",
 			"imageURL": "http://c85c7a.medialib.glogster.com/media/9e/9e681903b694c4ba6ce0feb2d8e390d7e680230c0cc677da7cc0226cfbd9501f/dougie-jpg.jpg"			
 		},
 		{
