@@ -1,0 +1,37 @@
+.videoitem {
+	height: 90px;
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+
+.thumbnail {
+	height: 90px;
+	width: 100px;
+	border: 2px;
+}
+
+hr {
+  background-color: white;
+  border-color: white;
+  color: white;
+}
+
+.title {
+	font-weight: 600;
+	font-size: 120%;
+	color: #CCFFFF;
+}
+
+.description {
+	line-height: 1.0;
+}
+
+h4 {
+	font-weight: 900;
+}
+
+hr {
+	background-color: #CCFFFF;
+	color: #CCFFFF;
+	border-color: #CCFFFF;
+}

@@ -1,0 +1,40 @@
+{
+	"videos": [
+		{
+			"title": "How to Dougie",
+			"description": "A description of adjsk vjkzc vjkc kHas awesome pet mice",
+			"vidid": "1",
+			"imageURL": "http://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Douglas_Engelbart_in_2008.jpg/972px-Douglas_Engelbart_in_2008.jpg"			
+		},
+		{
+			"title": "Ivan Sutherland",
+			"description": "Great at sketching",
+			"vidid": "1",
+			"imageURL": "http://upload.wikimedia.org/wikipedia/commons/5/5c/Ivan_Sutherland_at_CHM.jpg"			
+		},
+		{
+			"title": "Basic Salsa Steps 1-2-3",
+			"description": "Uses big words like 'symbiosis'",
+			"vidid": "1",
+			"imageURL": "http://upload.wikimedia.org/wikipedia/commons/6/66/J._C._R._Licklider.jpg"			
+		},
+		{
+			"title": "Vannevar Bush",
+			"description": "Has stellar associative memory",
+			"vidid": "1",
+			"imageURL": "http://upload.wikimedia.org/wikipedia/commons/e/ea/Vannevar_Bush_portrait.jpg"			
+		},
+		{
+			"title": "Alan C. Kay",
+			"description": "In love with his laptop",
+			"vidid": "1",
+			"imageURL": "http://upload.wikimedia.org/wikipedia/commons/7/76/Alan_Kay_%283097597186%29.jpg"
+		},
+		{
+			"title": "Allen Newell",
+			"description": "Really into psychology",
+			"vidid": "1",
+			"imageURL": "http://www.nap.edu/html/biomems/photo/anewell.JPG"
+		}
+	]
+}

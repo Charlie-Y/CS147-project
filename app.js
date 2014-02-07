@@ -15,13 +15,16 @@ var sass = require('node-sass');
 var index = require('./routes/index');
 var video = require('./routes/video');
 var sandbox = require('./routes/sandbox');
+var playlist = require('./routes/playlist');
+var help = require('./routes/help');
+var create = require('./routes/create');
 // Example route
 // var user = require('./routes/user');
 
 var app = express();
 
 // all environments
-app.set('port', process.env.PORT || 5000);
+app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', handlebars());
 app.set('view engine', 'handlebars');
@@ -54,7 +57,9 @@ app.get('/', index.view);
 app.get('/video/:id', video.watchVideo);
 app.get('/sandbox', sandbox.view);
 app.get('/sandbox/:videoId', sandbox.view);
-
+app.get('/playlist', playlist.view);
+app.get('/help', help.view);
+app.get('/create', create.view);
 // Example route
 // app.get('/users', user.list);
 
