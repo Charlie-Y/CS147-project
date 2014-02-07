@@ -21,6 +21,7 @@ h1, h2, h3, h4, h5, h6, p {
      background-color:#33CCFF;
      height: 40px;
      text-align: center;
+     margin: 0;
 }
 
 .menubar a {
@@ -41,4 +42,8 @@ h1, h2, h3, h4, h5, h6, p {
      height: 30px;
      line-height: 40px;
      vertical-align: middle;
+}
+
+a {
+     text-decoration: none;
 }
