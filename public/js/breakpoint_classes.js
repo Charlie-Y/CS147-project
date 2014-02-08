@@ -11,10 +11,16 @@
 
 
 
-// handles the various UI of the vidoe player
-// needs to make sure that the video player is the right size depending on 
-// the device. 
-// this will initialize all the random things 
+// ****** ====== Class BreakpointPlayer ====== ****** //
+
+// This is a delegator and overview class that encompasses and 
+// communicates between all the little pieces of the breakpoint player
+
+// This includes the breakpoint list, the controls, the video etc. 
+// This class stores all the breakpoints
+
+// I'm not sure if this class should handle all the html or not. I'll think about it
+
 var BreakPointPlayer = new JS.Class({
     
 
@@ -39,23 +45,61 @@ var BreakPointPlayer = new JS.Class({
     },
 
     // ====== Instance Variables ==== ///
-    // does this make sense to mirror the html with the js?
-    // i mean, how much do i care?
-    // the goal of the refactoring is to make this easier for myself 
-    // and others to work with...
 
-    // this.video
-    // this.control
-    // this.menu
-    // this.breakpoints
+    // this.video - an instance of BreakPointVideo
+    // this.control - an instance of BreakPointVideoControls
+    // this.menu - an instance of BreakPointMenu - todo?
+    
+    // this.breakpoints  - an array of BreakPoints
+    // this.breakpointsById - a hash of BreakPoints by their database Id
+
+    // this.iframeId
+
+
+    // ===== Html structure for player ==== //
+
+    /*
+    #player ----------------------------------- this
+        .player-main    
+            .player-video-id
+            #player-iframe .player-iframe ----- this.vidoe
+            .player-controls ------------------ this.controls
+        .player-sidenav
+            .player-menu            
+            .player-breakpoints --------------- this.breakpoints
+                .breakpoint-li
+                    .breakpoint
+                        .breakpoint-time
+                        .breakpoint-name
+    */
 
     // ====== Constructor ==== //
 
-    initialize: function(){
+    initialize: function(playerId)
+    {
+        var iframeId = playerId + "-iframe";
+        this.video = new BreakPointVideo(iframeId);
+        BreakPointVideo.setMainInstance(this.video);
 
+        this.setResizeListeners();
     },
 
+    // make sure that the screen fits
+    setResizeListeners: function(){
+        var thisPlayer = this;
+        $(window).on('resize', function(){
+
+        });
+    }
+
 })
+
+
+// ****** ====== Class BreakPointVideoControls ====== ****** //
+
+
+// This is in charge of everything below the video screen
+// Which is basically creating the javascript object that 
 
 var BreakPointVideoControls = new JS.Class({
 
@@ -63,8 +107,12 @@ var BreakPointVideoControls = new JS.Class({
 
 
 
-// handles the video loading playing controls 
-// and also events based on the Youtube Player object
+
+// ****** ====== Class BreakPointVideo ====== ****** //
+
+// Handles all the youtube API calls and seeking and listeners to
+// the youtube events. 
+
 var BreakPointVideo = new JS.Class({
 
     // ======= Class variables ==== //
@@ -83,9 +131,8 @@ var BreakPointVideo = new JS.Class({
     // ======= Class methods ==== //
 
 
-
-
     /* ===== Instance Variables ====== */
+
     // this.elementId
     // this.ytId - the youtube id
     // this.youtubePlayer 
@@ -237,6 +284,8 @@ var BreakPointVideo = new JS.Class({
 
     // ========= Html related methods ====== //
 
+    // refactor this into the breakpoint
+
     renderList: function(){
         var list = $("<ul class='breakpoints-ul'></ul>");
         // var list = $("<ul class='breakpoints-ul'><li class='breakpoint-header-li'>Breakpoints</li></ul>");
@@ -306,8 +355,11 @@ var BreakPointVideo = new JS.Class({
 });
 
 
-// encapsulates a single time segment in a video, possibly with other stuff
-// its more like a breakpoint segment
+// ****** ====== Class BreakPoint ====== ****** //
+
+// Encapsulates a single time segment in a video, possibly with other stuff
+// Its more like a breakpoint segment
+
 var BreakPoint = new JS.Class({
     
     // ===== Class methods ====== //
