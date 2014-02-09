@@ -50,7 +50,8 @@ $BREAKPOINT_HEIGHT: 45px;
 #player{
     position: relative;
 
-    // Video and controls
+    // ------- Main video and control section ////
+
     .player-main{
         width: $VIDEO_WIDTH;
         height: $SMARTPHONE_WIDTH;
@@ -59,15 +60,72 @@ $BREAKPOINT_HEIGHT: 45px;
         position: absolute;
 
     }
+
+
+    // ----- player controls ------ //
+
+
+
+    .player-controls{
+        position:relative;
+        width:100%;
+        // background: #000080;
+    }
+
     .player-slider{
         width: 100%;
 
     }
+
+    .main-slider{
+        cursor: pointer;
+        width: 100%;
+        // height: 100%;
+        background: #000080;
+
+        height:10px;
+    }
+
+    .slider-breakpoints{
+        // width:100%;   
+        height: 30px;
+        background: #004080;
+    }
+
+    .slider-breakpoint{
+        position:absolute;
+        cursor: pointer;
+
+        left:0;
+    }
+
+    .slider-breakpoint-img{
+        height: 20px;
+        width: 20px;
+        // background:white;
+    }
+
+    .filled-slider{
+        height: 100%;
+        // width:100%;
+        // position: absolute;
+        // left: 95%;
+
+        background: #800000;
+    }
+
+    .control-buttons{
+
+    }
+
+
     .player-iframe{
         width: $VIDEO_WIDTH;
         height: $VIDEO_HEIGHT;
     }
-    // Side nav
+
+    //  ----- Side nav ---------- //
+
     .player-sidenav{
         width: $SIDE_NAV_WIDTH;
         height: $SMARTPHONE_WIDTH;
@@ -77,6 +135,9 @@ $BREAKPOINT_HEIGHT: 45px;
         top:0;
         right:0;
     }
+
+    // little menu thing....
+
     .player-menu{
         height: $MENU_HEIGHT;
         // padding: 5px
@@ -86,6 +147,9 @@ $BREAKPOINT_HEIGHT: 45px;
         padding-bottom:5px;
         background:#333333;
     }
+
+    // ------ Breakpoints container ----- //
+
     .player-breakpoints{
         display: block;
         overflow-y: auto;
@@ -110,11 +174,11 @@ $BREAKPOINT_HEIGHT: 45px;
     &:nth-child(odd) .breakpoint{
         background:#222222;
     }    
-    max-height: $BREAKPOINT_HEIGHT;
     overflow:hidden;
 }
 
 .breakpoint{
+    max-height: $BREAKPOINT_HEIGHT;
     display: block;
     font-size: .8em;
     color: #e6e6e6;
@@ -135,3 +199,4 @@ $BREAKPOINT_HEIGHT: 45px;
 .complaint{
     color:white;
 }
+
