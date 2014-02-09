@@ -1,7 +1,9 @@
 $slate-grey: #1b1b1b;
+$header-height: 40px;
 
 #container{
     background: $slate-grey;
+    margin-top: 40px;
 }
 /* Smartphones (portrait and landscape) ----------- */
 // @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
@@ -34,6 +36,7 @@ $VIDEO_HEIGHT: 270px;
 $SIDE_NAV_WIDTH: $SMARTPHONE_HEIGHT - $VIDEO_WIDTH;
 $VIDEO_CONTROL_HEIGHT: $SMARTPHONE_WIDTH - $VIDEO_HEIGHT;
 
+$MENU_HEIGHT: 0;
 $MENU_HEIGHT: 30px;
 $BREAKPOINTS_HEIGHT: $SMARTPHONE_WIDTH - $MENU_HEIGHT;
 $BREAKPOINT_HEIGHT: 45px;
@@ -45,7 +48,7 @@ $BREAKPOINT_HEIGHT: 45px;
 }
 
 #player{
-    position: absolute;
+    position: relative;
 
     // Video and controls
     .player-main{

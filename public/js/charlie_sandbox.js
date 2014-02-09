@@ -10,7 +10,7 @@ $(document).ready(function() {
 
 
 
-var video; // GLOBAL MUAHHAHAHA
+var player; // GLOBAL MUAHHAHAHA
 
 
 /*
@@ -20,7 +20,7 @@ function initializePage() {
     // add any functionality and listeners you want here
     if($('#player').length > 0){
         // var video; 
-        video = new BreakPointPlayer('player');
+        player = new BreakPointPlayer('player');
         // video = new BreakPointVideo('player-iframe');
         // BreakPointVideo.setMainInstance(video);
     }

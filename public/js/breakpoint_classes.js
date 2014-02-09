@@ -1,3 +1,5 @@
+// TODO - refactor everything into singleton classes. maybe its too late?
+
 // TODO -refactor, controls and listeners seem all over the place right now
 
 // TODO - error checking to make sure that nothing breaks
@@ -11,7 +13,7 @@
 
 
 
-// ****** ====== Class BreakpointPlayer ====== ****** //
+// ****** ====== Class BreakPointPlayer ====== ****** //
 
 // This is a delegator and overview class that encompasses and 
 // communicates between all the little pieces of the breakpoint player
@@ -20,6 +22,11 @@
 // This class stores all the breakpoints
 
 // I'm not sure if this class should handle all the html or not. I'll think about it
+// Lets think about the particluars
+
+
+// it needs html to add and subtract break points
+// to hook up all the controls of the thing
 
 var BreakPointPlayer = new JS.Class({
     
@@ -36,10 +43,18 @@ var BreakPointPlayer = new JS.Class({
         VIDEO_HEIGHT: '250', // landscape, confusing i know
         VIDEO_CONTROL_HEIGHT: '70',
 
-        CONTROLS: 0 // 0 for no default youtube controls, 1 for youtube controls
+        SIDE_NAV_WIDTH_P: 0.20,
+        SIDE_NAV_WIDTH_MAX: '200',
+
+        VIDEO_CONTROL_HEIGHT_P: 0.16,
+        VIDEO_CONTROL_HEIGHT_MAX: '100',
+
+
+        CONTROLS: 0, // 0 for no default youtube controls, 1 for youtube controls
 
 
         
+
         // ====== Class methods ====== //
 
     },
@@ -62,7 +77,7 @@ var BreakPointPlayer = new JS.Class({
     #player ----------------------------------- this
         .player-main    
             .player-video-id
-            #player-iframe .player-iframe ----- this.vidoe
+            #player-iframe .player-iframe ----- this.video
             .player-controls ------------------ this.controls
         .player-sidenav
             .player-menu            
@@ -71,6 +86,20 @@ var BreakPointPlayer = new JS.Class({
                     .breakpoint
                         .breakpoint-time
                         .breakpoint-name
+
+
+    aspectRatio - make sure this is maintained 16:9 or 4:3. probably 16:9
+
+    resize formula
+        get the lesser of height and width
+        set the totalHeight and totalWidth accordingly
+
+        
+        set the sidebar width as a percentage of the screen with a maximum pixel width
+        set the video width as the remaining pixels
+
+        set the video height and width as a set percentage of the total
+
     */
 
     // ====== Constructor ==== //
@@ -81,14 +110,77 @@ var BreakPointPlayer = new JS.Class({
         this.video = new BreakPointVideo(iframeId);
         BreakPointVideo.setMainInstance(this.video);
 
+        this.video.breakPointPlayer = this;
         this.setResizeListeners();
     },
 
+    fitToScreen: function(toFit) {
+        var stats = BreakPointPlayer;
+
+        var thisWindow = toFit;
+        var totalHeight = thisWindow.height() - 40; // todo refactor the menu height. how is that going to work>
+        var totalWidth = thisWindow.width();
+        var isLandscape = true;
+
+        if (totalWidth > totalHeight){
+            isLandscape = true;
+            // console.log("Landscape orientation");
+        } else {
+            isLandscape = false;
+            // console.log("portrait orientation");
+        }
+
+        // get the sidebar width;
+
+        var sideNavWidth;
+        var possibleSideNavWidth = totalWidth * stats.SIDE_NAV_WIDTH_P;
+        if (possibleSideNavWidth < stats.SIDE_NAV_WIDTH_MAX) {
+            sideNavWidth = possibleSideNavWidth;
+        } else {
+            sideNavWidth = stats.SIDE_NAV_WIDTH_MAX;
+        }
+
+        var videoControlHeight;
+        var possibleControlHeight = totalHeight * stats.VIDEO_CONTROL_HEIGHT_P;
+        if (possibleControlHeight < stats.VIDEO_CONTROL_HEIGHT_MAX){
+            videoControlHeight = possibleControlHeight;
+        } else {
+            videoControlHeight = stats.VIDEO_CONTROL_HEIGHT_MAX;
+        }
+
+        var videoHeight = totalHeight - videoControlHeight;
+        var videoWidth = totalWidth - sideNavWidth;
+        
+        var $videoIframe = $('#player-iframe');
+        var $videoControls = $('.player-controls');
+        var $sideNav = $('.player-sidenav');
+        var $playerMainSection = $('.player-main');
+        var $breakpointContainer = $('.player-breakpoints');
+
+        $sideNav.width(sideNavWidth);
+        $sideNav.height(totalHeight);
+
+        $playerMainSection.width(videoWidth);
+        $playerMainSection.height(totalHeight);
+
+        $videoIframe.width(videoWidth);
+        $videoIframe.height(videoHeight);
+        
+        $videoControls.width(videoWidth);
+        $videoControls.height(videoControlHeight);
+
+        $breakpointContainer.width(sideNavWidth);
+        $breakpointContainer.height(totalHeight);
+
+    },
+
+
     // make sure that the screen fits
+    // only landscape
     setResizeListeners: function(){
         var thisPlayer = this;
         $(window).on('resize', function(){
-
+           thisPlayer.fitToScreen($(window));
         });
     }
 
@@ -124,6 +216,18 @@ var BreakPointVideo = new JS.Class({
         },
         getMainInstance: function() {
             return BreakPointVideo.mainInstance;
+        },
+        defaultVideoIds: function(){
+            return [
+                'moSFlvxnbgk', //frozen
+                'CGyEd0aKWZE', // burn
+                '0NKUpo_xKyQ' //lights
+            ]
+        },
+        randomDefaultVideoId: function(){
+            var dV = BreakPointVideo.defaultVideoIds();
+            var randomIndex = Math.floor( Math.random() * dV.length);
+            return dV[randomIndex];
         }
 
     },
@@ -140,6 +244,7 @@ var BreakPointVideo = new JS.Class({
     // this.breakpointsById {}
     // this.breakpointsegments
     // this.firstPlay 
+    // this.breakPointPlayer - the overview element
 
 
     // ===== Constructor ===== //
@@ -157,7 +262,8 @@ var BreakPointVideo = new JS.Class({
         if (ytId.length > 0 ){
             this.ytId = ytId;
         } else {
-            this.ytId = 'moSFlvxnbgk';
+            // this.ytId = 'moSFlvxnbgk';
+            this.ytId = BreakPointVideo.randomDefaultVideoId();
         }
 
         this.elementId = elementId;
@@ -185,8 +291,9 @@ var BreakPointVideo = new JS.Class({
         video.setPlayer(player);
         video.onVideoLoaded();
         video.renderOnPage();
- 
-        player.seekTo(13, true);
+        video.breakPointPlayer.fitToScreen($(window));
+        // player.seekTo(13, true);
+        video.playVideo();
     },
     // this is really important
     onPlayerStateChange: function (event) {
@@ -353,6 +460,9 @@ var BreakPointVideo = new JS.Class({
     } 
 
 });
+
+
+
 
 
 // ****** ====== Class BreakPoint ====== ****** //

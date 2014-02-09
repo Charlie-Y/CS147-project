@@ -1,5 +1,6 @@
 #container {
-  background: #1b1b1b; }
+  background: #1b1b1b;
+  margin-top: 40px; }
 
 /* Smartphones (portrait and landscape) ----------- */
 /* Smartphones (landscape) ----------- */
@@ -10,7 +11,7 @@
   background: black; }
 
 #player {
-  position: absolute; }
+  position: relative; }
   #player .player-main {
     width: 350px;
     height: 320px;
