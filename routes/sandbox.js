@@ -6,7 +6,10 @@ exports.view = function(req, res){
     res.render('charlie_sandbox',
         {
             'layout':'main',
-            'cssFiles': [{filename: 'charlie_sandbox.css'}],
+            'cssFiles': [
+                {filename: 'charlie_sandbox.css'},
+                {filename:'font-awesome.min.css'}
+            ],
             'videoId': videoId
         });
 
