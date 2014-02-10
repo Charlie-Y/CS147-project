@@ -34,8 +34,9 @@
 			<div class="playlist">
 				{{#each videos}}
 					<div class="videoitem">
-						<div class="thumbnails" style="background: url({{imageURL}}); background-size: cover">
-							<a href="/sandbox/{{vidid}}"><div class="over"><span class="helper"></span><span class="glyphicon glyphicon glyphicon-play-circle"></span></div></a>
+
+						<div class="thumbnails" style="background: url({{imageURL}}); background-size: cover" onclick="window.location='/sandbox/1'">
+							<div class="over"><span class="helper"></span><span class="glyphicon glyphicon glyphicon-play-circle"></span></div>
 						</div>
 
 						<div class="title">{{title}}</div>
