@@ -60,7 +60,7 @@ var BreakPointPlayer = new JS.Class({
 
         USE_DEV_BREAKPOINTS: true,
 
-        CONTROLS: 1, // 0 for no default youtube controls, 1 for youtube controls
+        CONTROLS: 0, // 0 for no default youtube controls, 1 for youtube controls
         AUTOPLAY: true
 
         
@@ -251,7 +251,6 @@ var BreakPointPlayer = new JS.Class({
         // console.log(player);
         list.appendTo($("#player-breakpoints"));
     },
-
 
     // ======== Event Listeners ======== //
 
@@ -465,12 +464,43 @@ var BreakPointVideoControls = new JS.Class({
             return false;
         });
 
+        // respond to the click by doing stuff
         this.$sliderBreakpoints.on('click', '.slider-breakpoint', function(event){
             console.log("Sliderbreakpoint clicked");
             var id = $(this).attr('data-bp-id');
             thisControls.breakPointPlayer.goToBreakpointById(id);
         });
 
+        // link the slider breakpoint to the block breakpoint
+        this.$sliderBreakpoints.on('mouseenter', '.slider-breakpoint', function(event){
+            // console.log("Sliderbreakpoint hover");
+            var id = $(this).attr('data-bp-id');
+            var $blockBreakpoint = $('.breakpoint[data-bp-id="'+ id +'"]');
+            $blockBreakpoint.addClass('active');
+        });
+
+        this.$sliderBreakpoints.on('mouseleave', '.slider-breakpoint', function(event){
+            // console.log("Sliderbreakpoint hover");
+            var id = $(this).attr('data-bp-id');
+            var $blockBreakpoint = $('.breakpoint[data-bp-id="'+ id +'"]');
+            $blockBreakpoint.removeClass('active');
+        });
+
+        var $breakpointContainer = $('.player-breakpoints');
+
+        $breakpointContainer.on('mouseenter', '.breakpoint', function(){
+            // console.log("breakpoint mouseenter");
+            var id = $(this).attr('data-bp-id');
+            var $sliderBreakpoint = $('.slider-breakpoint[data-bp-id="'+ id +'"] img');
+            $sliderBreakpoint.addClass('active');
+        });
+
+        $breakpointContainer.on('mouseleave', '.breakpoint', function(event){
+            // console.log("breakpoint mouseleave");
+            var id = $(this).attr('data-bp-id');
+            var $sliderBreakpoint = $('.slider-breakpoint[data-bp-id="'+ id +'"] img');
+            $sliderBreakpoint.removeClass('active');
+        });
     },
 
     setJqueryObjects: function(){
