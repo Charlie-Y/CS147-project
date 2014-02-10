@@ -14,10 +14,10 @@ function FoldedList(button){
 
 	button.click(function() {
 		if(!open) {
-			$(this).next().slideDown();
+			$(this).next().slideDown('slow');
 			open = true;
 		} else {
-			$(this).next().slideUp();
+			$(this).next().slideUp('slow');
 			open = false;
 		}
 	});

@@ -22,7 +22,7 @@ h4 {
 }
 
 .menu {
-	margin-top: 30px;
+	margin-top: 45px;
 }
 
 .menu-button {
@@ -57,7 +57,7 @@ h4 {
 }
 
 
-#button3:active {
+#button3:hover {
 	background-color: #cc0033;
 }
 
@@ -65,7 +65,7 @@ h4 {
 	color: #cc0033;
 }
 
-#button2:active {
+#button2:hover {
 	background-color: #cc3366;
 }
 
@@ -74,7 +74,7 @@ h4 {
 	color: #cc3366;
 }
 
-#button1:active {
+#button1:hover {
 	background-color: #993366;
 }
 
