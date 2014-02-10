@@ -138,7 +138,7 @@ $BREAKPOINT_HEIGHT: 45px;
         padding:5px;
     }
     // all icons in the button bar
-    .control-button .fa{
+    .control-button{
         // @include transition(width, .2s, ease-in);
         cursor:pointer;
         color: #eeeeee;
@@ -151,6 +151,19 @@ $BREAKPOINT_HEIGHT: 45px;
         }
     }
 
+    .control-time{
+        color: #999999;
+    }
+
+    .control-max-time{
+
+    }
+
+    .control-current-time{
+
+    }
+
+
     .control-sound, .control-nosound{
         font-size: .8em;
     }
@@ -160,6 +173,9 @@ $BREAKPOINT_HEIGHT: 45px;
     }
 
 
+    .add-breakpoint-helper{
+        font-size: .5em;
+    }
 
 
 

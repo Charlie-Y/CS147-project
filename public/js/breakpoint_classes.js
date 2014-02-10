@@ -15,6 +15,10 @@ console.log("breakpoint_classes.js");
 // todo all the error checking
 // todo - menubar gets in way of top breakpoint clicking
 // todo - drag and preview functionality
+// todo - scroll to breakpoint
+// todo - active breakpoint fun
+// todo - css resize fonts
+// todo - style the out of this thing
 
 
 
@@ -434,9 +438,10 @@ var BreakPointVideoControls = new JS.Class({
             .control-time
                 .control-current-time
                 .control-max-time
-            .control-addBreakpoint
             .control-sound
-            .control-quality etc...
+            .control-addBreakpoint
+                .add-breakpoint-helper
+
     */
 
     // ======== Instance Methods ====== //
@@ -444,9 +449,22 @@ var BreakPointVideoControls = new JS.Class({
 
     updateTime:function(){
         // translate a time into a percentage
-        var length = this.maxTime();
-        var percent = this.getVideo().getTime() / this.maxTime() * 100;
+        var maxTime = this.maxTime();
+        var currentTime = this.getVideo().getTime();
+        // move the slider
+        var percent = currentTime / maxTime * 100;
         this.$filledSlider.css('width', percent + "%");
+
+        // update the display time
+        if ( this.$maxTime.text().length == 0){
+            // console.log("Settting time");
+            var displayMaxTime = BreakPoint.timeInMinsSeconds(maxTime);
+            this.$maxTime.text(displayMaxTime);
+        }
+
+        var displayCurrentTime = BreakPoint.timeInMinsSeconds(Math.floor(currentTime));
+        this.$currentTime.text(displayCurrentTime);
+
     },
 
     // gets the maximum time for the video
@@ -680,6 +698,8 @@ var BreakPointVideoControls = new JS.Class({
         this.$sliderBreakpoints = $(".slider-breakpoints");
         this.$controlButtons = $(".control-buttons");
         this.updatePausePlayButton();
+        this.$currentTime = $('.control-current-time')
+        this.$maxTime = $('.control-max-time')
 
     },
 
@@ -948,8 +968,16 @@ var BreakPoint = new JS.Class({
         },
         initFromData: function(raw){
             return  new BreakPoint(raw.time, raw.desc, raw.breakPointId);
+        },
+        timeInMinsSeconds: function(timeInSeconds) {
+            mins = Math.floor(timeInSeconds / 60)
+            seconds = timeInSeconds % 60
+            // return {'mins': mins, 'seconds': seconds}
+            if (seconds < 10){
+                seconds = "0" + seconds
+            }
+            return mins + " : " + seconds
         }
-
     },
 
     // ===== Contructor ====== //
@@ -981,21 +1009,12 @@ var BreakPoint = new JS.Class({
         return "Time: " + this.startTime + ", Desc: " + this.desc + ", Id: " + this.breakPointId;
     },
 
-    timeInMinsSeconds: function(timeInSeconds) {
-        mins = Math.floor(timeInSeconds / 60)
-        seconds = timeInSeconds % 60
-        // return {'mins': mins, 'seconds': seconds}
-        if (seconds < 10){
-            seconds = "0" + seconds
-        }
-        return mins + " : " + seconds
-    },
 
     displayStartTime: function(){
-        return this.timeInMinsSeconds(this.startTime);
+        return BreakPoint.timeInMinsSeconds(this.startTime);
     },
     displayEndTime: function(){
-        return this.timeInMinsSeconds(this.endTime);
+        return BreakPoint.timeInMinsSeconds(this.endTime);
     },
 
     duration: function(){
