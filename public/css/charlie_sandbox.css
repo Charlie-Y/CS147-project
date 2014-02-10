@@ -2,6 +2,9 @@
   background: #1b1b1b;
   margin-top: 40px; }
 
+.glyphicon-list {
+  height: 0 !important; }
+
 /* Smartphones (portrait and landscape) ----------- */
 /* Smartphones (landscape) ----------- */
 /* Smartphones (portrait) ----------- */
@@ -29,7 +32,7 @@
     background: #000080;
     height: 10px; }
   #player .slider-breakpoints {
-    height: 20px; }
+    height: 10px; }
   #player .slider-breakpoint {
     position: absolute;
     cursor: pointer;
@@ -42,13 +45,21 @@
     height: 20px;
     width: 20px;
     vertical-align: top; }
+  #player .slider-breakpoint-icon:hover, #player .slider-breakpoint-icon.active {
+    color: #0080ff; }
+  #player .slider-breakpoint-icon {
+    cursor: pointer;
+    font-size: 20px;
+    color: #eeeeee; }
+    #player .slider-breakpoint-icon:active {
+      color: #0000ff; }
   #player .filled-slider {
     height: 100%;
     background: #800000; }
   #player .control-buttons {
     padding-left: 20px; }
   #player .control-button {
-    font-size: 2em;
+    font-size: 1.2em;
     display: inline-block;
     padding: 5px; }
   #player .control-button {

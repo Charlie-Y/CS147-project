@@ -19,7 +19,8 @@ console.log("breakpoint_classes.js");
 // todo - active breakpoint fun
 // todo - css resize fonts
 // todo - style the out of this thing
-
+// todo - hover and show times
+// todo - display todos on blankness
 
 
 // ****** ====== Class BreakPointPlayer ====== ****** //
@@ -545,7 +546,7 @@ var BreakPointVideoControls = new JS.Class({
 
         // respond to the click by doing stuff
         this.$sliderBreakpoints.on('click', '.slider-breakpoint', function(event){
-            console.log("Sliderbreakpoint clicked");
+            // console.log("Sliderbreakpoint clicked");
             var id = $(this).attr('data-bp-id');
             thisControls.breakPointPlayer.goToBreakpointById(id);
         });
@@ -570,14 +571,14 @@ var BreakPointVideoControls = new JS.Class({
         $breakpointContainer.on('mouseenter', '.breakpoint', function(){
             // console.log("breakpoint mouseenter");
             var id = $(this).attr('data-bp-id');
-            var $sliderBreakpoint = $('.slider-breakpoint[data-bp-id="'+ id +'"] img');
+            var $sliderBreakpoint = $('.slider-breakpoint[data-bp-id="'+ id +'"] i');
             $sliderBreakpoint.addClass('active');
         });
 
         $breakpointContainer.on('mouseleave', '.breakpoint', function(event){
             // console.log("breakpoint mouseleave");
             var id = $(this).attr('data-bp-id');
-            var $sliderBreakpoint = $('.slider-breakpoint[data-bp-id="'+ id +'"] img');
+            var $sliderBreakpoint = $('.slider-breakpoint[data-bp-id="'+ id +'"] i');
             $sliderBreakpoint.removeClass('active');
         });
 
@@ -659,7 +660,7 @@ var BreakPointVideoControls = new JS.Class({
     // this is going to be hard...
     setAddBreakpointListeners: function(){
         var thisPlayer = this;
-        this.$controlButtons.on('click', '.control-addBreakpoint', function(){
+        this.$controlButtons.on('click', '.control-addBreakpoint', function(event){
             // there needs to be an ajax request with an onSuccess callback
             // console.log(".control-addBreakpoint clicked");
             // assuming that callback arrives and i have a valid Id to work with
@@ -679,7 +680,8 @@ var BreakPointVideoControls = new JS.Class({
             // you click around the video until you find the next place
 
             // clicking the button again saves the breakpoint
-
+            event.preventDefault();
+            return false;
         });
     },
 
@@ -1059,7 +1061,10 @@ var BreakPoint = new JS.Class({
     },
 
     sliderHtmlString: function(){
-        var elemStr = "<span class='slider-breakpoint' data-bp-id='" + this.breakPointId +"'><img class='slider-breakpoint-img' src='"+ BreakPointPlayer.SLIDER_BREAKPOINT_IMG + "' /></span>";
+        var elemStr = "<span class='slider-breakpoint' data-bp-id='" + this.breakPointId + "'>";
+        // elemStr += "<img class='slider-breakpoint-img' src='"+ BreakPointPlayer.SLIDER_BREAKPOINT_IMG + "' />";
+        elemStr += "<i class='fa fa-tint fa-flip-vertical slider-breakpoint-icon'></i>";
+        elemStr += "</span>";
         return elemStr;
     }
 
