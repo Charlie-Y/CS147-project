@@ -1,5 +1,6 @@
 body {
      background-color:#181818;
+     font-family: 'Source Sans Pro', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6, p {
@@ -13,14 +14,18 @@ h1, h2, h3, h4, h5, h6, p {
      margin-top: 50px;
      margin-left: auto;
      margin-right: auto;
-     background-color:#282828;
      border-radius: 10px;
      padding: 10px;
 }
 
 .menubar {
-     background-color:#33CCFF;
-     height: 40px;
+    background: -moz-linear-gradient(45deg, #cc0099 0%, #ff0033 80%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left bottom, right top, color-stop(10%,#cc0099), color-stop(80%,#ff0033)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(45deg, #cc0099 0%,#ff0033 80%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(45deg, #cc0099 0%,#ff0033 80%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(45deg, #cc0099 0%,#ff0033 80%); /* IE10+ */
+    background: linear-gradient(45deg, #cc0099 0%,#ff0033 80%); /* W3C */
+     height: 45px;
      text-align: center;
      margin: 0;
      position: fixed;
@@ -35,7 +40,7 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .menubar span {
-     height: 40px;
+     height: 50px;
 }
 
 .helper {
@@ -46,10 +51,10 @@ h1, h2, h3, h4, h5, h6, p {
 
 .menubar img {
      height: 30px;
-     line-height: 40px;
+     line-height: 45px;
      vertical-align: middle;
 }
 
-a {
+a:hover {
      text-decoration: none;
 }
