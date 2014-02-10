@@ -40,6 +40,7 @@ h4 {
 	border: 1px solid #505050;
 	font-weight: 200;
 	color: white;
+	box-shadow: 1px 1px 1px #505050;
 }
 
 .menu-text {
@@ -98,13 +99,5 @@ h4 {
 	color: white;
 }
 #button3:active .glyphicon, #button1.active .glyphicon {
-	color: white;
-}
-
-#description {
-	text-align: center;
-	font-family: "Roboto";
-	font-weight: 200;
-	font-size: 9pt;
 	color: white;
 }

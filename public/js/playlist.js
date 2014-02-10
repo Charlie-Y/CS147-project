@@ -3,7 +3,30 @@
 // Call this function when the page loads (the "ready" event)
 $(document).ready(function() {
 	initializePage();
+	$(".folded").each(function() {
+		new FoldedList($(this));
+	});
 })
+
+
+function FoldedList(button){
+	var open = false;
+
+	button.click(function() {
+		if(!open) {
+			$(this).next().slideDown();
+			open = true;
+		} else {
+			$(this).next().slideUp();
+			open = false;
+		}
+	});
+
+	button.next().find(".foldbutton").click(function() {
+		$(this).parent().slideUp();
+		open = false;
+	})
+}
 
 /*
  * Function that is called when the document is ready.

@@ -15,6 +15,7 @@
 </head>
 
 <body>
+	<a name="top"></a>
 	<div class="row menubar">
 		<a href="/"><div class="col-xs-2"><span class="helper"></span><span class="glyphicon glyphicon-chevron-left"></span></div></a>
 		<a href="/"><div class="col-xs-8"><span class="helper"></span><img src="/images/logowhite.png"/></div></a>
@@ -22,33 +23,69 @@
 	</div>
 	<div class="row searchbar">
 		<form action="/search" method="get">
-		<div class="col-xs-10"><span class="helper"></span><input type="text" id="query" value="Search your videos"></div>
+		<div class="col-xs-10"><span class="helper"></span><input type="text" id="query" value="Search your videos..."></div>
 		<div class="col-xs-2"><span class="helper"></span><span id="submit" class="glyphicon glyphicon-search"></div>
 		</form>
 	</div>
-	<a name="top"></a>
+	
 	<div class="container">
-		
-		<h4> YOUR BREAKPOINT VIDEOS <span class="glyphicon glyphicon-facetime-video"></span></h4>
-		<hr>
-		<div class="playlist">
-			{{#each videos}}
-				<div class="row videoitem">
-					<div class="col-xs-5">
-						<img class="thumbnail" src="{{imageURL}}" />
+		<div class="folded"><span class="glyphicon glyphicon-time"></span>RECENTLY WATCHED</div>
+		<div class="list">
+			<div class="playlist">
+				{{#each videos}}
+					<div class="videoitem">
+					<a href="/sandbox/{{vidid}}">
+						<div class="thumbnails" style="background: url({{imageURL}}); background-size: cover">
+							<div class="over"><span class="helper"></span><span class="glyphicon glyphicon glyphicon-play-circle"></span></div>
+						</div>
+					</a>
+						<div class="title">{{title}}</div>
+						<div class="description"> {{description}} </div>
 					</div>
-					<div class="col-xs-7">
-						<a href="/sandbox/{{vidid}}"><h5 class="title">{{title}}</h5></a>
-						<p class="description">{{description}}</p>
-					</div>
-				</div>
-			{{/each}}
+
+				{{/each}}
+			</div>
+			<div class="foldbutton"><span class="glyphicon glyphicon-chevron-up"></div>
 		</div>
-		<div class="row text-center">
-			<a href="#top"><h4> GO BACK TO TOP <span class="glyphicon glyphicon-arrow-up"></span></h4></a>
+		
+		<div class="folded"><span class="glyphicon glyphicon-plus-sign"></span>RECENTLY CREATED</div>
+		<div class="list">
+			<div class="playlist">
+				{{#each videos}}
+					<div class="videoitem">
+					<a href="/sandbox/{{vidid}}">
+						<div class="thumbnails" style="background: url({{imageURL}}); background-size: cover">
+							<div class="over"><span class="helper"></span><span class="glyphicon glyphicon glyphicon-play-circle"></span></div>
+						</div>
+					</a>
+						<div class="title">{{title}}</div>
+						<div class="description"> {{description}} </div>
+					</div>
+
+				{{/each}}
+			</div>
+		</div>
+		
+		<div class="folded"><span class="glyphicon glyphicon-list-alt"></span>YOUR PLAYLISTS</div>
+		<div class="list">
+			<div class="playlist">
+				{{#each videos}}
+					<div class="videoitem">
+					<a href="/sandbox/{{vidid}}">
+						<div class="thumbnails" style="background: url({{imageURL}}); background-size: cover">
+							<div class="over"><span class="helper"></span><span class="glyphicon glyphicon glyphicon-play-circle"></span></div>
+						</div>
+					</a>
+						<div class="title">{{title}}</div>
+						<div class="description"> {{description}} </div>
+					</div>
+
+				{{/each}}
+			</div>
 		</div>
 	</div>
-
+	
+	<a href="#top"><div id="gobacktop"> GO BACK TO TOP <span class="glyphicon glyphicon-arrow-up"></span></div></a>
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/playlist.js"></script>
