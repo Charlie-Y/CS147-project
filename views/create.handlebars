@@ -10,6 +10,7 @@
 	<link href="/css/introHCI.css" rel="stylesheet">
 	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>
 	<link href="/css/application.css" rel="stylesheet">
+	<script src="create.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -20,12 +21,61 @@
 	</div>
 	<div class="container">
 		<div class="row text-center">
-			<h2> Plceholder for CREATE VIDEO page </h2>
+			<h2> Placeholder for CREATE VIDEO page </h2>
 			<a href="/"><button type="button" class="btn btn-default"> Go back Home</button></a>
 			<a href="/sandbox/1"><button type="button" class="btn btn-default"> Select Video to Create </button></a>
 		</div>
 	</div>
+	<div class = "row text-center">
+		<div id="buttons">
+     		 <a><input id="query" type="text"/><button id="search-button" onclick="search()">Search</button></a>
+    	</div>
+    	<div id="search-container">
+    	</div>
+    	<pre id = "response"></pre>
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
+    <script>
+		// Helper function to display JavaScript value on HTML page.
+		function showResponse(response) {
+		    var responseString = JSON.stringify(response, '', 2);
+		    console.log(responseString);
+		}
+
+		// Called automatically when JavaScript client library is loaded.
+		function onClientLoad() {
+		    gapi.client.load('youtube', 'v3', onYouTubeApiLoad);
+		}
+
+		// Called automatically when YouTube API interface is loaded (see line 9).
+		function onYouTubeApiLoad() {
+		    // This API key is intended for use only in this lesson.
+		    // See http://goo.gl/PdPA1 to get a key for your own applications.
+		    gapi.client.setApiKey('AIzaSyCZ3Xe72tMKmRsD_UxziY1PaGetuB5zlKg');
+		}
+
+		function search() {
+			var query = $("#query").val();
+
+		    // Use the JavaScript client library to create a search.list() API call.
+		    var request = gapi.client.youtube.search.list({
+		        q: query,
+		        part: 'snippet'
+		    });
+		    
+		    // Send the request to the API server,
+		    // and invoke onSearchRepsonse() with the response.
+		    request.execute(onSearchResponse);
+		}
+
+		// Called automatically with the response of the YouTube API request.
+		function onSearchResponse(response) {
+		    showResponse(response);
+		}
+	</script>
+
+    <script src="https://apis.google.com/js/client.js?onload=onClientLoad"></script>
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 </body>
