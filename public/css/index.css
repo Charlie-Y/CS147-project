@@ -92,12 +92,12 @@ h4 {
 	font-weight: 300;
 }
 
-#button1:active .glyphicon, #button1.active .glyphicon {
+#button1:hover .glyphicon, #button1.active .glyphicon {
 	color: white;
 }
-#button2:active .glyphicon, #button1.active .glyphicon {
+#button2:hover .glyphicon, #button1.active .glyphicon {
 	color: white;
 }
-#button3:active .glyphicon, #button1.active .glyphicon {
+#button3:hover .glyphicon, #button1.active .glyphicon {
 	color: white;
 }
