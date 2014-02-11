@@ -53,6 +53,8 @@
     color: #eeeeee; }
     #player .slider-breakpoint-icon:active {
       color: #0000ff; }
+    #player .slider-breakpoint-icon.to-remove {
+      color: #ff0000; }
   #player .filled-slider {
     height: 100%;
     background: #800000; }
@@ -62,12 +64,12 @@
     font-size: 1.2em;
     display: inline-block;
     padding: 5px; }
-  #player .control-button {
+  #player .control-button .fa {
     cursor: pointer;
     color: #eeeeee; }
-    #player .control-button:hover {
+    #player .control-button .fa:hover {
       color: #0080ff; }
-    #player .control-button:active {
+    #player .control-button .fa:active {
       color: #0000ff; }
   #player .control-time {
     color: #999999; }

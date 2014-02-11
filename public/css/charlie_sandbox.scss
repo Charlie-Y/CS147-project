@@ -141,7 +141,9 @@ $BREAKPOINT_HEIGHT: 45px;
         &:hover{
             @extend %active-slider-breakpoint-icon;
         }
-        
+        &.to-remove{
+            color: #ff0000;
+        }
     }
     .slider-breakpoint-icon.active{
         @extend %active-slider-breakpoint-icon;
@@ -165,7 +167,7 @@ $BREAKPOINT_HEIGHT: 45px;
         padding:5px;
     }
     // all icons in the button bar
-    .control-button{
+    .control-button .fa{
         // @include transition(width, .2s, ease-in);
         cursor:pointer;
         color: #eeeeee;

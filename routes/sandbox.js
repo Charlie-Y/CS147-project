@@ -3,7 +3,8 @@
 
 exports.view = function(req, res){
     var videoId = req.params.videoId; 
-    res.render('charlie_sandbox',
+    res.render('angular_sandbox',
+    // res.render('charlie_sandbox',
         {
             'layout':'main',
             'cssFiles': [
