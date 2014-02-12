@@ -84,7 +84,7 @@ h4 {
 }
 
 
-.menu-button:active {
+.menu-button:hover {
 	position:relative;
 	top:3px;
 	border: none;
@@ -92,12 +92,13 @@ h4 {
 	font-weight: 300;
 }
 
-#button1:hover .glyphicon, #button1.active .glyphicon {
-	color: white;
+#button1:hover .glyphicon, #button1.hover .glyphicon {
+	color: white;
+
 }
-#button2:hover .glyphicon, #button1.active .glyphicon {
+#button2:hover .glyphicon, #button1.hover .glyphicon {
 	color: white;
 }
-#button3:hover .glyphicon, #button1.active .glyphicon {
+#button3:hover .glyphicon, #button1.hover .glyphicon {
 	color: white;
 }
