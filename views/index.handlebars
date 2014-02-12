@@ -19,9 +19,12 @@
 	<img id="jumbo" src="/images/breakdance.gif"/>
 	<img id="logo" src="/images/logo.png"/>
 	<div class="menu">
+		{{#each videos}}
+		<li>{{title}}</li>
+		{{/each}}
 		<a href="/create">
 			<div class="menu-button" id="button1">
-				<span class="glyphicon glyphicon-facetime-video"></span><div class="menu-text"> CREATE </div>
+				<span class="glyphicon glyphicon-facetime-video"></span><div class="menu-text"> CREATE</div>
 			</div>
 		</a>
 		<a href="/playlist">
