@@ -1,5 +1,16 @@
 console.log("breakpoint_classes.js");
 
+//----- FIRST TODO -----
+
+/*
+
+    Refactor piece by piece into an angular app.
+
+    the angular app should set bind all the listeneres and setup all the html
+    and that makes sense. 
+
+*/
+
 
 // TODO -refactor, controls and listeners seem all over the place right now
 
@@ -28,7 +39,7 @@ console.log("breakpoint_classes.js");
 
 BreakPointPlayer
 
-    fits to screen
+    fits to screen 
 
     draws breakpoint blocks in side nav
     seeks on breakpoint block click
@@ -123,6 +134,8 @@ var BreakPointPlayer = new JS.Class({
 
     // this.iframeId
 
+    // this.callback - on finished
+
 
     // ===== Html structure for player ==== //
 
@@ -144,16 +157,17 @@ var BreakPointPlayer = new JS.Class({
 
     // ====== Constructor ==== //
 
-    initialize: function(playerId){
+    initialize: function(playerId, options){
         var iframeId = playerId + "-iframe";
         this.video = new BreakPointVideo(iframeId);
         BreakPointVideo.setMainInstance(this.video);
+
+        this.callback = options.callback || function(){};
 
         this.video.breakPointPlayer = this;
         this.setResizeListeners();
         this.breakpoints = [];
         this.breakpointsById = {};
-
 
         this.setJqueryObjects();
 
@@ -169,7 +183,7 @@ var BreakPointPlayer = new JS.Class({
 
         // setup the breakpoints to work - listeners and html
         this.loadBreakPoints();
-        this.renderBreakpointList();
+        // this.renderBreakpointList();
         this.setBreakPointListeners();
 
         // do it twice! because the first time the window height and 
@@ -180,6 +194,7 @@ var BreakPointPlayer = new JS.Class({
         if (BreakPointPlayer.AUTOPLAY){
             this.video.playVideo();
         }
+
     },
 
     // these should all exist on the page first
@@ -189,8 +204,10 @@ var BreakPointPlayer = new JS.Class({
         this.$breakpointsUl = $('.breakpoints-ul');
     },
 
-    setupVideoControls: function(){
+    onVideoFirstPlay: function(){
         this.controls = new BreakPointVideoControls(this);
+        this.callback();
+
     },
 
     // ======== Html rendering and resizing ===== //
@@ -198,7 +215,7 @@ var BreakPointPlayer = new JS.Class({
     fitToScreen: function(toFit) {
         var stats = BreakPointPlayer;
 
-        var totalHeight = toFit.height() - 40; // todo refactor the menu height. how is that going to work>
+        var totalHeight = toFit.height(); // todo refactor the menu height. how is that going to work>
         var totalWidth = toFit.width();
         var isLandscape = true;
 
@@ -307,15 +324,15 @@ var BreakPointPlayer = new JS.Class({
         var thisPlayer = this
 
         // seek to on clicking the entire thing
-        $('.player-breakpoints').on('click','.breakpoint', function(event){
-            var id = $(this).attr('data-bp-id');
-            // console.log("Breakpoint with id: " + id)
-            var bp = thisPlayer.getBreakPoint(id);
-            thisPlayer.video.gotoBreakPoint(bp);
-            console.log("Clicked: " + bp.toString());
-            event.preventDefault();
-            return false;
-        });
+        // $('.player-breakpoints').on('click','.breakpoint', function(event){
+        //     var id = $(this).attr('data-bp-id');
+        //     // console.log("Breakpoint with id: " + id)
+        //     var bp = thisPlayer.getBreakPoint(id);
+        //     thisPlayer.video.gotoBreakPoint(bp);
+        //     console.log("Clicked: " + bp.toString());
+        //     event.preventDefault();
+        //     return false;
+        // });
 
         $('.player-breakpoints').on('click','.breakpoint-remove', function(event){
             // i feel bad for writing this selector...
@@ -347,6 +364,10 @@ var BreakPointPlayer = new JS.Class({
         this.video.gotoBreakPoint(bp);
     },
 
+    goToBreakpoint: function(bp){
+        this.video.gotoBreakPoint(bp);
+    },
+
     // adds the breakpoint to the internal data structures
     // also hits the database and also renders the html
     addBreakPoint: function(bp) {
@@ -359,9 +380,9 @@ var BreakPointPlayer = new JS.Class({
     addBreakPointWithUpdate: function(bp){
         this.addBreakPoint(bp);
         this.sortBreakPoints();
-        this.renderBreakpointList();
+        // this.renderBreakpointList();
         this.fitToScreen($(window));
-        this.controls.addSliderBreakpoint(bp);
+        // this.controls.addSliderBreakpoint(bp);
 
         // also should update the other things. at this point events are useful..
     },
@@ -384,12 +405,10 @@ var BreakPointPlayer = new JS.Class({
     // needs an animation on removal
     removeBreakPointWithUpdate: function(bp){
         // this.renderBreakpointList()
-        var $bp = $('.breakpoint[data-bp-id="' + bp.breakPointId + '"]');
-        $bp.remove();
-        this.controls.removeSliderBreakpoint(bp);
-
+        // var $bp = $('.breakpoint[data-bp-id="' + bp.breakPointId + '"]');
+        // $bp.remove();
+        // this.controls.removeSliderBreakpoint(bp);
         this.removeBreakPoint(bp);
-
     },
 
     loadBreakPoints: function(){
@@ -549,6 +568,15 @@ var BreakPointVideoControls = new JS.Class({
 
     // ========= Listener initialization ====== ///
 
+    onSliderClick: function(event){
+        var coords = this.relativeMouseCoords(event.toElement, event);
+        // console.log("coords: " + coords.x + ', ' + coords.y);
+        this.seekToX(coords.x);
+        // prevent propagation
+        event.preventDefault();
+        return false;
+    },
+
 
     setControlListeners: function(){
         var thisControls = this;
@@ -559,22 +587,22 @@ var BreakPointVideoControls = new JS.Class({
         }, 300);
 
         // update time on clicking the main slider
-        this.$mainSlider.on('click', function(event){
+        // this.$mainSlider.on('click', function(event){
             // console.log("mainSlider clicked");
-            var coords = thisControls.relativeMouseCoords($(this).get(0), event);
+            // var coords = thisControls.relativeMouseCoords($(this).get(0), event);
             // console.log("coords: " + coords.x + ', ' + coords.y);
-            thisControls.seekToX(coords.x);
+            // thisControls.seekToX(coords.x);
             // prevent propagation
-            event.preventDefault();
-            return false;
-        });
+            // event.preventDefault();
+            // return false;
+        // });
 
         // respond to the click by doing stuff
-        this.$sliderBreakpoints.on('click', '.slider-breakpoint', function(event){
+        // this.$sliderBreakpoints.on('click', '.slider-breakpoint', function(event){
             // console.log("Sliderbreakpoint clicked");
-            var id = $(this).attr('data-bp-id');
-            thisControls.breakPointPlayer.goToBreakpointById(id);
-        });
+            // var id = $(this).attr('data-bp-id');
+            // thisControls.breakPointPlayer.goToBreakpointById(id);
+        // });
 
         // link the slider breakpoint to the block breakpoint
         this.$sliderBreakpoints.on('mouseenter', '.slider-breakpoint', function(event){
@@ -626,19 +654,19 @@ var BreakPointVideoControls = new JS.Class({
 
 
         // Pause play controls
-        this.$controlButtons.on('click', '.control-button .control-pauseplay', function(){
-            thisControls.togglePausePlayButton();
-        });
+        // this.$controlButtons.on('click', '.control-button .control-pauseplay', function(){
+        //     thisControls.togglePausePlayButton();
+        // });
 
         // Volume controls
         // this.$controlButtons.on('click', '.control-nosound', function(){
         //     thisControls.toggleVolumeButton();
         // });
 
-        this.$controlButtons.on('click', '.control-button .control-sound', function(){
-            // console.log("CLICKED");
-            thisControls.toggleVolumeButton();
-        });
+        // this.$controlButtons.on('click', '.control-button .control-sound', function(){
+        //     // console.log("CLICKED");
+        //     thisControls.toggleVolumeButton();
+        // });
 
         this.setAddBreakpointListeners();
 
@@ -710,7 +738,6 @@ var BreakPointVideoControls = new JS.Class({
             var totallyValidId = Math.floor(Math.random() * 38902);
             var time = Math.round(thisPlayer.getVideo().getTime());
             var bp = new BreakPoint(time, "Breakpoint: " + totallyValidId, totallyValidId);
-
             thisPlayer.breakPointPlayer.addBreakPointWithUpdate(bp);
 
             // final functionality for now
@@ -778,7 +805,7 @@ var BreakPointVideoControls = new JS.Class({
         this.setJqueryObjects();
 
         // build all the html elements
-        this.renderControlBreakpoints();
+        // this.renderControlBreakpoints();
         this.renderSpeedControls();
 
         // set all the event listeners
@@ -943,7 +970,8 @@ var BreakPointVideo = new JS.Class({
         
     },
     onVideoFirstPlay: function (){
-        this.breakPointPlayer.setupVideoControls();
+        this.breakPointPlayer.onVideoFirstPlay();
+
     },
     // basically wrapper functions to the youtube api
     // necessary? not really. nice to have. barely...
@@ -1132,35 +1160,37 @@ var BreakPoint = new JS.Class({
     // using jquery, because laziness > speed of site
     // also i would like some kind of templating because this is awful and annoying
 
-    timeDivString: function(){
-        var time = this.displayStartTime();
-        var div =  "<div class='breakpoint-time'>"+  time + "</div>";
-        return div;
-    },
+    /*
+        timeDivString: function(){
+            var time = this.displayStartTime();
+            var div =  "<div class='breakpoint-time'>"+  time + "</div>";
+            return div;
+        },
 
-    descDivString: function() {
-        var div =  "<div class='breakpoint-name' contenteditable='true'>"+ this.desc + "</div>";
-        return div;
-    },
+        descDivString: function() {
+            var div =  "<div class='breakpoint-name' contenteditable='true'>"+ this.desc + "</div>";
+            return div;
+        },
 
-    htmlString: function () {
-        var elemStr = "<a class='breakpoint' href='#' data-bp-id='" + this.breakPointId +"'>" + this.timeDivString() + this.descDivString() + "</a>";
-        return elemStr;
-        // getImage();
-    },
+        htmlString: function () {
+            var elemStr = "<a class='breakpoint' href='#' data-bp-id='" + this.breakPointId +"'>" + this.timeDivString() + this.descDivString() + "</a>";
+            return elemStr;
+            // getImage();
+        },
 
-    liHtmlString: function(){
-        var elemStr = "<li class='breakpoint-li'>"  + this.htmlString() + " <i class='fa fa-times breakpoint-remove'></i> </li>";
-        return elemStr;
-    },
+        liHtmlString: function(){
+            var elemStr = "<li class='breakpoint-li'>"  + this.htmlString() + " <i class='fa fa-times breakpoint-remove'></i> </li>";
+            return elemStr;
+        },
 
-    sliderHtmlString: function(){
-        var elemStr = "<span class='slider-breakpoint' data-bp-id='" + this.breakPointId + "'>";
-        // elemStr += "<img class='slider-breakpoint-img' src='"+ BreakPointPlayer.SLIDER_BREAKPOINT_IMG + "' />";
-        elemStr += "<i class='fa fa-tint fa-flip-vertical slider-breakpoint-icon'></i>";
-        elemStr += "</span>";
-        return elemStr;
-    }
+        sliderHtmlString: function(){
+            var elemStr = "<span class='slider-breakpoint' data-bp-id='" + this.breakPointId + "'>";
+            // elemStr += "<img class='slider-breakpoint-img' src='"+ BreakPointPlayer.SLIDER_BREAKPOINT_IMG + "' />";
+            elemStr += "<i class='fa fa-tint fa-flip-vertical slider-breakpoint-icon'></i>";
+            elemStr += "</span>";
+            return elemStr;
+        }
+    */
 
 });
 

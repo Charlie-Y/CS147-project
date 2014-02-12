@@ -1,6 +1,5 @@
 #container {
-  background: #1b1b1b;
-  margin-top: 40px; }
+  background: #1b1b1b; }
 
 .glyphicon-list {
   height: 0 !important; }
@@ -149,3 +148,7 @@
 .complaint {
   color: white; }
 
+
+.debug-button {
+  position: fixed;
+  bottom: 0; }

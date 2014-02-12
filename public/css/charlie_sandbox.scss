@@ -4,7 +4,6 @@ $header-height: 40px;
 
 #container{
     background: $slate-grey;
-    margin-top: 40px;
 }
 
 .glyphicon-list{
@@ -318,5 +317,10 @@ $BREAKPOINT_HEIGHT: 45px;
 
 .flat{
 
+}
+
+.debug-button{
+    position: fixed;
+    bottom:0;
 }
 

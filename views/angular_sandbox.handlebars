@@ -1,71 +1,83 @@
 <body id="container">
-    {{> menubar}}
+    {{!-- {{> menubar}} --}}
     <!-- All the html and stuff goes here -->
 
-    {{!-- <iframe class="youtube-player" type="text/html" width="640" height="385" src="http://www.youtube.com/embed/moSFlvxnbgk" allowfullscreen frameborder="0">  </iframe>--}}
+     <!-- <iframe class="youtube-player" type="text/html" width="640" height="385" src="http://www.youtube.com/embed/moSFlvxnbgk" allowfullscreen frameborder="0">  </iframe> -->
 
     <!-- <div class="smartphone-landscape" id=""> -->
-    {{!-- <div class="" id="" > --}}
+    <!-- <div class="" id="" >  -->
 
-    <div class="" id="player" >
-    {{!-- <div class="smartphone-landscape" id="player" > --}}
+    <div class="" id="player" ng-controller="BreakPointCtrl" >
+    <!-- <div class="smartphone-landscape" id="player" >  -->
         <div class="player-main">
             <div class="player-video-id" data-video-id="{{videoId}}"></div>
             <div class="iframe-wrapper">
                 <div class="player-iframe" id="player-iframe"> Video loading! Sit tight</div>
             </div>
             <div class="player-controls">
-                <div class="slider-breakpoints">
+                <div class="slider-breakpoints" ng-model='breakpoints'>
+                    <span class="slider-breakpoint" data-bp-id="\{{sbp.breakPointId}}" ng-repeat="sbp in breakpoints" style="left:\{{sliderBreakpointLeft(sbp)}}%" ng-click="clickedSliderBreakpoint(sbp)">
+                        <i class='fa fa-tint fa-flip-vertical slider-breakpoint-icon'></i>
+                    </span>
                 </div>
-                <div class="main-slider">
+                <div class="main-slider" ng-click="clickedSlider($event)">
                     <div class="filled-slider"></div>
                 </div>
                 <div class="control-buttons">
                     <span class="control-button">
-                            <i class="fa fa-play control-pauseplay"></i>
+                            <i class="fa fa-play control-pauseplay" ng-click="clickedPausePlay()"></i>
                     </span>
                     <span class="control-time">
                         <span class="control-current-time"></span>
                         <span class="control-max-time"></span>
                     </span>
                     <span class="control-button">
-                        <i class="fa fa-volume-up control-sound"></i>
+                        <i class="fa fa-volume-up control-sound" ng-click="clickedVolume()"></i>
                     </span>
                     <span class="control-button">
-                            <i class="fa fa-plus control-addBreakpoint"></i>
+                            <i class="fa fa-plus control-addBreakpoint" ng-click="clickedAddBreakpoint()"></i>
                             <span class="add-breakpoint-helper">
                                 Add Breakpoint
                             </span>
                     </span>
-
-
                 </div>
-
-                {{!-- <input class="player-slider" id="player-slider" type='range'> --}}
-
             </div>
         </div>
         <div class="player-sidenav">
-            {{!-- <a href="/">
+            <a href="/">
                 <div class="player-menu">
                     Menu 
                 </div>
-            </a> --}}
+            </a> 
             <div class="player-breakpoints" id="player-breakpoints"> 
-                <ul class='breakpoints-ul'></ul>
+                <ul class='breakpoints-ul'>
+                    <li class="breakpoint-li" ng-repeat="bp in breakpoints">
+                        <a class="breakpoint" href=
+                        "#" data-bp-id="\{{bp.breakPointId}}" ng-click="clickedBreakpoint(bp)">
+                            <div class="breakpoint-time">
+                                \{{bp.displayStartTime()}}
+                            </div>
+                            <div class="breakpoint-name" contenteditable='true'>
+                                \{{bp.desc}}
+                            </div>
+                        </a>
+                        <i class='fa fa-times breakpoint-remove' ng-click="clickedRemoveBreakpoint(bp)"></i>
+                    </li>
+                </ul>
             </div>
         </div>
+
+
+        {{!-- <button class="debug-button" ng-click="logBreakPoints()" >CLICK ME</button> --}}
+
     </div>
 
-        <!--     <div class="complaint">
-                And then we implement our own video controls!
 
-                https://code.google.com/p/gdata-issues/issues/detail?id=3007
-            </div>
-         -->
+         
     <!-- Put your scripts after here -->
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+
     <script src="/js/jsclass_core.js"></script>
     <script src="/js/breakpoint_classes.js"></script>
     <script src="/js/charlie_sandbox.js"></script>
