@@ -49,12 +49,12 @@ BreakPointPlayer
     loads breakpoints from data
 
 BreakPointControls 
-    shows time
-    clicking bar goes to time
-    clicking slider breakpoint goes to time
+    shows time - done
+    clicking bar goes to time - done
+    clicking slider breakpoint goes to time - done
     hovering breakpoints highlights the corresponding part
-    volume control - with update
-    play button control - with update
+    volume control - with update - done
+    play button control - with update - done
 
     add breakpoint button adds to thing
 
@@ -184,7 +184,6 @@ var BreakPointPlayer = new JS.Class({
         // setup the breakpoints to work - listeners and html
         this.loadBreakPoints();
         // this.renderBreakpointList();
-        this.setBreakPointListeners();
 
         // do it twice! because the first time the window height and 
         // width will change for some reason. teehee
@@ -318,32 +317,6 @@ var BreakPointPlayer = new JS.Class({
         $(window).on('resize', function(){
            thisPlayer.fitToScreen($(window));
         });
-    },
-
-    setBreakPointListeners: function() {
-        var thisPlayer = this
-
-        // seek to on clicking the entire thing
-        // $('.player-breakpoints').on('click','.breakpoint', function(event){
-        //     var id = $(this).attr('data-bp-id');
-        //     // console.log("Breakpoint with id: " + id)
-        //     var bp = thisPlayer.getBreakPoint(id);
-        //     thisPlayer.video.gotoBreakPoint(bp);
-        //     console.log("Clicked: " + bp.toString());
-        //     event.preventDefault();
-        //     return false;
-        // });
-
-        $('.player-breakpoints').on('click','.breakpoint-remove', function(event){
-            // i feel bad for writing this selector...
-            var id = $(this).closest('.breakpoint-li').find('.breakpoint').attr('data-bp-id');
-            var bp = thisPlayer.getBreakPoint(id);
-
-            thisPlayer.removeBreakPointWithUpdate(bp);
-            event.preventDefault();
-            return false;
-        });
-
     },
 
     // relays the event change to other parts of the video player
@@ -586,24 +559,6 @@ var BreakPointVideoControls = new JS.Class({
             thisControls.updateTime();
         }, 300);
 
-        // update time on clicking the main slider
-        // this.$mainSlider.on('click', function(event){
-            // console.log("mainSlider clicked");
-            // var coords = thisControls.relativeMouseCoords($(this).get(0), event);
-            // console.log("coords: " + coords.x + ', ' + coords.y);
-            // thisControls.seekToX(coords.x);
-            // prevent propagation
-            // event.preventDefault();
-            // return false;
-        // });
-
-        // respond to the click by doing stuff
-        // this.$sliderBreakpoints.on('click', '.slider-breakpoint', function(event){
-            // console.log("Sliderbreakpoint clicked");
-            // var id = $(this).attr('data-bp-id');
-            // thisControls.breakPointPlayer.goToBreakpointById(id);
-        // });
-
         // link the slider breakpoint to the block breakpoint
         this.$sliderBreakpoints.on('mouseenter', '.slider-breakpoint', function(event){
             // console.log("Sliderbreakpoint hover");
@@ -649,24 +604,6 @@ var BreakPointVideoControls = new JS.Class({
             var $sliderBreakpoint = $('.slider-breakpoint[data-bp-id="'+ id +'"] i');
             $sliderBreakpoint.removeClass('to-remove');
         });
-
-        // Player controls
-
-
-        // Pause play controls
-        // this.$controlButtons.on('click', '.control-button .control-pauseplay', function(){
-        //     thisControls.togglePausePlayButton();
-        // });
-
-        // Volume controls
-        // this.$controlButtons.on('click', '.control-nosound', function(){
-        //     thisControls.toggleVolumeButton();
-        // });
-
-        // this.$controlButtons.on('click', '.control-button .control-sound', function(){
-        //     // console.log("CLICKED");
-        //     thisControls.toggleVolumeButton();
-        // });
 
         this.setAddBreakpointListeners();
 
