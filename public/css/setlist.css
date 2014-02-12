@@ -21,7 +21,7 @@
 }
 
 .description {
-	border-left: 5px solid #d11985;
+	border-left: 5px solid #eb006f;
 	color: white;
 }
 
@@ -80,4 +80,8 @@
 #gobacktop {
 	margin-top: 5px;
 	color:  #eb006f;
+}
+
+.icw {
+	color: #E0E0E0;
 }
