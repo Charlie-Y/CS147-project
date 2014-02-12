@@ -1,5 +1,5 @@
 .setlisttitle {
-	color: #cd2b8a;
+	color: #eb006f;
 	font-weight: 800;
 	text-transform:uppercase;
 	font-size: 25pt;
@@ -26,7 +26,7 @@
 }
 
 .title {
-	color: #cd2b8a;
+	color: #eb006f;
 }
 
 .number {
@@ -42,7 +42,7 @@
 	margin-left: 70%;
 	color: white;
 	border-radius: 10px;
-	border: 1px solid #ffabe8;
+	border: 1px solid #eb006f;
 	font-weight: 700;
 	padding: 2px;
 	text-align: center;
@@ -52,7 +52,7 @@
 .add, .remove {
 	width: 100%;
 	margin: 0 auto;
-	color: #ffb1f4;
+	color: #eb006f;
 	background-color: rgba(0,0,0,0.5);
 	font-weight: 400;
 	font-size: 11pt;
@@ -79,5 +79,5 @@
 
 #gobacktop {
 	margin-top: 5px;
-	color:  #cd2b8a;
+	color:  #eb006f;
 }

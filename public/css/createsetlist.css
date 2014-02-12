@@ -7,14 +7,14 @@ input, textarea {
 	font-weight: 800;
 	font-size: 20pt;
 	margin-bottom: 20px;
-	color: #cd2b8a;
+	color: #eb006f;
 }
 
 .heading {
 	font-weight: 300;
 	font-size: 15pt;
 	color: white;
-	border-left: 10px solid #d11985;
+	border-left: 10px solid #eb006f;
 	padding-left: 10px;
 	margin-bottom: 5px;
 }
