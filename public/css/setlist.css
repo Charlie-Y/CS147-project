@@ -1,0 +1,87 @@
+.setlisttitle {
+	color: #eb006f;
+	font-weight: 800;
+	text-transform:uppercase;
+	font-size: 25pt;
+	line-height: 1.0;
+}
+
+.setlistdescription {
+	color: white;
+	font-weight: 300;
+	font-size: 13pt;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	line-height: 1.1;
+}
+
+.divider {
+	border-bottom: 1px dotted #606060;
+	margin: 20px auto 15px auto;
+}
+
+.description {
+	border-left: 5px solid #eb006f;
+	color: white;
+}
+
+.title {
+	color: #eb006f;
+}
+
+.number {
+
+	font-weight: 600;
+	font-size: 15pt;
+	color: #B0B0B0;
+	text-align: right;
+}
+
+.removebutton {
+	width: 30%;
+	margin-left: 70%;
+	color: white;
+	border-radius: 10px;
+	border: 1px solid #eb006f;
+	font-weight: 700;
+	padding: 2px;
+	text-align: center;
+	display: none;
+}
+
+.add, .remove {
+	width: 100%;
+	margin: 0 auto;
+	color: #eb006f;
+	background-color: rgba(0,0,0,0.5);
+	font-weight: 400;
+	font-size: 11pt;
+	text-align: center;
+	line-height: 1.0;
+	padding: 5px;
+	border-radius: 20px;
+	box-shadow: 2px 2px 2px #101010;
+}
+
+.add:hover, .remove:hover {
+	position:relative;
+	top:2px;
+}
+
+.ic {
+	font-size: 15pt;
+	margin-bottom: 3px;
+}
+
+.row {
+	margin-bottom: 20px;
+}
+
+#gobacktop {
+	margin-top: 5px;
+	color:  #eb006f;
+}
+
+.icw {
+	color: #E0E0E0;
+}
