@@ -8,23 +8,13 @@ var http = require('http');
 var path = require('path');
 var handlebars = require('express3-handlebars');
 var sass = require('node-sass');
-/*
-var mongoose = require ("mongoose");
-var uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/test';
-var db = mongoose.connection;
-db.on('error', console.error);
-db.once('open', function() {
-	var dbSchema = new mongoose.Schema({
-	  title: { type: String }
-	, rating: String
-	, releaseYear: Number
-	, hasCreditCookie: Boolean
-	});
 
-	var Movie = mongoose.model('Movie', movieSchema);
-});
-mongoose.connect('mongodb://localhost/test')
-*/
+var mongoose = require("mongoose");
+var uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/test';
+mongoose.connect(uristring);
+mongoose.model('Video', require('./models/video').Video);
+mongoose.model('Setlist', require('./models/setlist').Setlist);
+
 var index = require('./routes/index');
 var video = require('./routes/video');
 var sandbox = require('./routes/sandbox');
@@ -62,7 +52,6 @@ app.use(
 );
 
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 // development only
 if ('development' == app.get('env')) {

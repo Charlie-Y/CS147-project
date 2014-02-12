@@ -71,7 +71,7 @@ hr {
 }
 
 .foldbutton {
-	background-color:  #ee5259;
+	background-color: #505050;
 	padding: 2px;
 	color: white;
 	text-align: center;
@@ -112,7 +112,7 @@ hr {
 }
 
 .setlistfoldbutton span {
-	color: #ee5259;
+	color: #505050;
 	font-size: 8pt;
 }
 

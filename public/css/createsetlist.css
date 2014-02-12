@@ -18,3 +18,13 @@ input, textarea {
 	padding-left: 10px;
 	margin-bottom: 5px;
 }
+
+#title {
+	font-size: 15pt;
+	padding: 3px;
+}
+
+#textarea {
+	font-size: 12pt;
+	padding: 5px;
+}
