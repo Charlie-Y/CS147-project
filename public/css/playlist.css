@@ -62,7 +62,7 @@ hr {
 	font-family: "Source Sans Pro";
 	color: white;
 	font-size: 15pt;
-	border-bottom: 1px solid #505050;
+	border-bottom: 1px solid #303030;
 	margin-bottom: 15px;
 }
 
@@ -71,7 +71,7 @@ hr {
 }
 
 .foldbutton {
-	background-color:  #f13941;
+	background-color:  #ee5259;
 	padding: 2px;
 	color: white;
 	text-align: center;
@@ -93,7 +93,7 @@ hr {
 	padding-top: 5px;
 	padding-left: 10px;
 	padding-bottom: 5px;
-	color:  #f13941;
+	color:  #ee5259;
 	line-height: 1.0;
 	margin-bottom: 0px;
 }
@@ -112,7 +112,7 @@ hr {
 }
 
 .setlistfoldbutton span {
-	color: #f13941;
+	color: #ee5259;
 	font-size: 8pt;
 }
 
@@ -133,7 +133,7 @@ hr {
 
 .setlistnum {
 	font-weight: 700;
-	color: #f13941;
+	color: #ee5259;
 }
 
 .add {
@@ -141,7 +141,7 @@ hr {
 	padding: 3px;
 	border-radius: 5px;
 	box-shadow: 1px 1px 1px #606060;
-	background-color: #f13941;
+	background-color: #ee5259;
 	font-family: "Source Sans Pro";
 	color: white;
 	font-weight: 600;
@@ -171,7 +171,7 @@ hr {
 }
 
 .title {
-	color:  #f13941;
+	color:  #ee5259;
 }
 
 .description {
@@ -180,5 +180,5 @@ hr {
 
 
 #gobacktop {
-	color: #f13941;
+	color: #ee5259;
 }
