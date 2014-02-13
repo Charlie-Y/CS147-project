@@ -25,8 +25,8 @@
 	<a name="top"></a>
 
 	<div class="container">
-		<div class="setlisttitle">{{setlists.[0].title}}</div>
-		<div class="setlistdescription">{{setlists.[0].description}}</div>
+		<div class="setlisttitle">{{title}}</div>
+		<div class="setlistdescription">{{description}}</div>
 		<div class="first row">
 			<div class="col-xs-6"><div class="add"><div class="ic"><span class="glyphicon glyphicon-plus"></span></div> <div class="icw">ADD TO <br/> SETLIST</div></div></div>
 			<div class="col-xs-6"><div class="remove"><div class="ic"><span class="glyphicon glyphicon-minus"></span></div> <div class="icw">REMOVE FROM <br/> SETLIST</div></div></div>
@@ -40,15 +40,13 @@
 
 				<div class="title">{{title}}</div>
 				<div class="description"> {{description}} </div>
-				<div class="removebutton"> REMOVE </div>
+				<div class="removebutton" id="{{id}}"> REMOVE </div>
 
 			</div>
 			<div class="divider"></div>
 		{{/each}}
-		<div class="row">
-			<div class="col-xs-6"><div class="add"><div class="ic"><span class="glyphicon glyphicon-plus"></span></div> <div class="icw">ADD TO <br/> SETLIST</div></div></div>
-			<div class="col-xs-6"><div class="remove"><div class="ic"><span class="glyphicon glyphicon-minus"></span></div> <div class="icw">REMOVE FROM <br/> SETLIST</div></div></div>
-		</div>
+
+		<div id="delete"> <span class="glyphicon glyphicon-trash"></span> DELETE PLAYLIST </div>
 	</div>
 	
 	<a href="#top"><div id="gobacktop"> GO BACK TO TOP <span class="glyphicon glyphicon-arrow-up"></span></div></a>

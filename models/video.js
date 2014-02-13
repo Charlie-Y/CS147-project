@@ -5,6 +5,8 @@ var Video = new mongoose.Schema({
 	, duration: String
 	, lastWatched: Date
 	, created: Date
+	, id: Number
+	, videoURL: String
 	, imageURL: String
 	, breakpoints: [{ name: String, start: String, end: String }]
 });

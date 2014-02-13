@@ -12,8 +12,29 @@ var sass = require('node-sass');
 var mongoose = require("mongoose");
 var uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/test';
 mongoose.connect(uristring);
-mongoose.model('Video', require('./models/video').Video);
-mongoose.model('Setlist', require('./models/setlist').Setlist);
+
+mongoose.model('Video', require('./models/video').Video, "videos");
+mongoose.model('Setlist', require('./models/setlist').Setlist, "setlists");
+Video = mongoose.model('Video');
+Setlist = mongoose.model('Setlist');
+
+/* Remove content */
+mongoose.connection.collections['videos'].drop();
+mongoose.connection.collections['setlists'].drop();
+
+/* Repopulate with seed */
+var videoseed = require('./videoseed.json');
+var setlistseed = require('./setlistseed.json');
+Video.create(videoseed, function (err) {
+    if (err) {
+    	console.log(err);
+    }
+});
+Setlist.create(setlistseed, function (err) {
+    if (err) {
+    	console.log(err);
+    }
+});
 
 var index = require('./routes/index');
 var video = require('./routes/video');
@@ -63,11 +84,17 @@ app.get('/', index.view);
 app.get('/video/:id', video.watchVideo);
 app.get('/sandbox', sandbox.view);
 app.get('/sandbox/:videoId', sandbox.view);
+
 app.get('/setlist/:setlistId', setlist.view);
+app.get('/setlist/:setlistId/add/:videoId', setlist.add);
+app.get('/setlist/:setlistId/remove/:videoId', setlist.remove);
+app.get('/setlist/:setlistId/remove', setlist.delete);
+
 app.get('/playlist', playlist.view);
 app.get('/help', help.view);
 app.get('/create', create.view);
-app.get('/createsetlist', createsetlist.view)
+app.get('/createsetlist', createsetlist.view);
+
 // Example route
 // app.get('/users', user.list);
 
