@@ -1,10 +1,52 @@
-var data = require('../playlistdata.json');
+var mongoose = require('mongoose');
+Video = mongoose.model('Video');
+Setlist = mongoose.model('Setlist');
+
 
 exports.view = function(req, res){
+	var data = {};
+
 	data["helpers"] = {
-	    title_of: function(index,array) {
-	  		return array[parseInt(index)].title;
+	    title_of: function(id) {
+	    	for (var i=0; i < data.videos.length; i++) {
+	    		var elem = data.videos[i];
+	    		if (elem.id == id) {
+	    			return elem.title;
+	    		}
+	    	}
+	  	},
+	  	thumbnail_of: function(id) {
+	  		for (var i=0; i < data.videos.length; i++) {
+	    		var elem = data.videos[i];
+	    		if (elem.id == id) {
+	    			return elem.imageURL;
+	    		}
+	    	}
 	  	}
-	};	
-	res.render('playlist', data);
+	};
+
+	Setlist.find({}, function (err, setlists) {
+		data.setlists = setlists;
+		Video.find({}, function (err, videos) {
+			data.videos = videos;
+		
+			var options = {
+			    "limit": 5,
+			    "sort": {"lastWatched": -1}
+			}
+			Video.find({}, {}, options, function (err, videos) {
+				data.recentlyWatched = videos;
+				console.log(videos);
+				var options = {
+				    "limit": 5,
+				    "sort": {"created": -1}
+				}
+				Video.find({}, {}, options, function (err, videos) {
+					data.recentlyCreated = videos;
+					console.log(videos);
+					res.render('playlist', data);
+				});
+			});
+		});
+	});
 }

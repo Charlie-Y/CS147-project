@@ -1,0 +1,14 @@
+[
+	{
+		"title": "Hip Hop playlist",
+		"description": "for hip hop vids",
+		"id": "1",
+		"setlistvids": ["1","3","5"]
+	},
+	{
+		"title": "Contemporary playlist",
+		"description": "for contemporary vids",
+		"id": "2",
+		"setlistvids": ["2","4","6"]
+	}
+]

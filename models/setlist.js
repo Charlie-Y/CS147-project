@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 var Setlist = new mongoose.Schema({
 	  title: String
 	, description: String
-	, imageURL: String
-	, setlistvids: [{vidid: Number}]
+	, id: Number
+	, setlistvids: [Number]
 });
 
 module.exports.Setlist = Setlist;

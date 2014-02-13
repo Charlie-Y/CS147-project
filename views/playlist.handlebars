@@ -35,7 +35,7 @@
 		<div class="folded"><span class="glyphicon glyphicon-time"></span>RECENTLY WATCHED</div>
 		<div class="list">
 			<div class="block">
-				{{#each videos}}
+				{{#each recentlyWatched}}
 					<div class="videoitem">
 
 						<div class="thumbnails" style="background: url({{imageURL}}); background-size: cover" onclick="window.location='/sandbox/1'">
@@ -53,7 +53,7 @@
 		<div class="folded"><span class="glyphicon glyphicon-plus-sign"></span>RECENTLY CREATED</div>
 		<div class="list">
 			<div class="block">
-				{{#each videos}}
+				{{#each recentlyCreated}}
 					<div class="videoitem">
 					<a href="/sandbox/{{vidid}}">
 						<div class="thumbnails" style="background: url({{imageURL}}); background-size: cover">
@@ -74,14 +74,14 @@
 				<div class="setlistitem">
 					<div class="folded setlisttitle">{{title}}</div>
 					<div class="list">
-							<div class="thumbnails" style="background: url({{imageURL}}); background-size: cover" onclick="window.location='/setlist/{{setlistId}}'">
+							<div class="thumbnails" style="background: url({{thumbnail_of setlistvids.[0]}}); background-size: cover" onclick="window.location='/setlist/{{id}}'">
 								<div class="over"><span class="helper"></span><span class="glyphicon glyphicon glyphicon-play-circle"></span></div>
 							</div>
 						<div class="setlistdescription"> {{description}} <br/> </div>
 						<div class="setlistvideos">
 							<span class="setlistnum">{{setlistvids.length}} videos including: </span>
 							{{#setlistvids}}
-							<div class="setlistvideo" onclick="window.location='/sandbox/1'">{{title_of this ../../videos}}</div>
+							<div class="setlistvideo" onclick="window.location='/sandbox/1'">{{title_of this}}</div>
 							{{/setlistvids}}
 						</div>
 						<div class="add"><span class="glyphicon glyphicon-plus-sign"></span> ADD TO SETLIST</div>
