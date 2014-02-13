@@ -27,6 +27,8 @@ exports.view = function(req, res){
 
 	Setlist.find({}, function (err, setlists) {
 		data.setlists = setlists;
+		console.log(data.setlists);
+
 		Video.find({}, function (err, videos) {
 			data.videos = videos;
 		
@@ -36,14 +38,12 @@ exports.view = function(req, res){
 			}
 			Video.find({}, {}, options, function (err, videos) {
 				data.recentlyWatched = videos;
-				console.log(videos);
 				var options = {
 				    "limit": 5,
 				    "sort": {"created": -1}
 				}
 				Video.find({}, {}, options, function (err, videos) {
 					data.recentlyCreated = videos;
-					console.log(videos);
 					res.render('playlist', data);
 				});
 			});
