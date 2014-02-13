@@ -31,7 +31,21 @@ console.log("breakpoint_classes.js");
 // todo - hover and show times
 // todo - display todos on blankness
 // todo - content editable - use cases and flow
-// todo - downsize menu bar into corner
+// todo - link up menu buttons
+// todo - set max aspect ration on player
+// todo - hide side nav
+// todo - create draggable element at end of filled slider
+// todo = no breakpoint text
+// todo - scroll to breakpoint on click
+// todo - max breakpoints
+
+// todo - 
+
+// todo - main functionality = show duration on hover
+// todo - currentBreakpoint functionality
+
+// extra - track times? 
+// extra - mark segments as finished
 
 // ===== Finished functionality checklist ==== //
 
@@ -102,7 +116,7 @@ var BreakPointPlayer = new JS.Class({
         SIDE_NAV_WIDTH_MAX: '200',
 
         VIDEO_CONTROL_HEIGHT_P: 0.16,
-        VIDEO_CONTROL_HEIGHT_MAX: '100',
+        VIDEO_CONTROL_HEIGHT_MAX: '80',
 
         BREAKPOINT_HEIGHT_P: 0.10,
         BREAKPOINT_HEIGHT_MIN: '30',
@@ -664,6 +678,13 @@ var BreakPointVideoControls = new JS.Class({
     },
 
 
+    clickedAddBreakpoint: function(event){
+        // var totallyValidId = Math.floor(Math.random() * 38902);
+        var time = Math.round(this.getVideo().getTime());
+        var bp = new BreakPoint(time, "New Breakpoint" , -1);
+        this.breakPointPlayer.addBreakPointWithUpdate(bp);
+    },
+
     // this is going to be hard...
     setAddBreakpointListeners: function(){
         var thisPlayer = this;
@@ -1131,19 +1152,26 @@ var BreakPoint = new JS.Class({
 
 });
 
+var ytplayer;   
 
+function onYouTubePlayerReady(playerId) {
+    console.log("onYouTubePlayerReady");
+      ytplayer = document.getElementById("myytplayer");
+    // ytplayer = document.getElementById("iframePlayer");
+}
 
 // yeah this needs to be called from the window context.
 // I'll figure out scopes later..
 // I really want to move this into one of the classes but i have problems...
 function onYouTubeIframeAPIReady() {
+    console.log("onYouTubeIframeAPIReady");
     var player;
     var video = BreakPointVideo.getMainInstance();
     player = new YT.Player(video.elementId, {
         height: BreakPointPlayer.VIDEO_HEIGHT,
         width: BreakPointPlayer.VIDEO_WIDTH,
         videoId: video.ytId,
-        playerVars: {controls: BreakPointPlayer.CONTROLS},
+        playerVars: {controls: BreakPointPlayer.CONTROLS, },
         events: {
             'onReady': video.onPlayerReady,
             'onStateChange': video.onPlayerStateChange

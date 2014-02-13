@@ -67,7 +67,7 @@ var BreakPointCtrl = function($scope) {
     }
 
     $scope.clickedBreakpoint = function(bp){
-        console.log("clickedBreakpoint");
+        // console.log("clickedBreakpoint");
         $scope.bpPlayer.goToBreakpoint(bp);
     }
 
@@ -76,7 +76,7 @@ var BreakPointCtrl = function($scope) {
     }
 
     $scope.clickedRemoveBreakpoint = function(bp){
-        console.log("clickedRemoveBreakpoint");
+        // console.log("clickedRemoveBreakpoint");
         $scope.bpPlayer.removeBreakPoint(bp);
     }
 
@@ -89,7 +89,7 @@ var BreakPointCtrl = function($scope) {
     }
     
     $scope.clickedAddBreakpoint = function(){
-        // $scope.bpPlayer.
+        $scope.controls.clickedAddBreakpoint();
     }
 
 }

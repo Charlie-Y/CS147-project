@@ -2,12 +2,25 @@
     {{!-- {{> menubar}} --}}
     <!-- All the html and stuff goes here -->
 
-     <!-- <iframe class="youtube-player" type="text/html" width="640" height="385" src="http://www.youtube.com/embed/moSFlvxnbgk" allowfullscreen frameborder="0">  </iframe> -->
+      {{!-- <iframe id="myYTPlayer" type="text/html" width="640" height="385" src="http://www.youtube.com/embed/moSFlvxnbgk?enablejsapi=1&version=3" allowfullscreen frameborder="0" id="iframePlayer">  </iframe> --}}
+
+  <script type="text/javascript" src="/js/swfobject.js"></script>    
+  <div id="ytapiplayer">
+    You need Flash player 8+ and JavaScript enabled to view this video.
+  </div>
+
+  <script type="text/javascript">
+
+    var params = { allowScriptAccess: "always" };
+    var atts = { id: "myytplayer" };
+    swfobject.embedSWF("http://www.youtube.com/v/moSFlvxnbgk?enablejsapi=1&playerapiid=ytplayer&version=3",
+                       "ytapiplayer", "425", "356", "8", null, null, params, atts);
+  </script>
 
     <!-- <div class="smartphone-landscape" id=""> -->
     <!-- <div class="" id="" >  -->
 
-    <div class="" id="player" ng-controller="BreakPointCtrl" >
+    <div class="" id="" ng-controller="BreakPointCtrl" >
     <!-- <div class="smartphone-landscape" id="player" >  -->
         <div class="player-main">
             <div class="player-video-id" data-video-id="{{videoId}}"></div>
