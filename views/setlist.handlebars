@@ -27,9 +27,15 @@
 	<div class="container">
 		<div class="setlisttitle">{{title}}</div>
 		<div class="setlistdescription">{{description}}</div>
-		<div class="first row">
-			<div class="col-xs-6"><div class="add"><div class="ic"><span class="glyphicon glyphicon-plus"></span></div> <div class="icw">ADD TO <br/> SETLIST</div></div></div>
-			<div class="col-xs-6"><div class="remove"><div class="ic"><span class="glyphicon glyphicon-minus"></span></div> <div class="icw">REMOVE FROM <br/> SETLIST</div></div></div>
+		<div class="buttons">
+			<div class="add">
+				<div class="ic"><span class="helper"></span><span class="glyphicon glyphicon-plus"></span></div>
+				<div class="icw">ADD<div class="small">videos</div></div>
+			</div>
+			<div class="remove">
+				<div class="ic"><span class="helper"></span><span class="glyphicon glyphicon-minus"></span></div>
+				<div class="icw">REMOVE<div class="small">videos</div></div>
+			</div>
 		</div>
 		{{#each videos}}
 			<div class="videoitem">
@@ -46,7 +52,7 @@
 			<div class="divider"></div>
 		{{/each}}
 
-		<div id="delete"> <span class="glyphicon glyphicon-trash"></span> DELETE PLAYLIST </div>
+		<div id="delete"> <span class="glyphicon glyphicon-trash"></span> DELETE SETLIST </div>
 	</div>
 	
 	<a href="#top"><div id="gobacktop"> GO BACK TO TOP <span class="glyphicon glyphicon-arrow-up"></span></div></a>

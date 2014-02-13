@@ -73,6 +73,8 @@ app.use(
 );
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
+app.use(express.urlencoded());
 
 // development only
 if ('development' == app.get('env')) {
@@ -94,6 +96,8 @@ app.get('/playlist', playlist.view);
 app.get('/help', help.view);
 app.get('/create', create.view);
 app.get('/createsetlist', createsetlist.view);
+app.post('/createsetlist', createsetlist.create);
+
 
 // Example route
 // app.get('/users', user.list);

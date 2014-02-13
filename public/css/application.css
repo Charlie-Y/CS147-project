@@ -58,7 +58,9 @@ h1, h2, h3, h4, h5, h6, p {
 a:hover {
      text-decoration: none;
 }
-
+select:focus,
+textarea:focus,
+button:focus,
 input:focus {
     outline: none;
 }
