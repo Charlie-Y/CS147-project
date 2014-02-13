@@ -4,7 +4,10 @@ $header-height: 40px;
 
 #container{
     background: $slate-grey;
-    margin-top: 40px;
+}
+
+.glyphicon-list{
+    height: 0 !important;
 }
 
 /* Smartphones (portrait and landscape) ----------- */
@@ -90,7 +93,7 @@ $BREAKPOINT_HEIGHT: 45px;
 
     .slider-breakpoints{
         // width:100%;   
-        height: 20px;
+        height: 10px;
         // background: #004080;
     }
 
@@ -120,6 +123,31 @@ $BREAKPOINT_HEIGHT: 45px;
         vertical-align: top;
         // background:white;
     }
+
+    %active-slider-breakpoint-icon{// can't extend nested selectors
+        color:#0080ff;
+    }
+
+    .slider-breakpoint-icon{
+        cursor:pointer;
+        font-size: 20px;
+        // figure out transitions etc. 
+        color: #eeeeee;
+
+        &:active{
+            color:#0000ff;
+        }
+        &:hover{
+            @extend %active-slider-breakpoint-icon;
+        }
+        &.to-remove{
+            color: #ff0000;
+        }
+    }
+    .slider-breakpoint-icon.active{
+        @extend %active-slider-breakpoint-icon;
+    }
+
     .filled-slider{
         height: 100%;
         // width:100%;
@@ -133,12 +161,12 @@ $BREAKPOINT_HEIGHT: 45px;
     }
 
     .control-button{
-        font-size: 2em; // todo responsive
+        font-size: 1.2em; // todo responsive
         display: inline-block;
         padding:5px;
     }
     // all icons in the button bar
-    .control-button{
+    .control-button .fa{
         // @include transition(width, .2s, ease-in);
         cursor:pointer;
         color: #eeeeee;
@@ -289,5 +317,10 @@ $BREAKPOINT_HEIGHT: 45px;
 
 .flat{
 
+}
+
+.debug-button{
+    position: fixed;
+    bottom:0;
 }
 
