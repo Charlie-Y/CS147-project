@@ -18,7 +18,6 @@
     width: 350px;
     height: 320px;
     display: inline-block;
-    background: #4c4c4c;
     position: absolute; }
   #player .player-controls {
     position: relative;
@@ -28,7 +27,7 @@
   #player .main-slider {
     cursor: pointer;
     width: 100%;
-    background: #000080;
+    background: #777777;
     height: 10px; }
   #player .slider-breakpoints {
     height: 10px; }
@@ -45,7 +44,7 @@
     width: 20px;
     vertical-align: top; }
   #player .slider-breakpoint-icon:hover, #player .slider-breakpoint-icon.active {
-    color: #0080ff; }
+    color: #000094; }
   #player .slider-breakpoint-icon {
     cursor: pointer;
     font-size: 20px;
@@ -84,7 +83,7 @@
   #player .player-sidenav {
     width: 130px;
     height: 320px;
-    background: #7f7f7f;
+    background: #252525;
     position: absolute;
     top: 0;
     right: 0; }
@@ -115,7 +114,7 @@
   .breakpoint-li:nth-child(odd) .breakpoint {
     background: #222222; }
   .breakpoint-li .breakpoint.active, .breakpoint-li .breakpoint:hover {
-    background: #0c0c0c;
+    background: #000094;
     color: #f3f3f3; }
   .breakpoint-li .breakpoint-remove {
     position: absolute;

@@ -14,7 +14,6 @@ console.log("breakpoint_classes.js");
 
 // TODO -refactor, controls and listeners seem all over the place right now
 
-// TODO - error checking to make sure that nothing breaks
     // like breakpoints giving bad times
 // todo make a poper control system after first agreeing on what it should look like
 // and how it should respond
@@ -22,7 +21,7 @@ console.log("breakpoint_classes.js");
 // todo - maybe impossibly get image thumbnails. based on the dimensions of the final,
 // this might not actually be necessary
 // todo - show buffered times...
-// todo - menubar gets in way of top breakpoint clicking
+
 // todo - drag and preview functionality
 // todo - scroll to breakpoint
 // todo - active breakpoint fun
@@ -30,19 +29,25 @@ console.log("breakpoint_classes.js");
 // todo - style the out of this thing
 // todo - hover and show times
 // todo - display todos on blankness
-// todo - content editable - use cases and flow
-// todo - link up menu buttons
-// todo - set max aspect ration on player
-// todo - hide side nav
+// todo - content editable - with save
+// todo - link up menu buttons -
+// todo - set max aspect ratio on player
+// todo - hide side nav button
 // todo - create draggable element at end of filled slider
-// todo = no breakpoint text
 // todo - scroll to breakpoint on click
-// todo - max breakpoints
+// todo - max breakpoints?
+// todo - speed buttons
+// todo - resize button
 
-// todo - 
+// TODO - error checking to make sure that nothing breaks
+    // make sure breakpoint times are well ordered
+    // make sure functions don't break that are empty
 
-// todo - main functionality = show duration on hover
-// todo - currentBreakpoint functionality
+// todo - main functionality = show duration on hover in slider
+// todo - currentBreakpoint functionality with repeats
+    // on playing a breakpoint
+    // play selected breakpoint
+
 
 // extra - track times? 
 // extra - mark segments as finished
@@ -83,6 +88,13 @@ BreakPoint
 
 */
 
+
+/*
+ ======== Finished todos ======== 
+
+ // todo - menubar gets in way of top breakpoint clicking
+
+*/
 
 // ****** ====== Class BreakPointPlayer ====== ****** //
 
@@ -564,7 +576,7 @@ var BreakPointVideoControls = new JS.Class({
         return false;
     },
 
-
+    // deprecated thanks to angular
     setControlListeners: function(){
         var thisControls = this;
         
@@ -573,53 +585,53 @@ var BreakPointVideoControls = new JS.Class({
             thisControls.updateTime();
         }, 300);
 
-        // link the slider breakpoint to the block breakpoint
-        this.$sliderBreakpoints.on('mouseenter', '.slider-breakpoint', function(event){
-            // console.log("Sliderbreakpoint hover");
-            var id = $(this).attr('data-bp-id');
-            var $blockBreakpoint = $('.breakpoint[data-bp-id="'+ id +'"]');
-            $blockBreakpoint.addClass('active');
-        });
+        // // link the slider breakpoint to the block breakpoint
+        // this.$sliderBreakpoints.on('mouseenter', '.slider-breakpoint', function(event){
+        //     // console.log("Sliderbreakpoint hover");
+        //     var id = $(this).attr('data-bp-id');
+        //     var $blockBreakpoint = $('.breakpoint[data-bp-id="'+ id +'"]');
+        //     $blockBreakpoint.addClass('active');
+        // });
 
-        this.$sliderBreakpoints.on('mouseleave', '.slider-breakpoint', function(event){
-            // console.log("Sliderbreakpoint hover");
-            var id = $(this).attr('data-bp-id');
-            var $blockBreakpoint = $('.breakpoint[data-bp-id="'+ id +'"]');
-            $blockBreakpoint.removeClass('active');
-        });
+        // this.$sliderBreakpoints.on('mouseleave', '.slider-breakpoint', function(event){
+        //     // console.log("Sliderbreakpoint hover");
+        //     var id = $(this).attr('data-bp-id');
+        //     var $blockBreakpoint = $('.breakpoint[data-bp-id="'+ id +'"]');
+        //     $blockBreakpoint.removeClass('active');
+        // });
 
-        var $breakpointContainer = $('.player-breakpoints');
+        // var $breakpointContainer = $('.player-breakpoints');
 
-        $breakpointContainer.on('mouseenter', '.breakpoint', function(){
-            // console.log("breakpoint mouseenter");
-            var id = $(this).attr('data-bp-id');
-            var $sliderBreakpoint = $('.slider-breakpoint[data-bp-id="'+ id +'"] i');
-            $sliderBreakpoint.addClass('active');
-        });
+        // $breakpointContainer.on('mouseenter', '.breakpoint', function(){
+        //     // console.log("breakpoint mouseenter");
+        //     var id = $(this).attr('data-bp-id');
+        //     var $sliderBreakpoint = $('.slider-breakpoint[data-bp-id="'+ id +'"] i');
+        //     $sliderBreakpoint.addClass('active');
+        // });
 
-        $breakpointContainer.on('mouseleave', '.breakpoint', function(event){
-            // console.log("breakpoint mouseleave");
-            var id = $(this).attr('data-bp-id');
-            var $sliderBreakpoint = $('.slider-breakpoint[data-bp-id="'+ id +'"] i');
-            $sliderBreakpoint.removeClass('active');
-        });
+        // $breakpointContainer.on('mouseleave', '.breakpoint', function(event){
+        //     // console.log("breakpoint mouseleave");
+        //     var id = $(this).attr('data-bp-id');
+        //     var $sliderBreakpoint = $('.slider-breakpoint[data-bp-id="'+ id +'"] i');
+        //     $sliderBreakpoint.removeClass('active');
+        // });
 
-        // removal highlight
-        $breakpointContainer.on('mouseenter', '.breakpoint-remove', function(){
-            // console.log("breakpoint mouseenter");
-            var id = $(this).closest('.breakpoint-li').find('.breakpoint').attr('data-bp-id');
-            var $sliderBreakpoint = $('.slider-breakpoint[data-bp-id="'+ id +'"] i');
-            $sliderBreakpoint.addClass('to-remove');
-        });
+        // // removal highlight
+        // $breakpointContainer.on('mouseenter', '.breakpoint-remove', function(){
+        //     // console.log("breakpoint mouseenter");
+        //     var id = $(this).closest('.breakpoint-li').find('.breakpoint').attr('data-bp-id');
+        //     var $sliderBreakpoint = $('.slider-breakpoint[data-bp-id="'+ id +'"] i');
+        //     $sliderBreakpoint.addClass('to-remove');
+        // });
 
-        $breakpointContainer.on('mouseleave', '.breakpoint-remove', function(event){
-            // console.log("breakpoint mouseleave");
-            var id = $(this).closest('.breakpoint-li').find('.breakpoint').attr('data-bp-id');
-            var $sliderBreakpoint = $('.slider-breakpoint[data-bp-id="'+ id +'"] i');
-            $sliderBreakpoint.removeClass('to-remove');
-        });
+        // $breakpointContainer.on('mouseleave', '.breakpoint-remove', function(event){
+        //     // console.log("breakpoint mouseleave");
+        //     var id = $(this).closest('.breakpoint-li').find('.breakpoint').attr('data-bp-id');
+        //     var $sliderBreakpoint = $('.slider-breakpoint[data-bp-id="'+ id +'"] i');
+        //     $sliderBreakpoint.removeClass('to-remove');
+        // });
 
-        this.setAddBreakpointListeners();
+        // this.setAddBreakpointListeners();
 
     },
 
@@ -1014,32 +1026,38 @@ var BreakPoint = new JS.Class({
         devBreakpoints: function() {
             breakpoints = [
                 {
-                    time: 12,
+                    startTime: 12,
+                    endTime: 15,
                     desc: "Beginning",
                     breakPointId: 1
                 },
                 {
-                    time: 90,
+                    startTime: 90,
+                    endTime: 100,
                     desc: "The code didn't bother me anyways",
                     breakPointId: 2
                 },
                 {
-                    time: 143,
+                    startTime: 143,
+                    endTime: 150,
                     desc: 'So badass',
                     breakPointId: 3
                 },
                 {
-                    time: 235,
+                    startTime: 235,
+                    endTime: 260,
                     desc: 'Break me!',
                     breakPointId: 4
                 },
                 {
-                    time: 44,
+                    startTime: 44,
+                    endTime: 50,
                     desc: 'Foobar',
                     breakPointId: 5
                 },
                 {
-                    time: 30,
+                    startTime: 30,
+                    endTime: 70,
                     desc: 'More bar',
                     breakPointId: 11
                 }
@@ -1047,7 +1065,7 @@ var BreakPoint = new JS.Class({
             return breakpoints;
         },
         initFromData: function(raw){
-            return  new BreakPoint(raw.time, raw.desc, raw.breakPointId);
+            return  new BreakPoint(raw.startTime, raw.endTime, raw.desc, raw.breakPointId);
         },
         timeInMinsSeconds: function(timeInSeconds) {
             mins = Math.floor(timeInSeconds / 60)
@@ -1066,8 +1084,9 @@ var BreakPoint = new JS.Class({
 
     // ===== Contructor ====== //
 
-    initialize: function(startTime, desc, breakPointId){
+    initialize: function(startTime, endTime, desc, breakPointId){
         this.startTime = startTime;
+        this.endTime = endTime;
         this.desc = desc;
         // this.breakPointId = breakPointId;
         this.breakPointId = BreakPoint.getClientSideId();
@@ -1164,14 +1183,14 @@ function onYouTubePlayerReady(playerId) {
 }
 
 // function onYouTubeIframeAPIReady(){
-    
+// 
 // }
 
 // yeah this needs to be called from the window context.
 // I'll figure out scopes later..
 // I really want to move this into one of the classes but i have problems...
 function onYouTubeIframeAPIReady() {
-    console.log("onYouTubeIframeAPIReady");
+    // console.log("onYouTubeIframeAPIReady");
     var player;
     var video = BreakPointVideo.getMainInstance();
     player = new YT.Player(video.elementId, {

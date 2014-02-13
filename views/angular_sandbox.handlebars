@@ -36,8 +36,8 @@ http://stackoverflow.com/questions/7988476/listening-for-youtube-event-in-javasc
             </div>
             <div class="player-controls">
                 <div class="slider-breakpoints" ng-model='breakpoints'>
-                    <span class="slider-breakpoint" data-bp-id="\{{sbp.breakPointId}}" ng-repeat="sbp in breakpoints" style="left:\{{sliderBreakpointLeft(sbp)}}%" ng-click="clickedSliderBreakpoint(sbp)">
-                        <i class='fa fa-tint fa-flip-vertical slider-breakpoint-icon'></i>
+                    <span class="slider-breakpoint" data-bp-id="\{{sbp.breakPointId}}" ng-repeat="sbp in breakpoints" style="left:\{{sliderBreakpointLeft(sbp)}}%" ng-click="clickedSliderBreakpoint(sbp)" >
+                        <i class='fa fa-tint fa-flip-vertical slider-breakpoint-icon' ng-class="{active: isCurrentBreakpoint(sbp)}"></i>
                     </span>
                 </div>
                 <div class="main-slider" ng-click="clickedSlider($event)">
@@ -73,9 +73,9 @@ http://stackoverflow.com/questions/7988476/listening-for-youtube-event-in-javasc
                 <ul class='breakpoints-ul'>
                     <li class="breakpoint-li" ng-repeat="bp in breakpoints">
                         <a class="breakpoint" href=
-                        "#" data-bp-id="\{{bp.breakPointId}}" ng-click="clickedBreakpoint(bp)">
+                        "#" data-bp-id="\{{bp.breakPointId}}" ng-click="clickedBreakpoint(bp)" ng-class="{active: isCurrentBreakpoint(bp)}">
                             <div class="breakpoint-time">
-                                \{{bp.displayStartTime()}}
+                                \{{bp.displayStartTime()}} - \{{bp.displayEndTime()}}
                             </div>
                             <div class="breakpoint-name" contenteditable='true'>
                                 \{{bp.desc}}

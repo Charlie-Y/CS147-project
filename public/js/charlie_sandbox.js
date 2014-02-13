@@ -21,6 +21,9 @@ var app = angular.module("BreakPoint", []);
 
 var BreakPointCtrl = function($scope) {
     $scope.breakpoints = [];
+    $scope.currentBreakpoint = {};
+
+    window.$scope = $scope;
 
     $(document).ready(function() {
         initializePage();
@@ -53,27 +56,52 @@ var BreakPointCtrl = function($scope) {
     $scope.onVideoLoaded = function(){
         $scope.controls = $scope.bpPlayer.controls
         $scope.breakpoints = $scope.bpPlayer.breakpoints;
-
-        console.log("onVideoLoaded");
+        // console.log("onVideoLoaded");
         $scope.$apply();
     }
 
     // move these to directive?
     // probably?
 
+    // ========= Current Breakpoint activity ===== //
+
+    var setCurrentBreakpoint = function(bp){
+        if ($scope.isCurrentBreakpoint(bp)){
+            $scope.currentBreakpoint = {};
+        } else {
+            $scope.currentBreakpoint = bp;
+        }
+        console.log("currentBreakpoint " + $scope.currentBreakpoint.toString());
+    }
+
+    $scope.isCurrentBreakpoint = function(bp){
+        return bp == $scope.currentBreakpoint;
+    }
+
+    $scope.clickedBreakpoint = function(bp){
+        // console.log("clickedBreakpoint");
+        if (!$scope.isCurrentBreakpoint(bp)){
+            $scope.bpPlayer.goToBreakpoint(bp);
+        }
+        setCurrentBreakpoint(bp);
+    }
+
+
+    $scope.clickedSliderBreakpoint = function(bp){
+        if (!$scope.isCurrentBreakpoint(bp)){
+            $scope.bpPlayer.goToBreakpoint(bp);
+        }
+        setCurrentBreakpoint(bp);
+    }
+
+
+    // ========= Click listeners ========== //
+
     $scope.clickedSlider = function($event){
         // console.log(event);
         $scope.controls.onSliderClick($event);
     }
 
-    $scope.clickedBreakpoint = function(bp){
-        // console.log("clickedBreakpoint");
-        $scope.bpPlayer.goToBreakpoint(bp);
-    }
-
-    $scope.clickedSliderBreakpoint = function(bp){
-        $scope.bpPlayer.goToBreakpoint(bp);
-    }
 
     $scope.clickedRemoveBreakpoint = function(bp){
         // console.log("clickedRemoveBreakpoint");
@@ -87,10 +115,10 @@ var BreakPointCtrl = function($scope) {
     $scope.clickedVolume = function(){
         $scope.controls.toggleVolumeButton();
     }
-    
-    $scope.clickedAddBreakpoint = function(){
+        $scope.clickedAddBreakpoint = function(){
         $scope.controls.clickedAddBreakpoint();
     }
+
 
 }
 
