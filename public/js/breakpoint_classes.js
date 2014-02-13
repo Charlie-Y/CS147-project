@@ -820,6 +820,13 @@ var BreakPointVideo = new JS.Class({
             var randomIndex = Math.floor( Math.random() * dV.length);
             return dV[randomIndex];
         },
+        loadYoutubeAPIScript: function(){
+            var tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        },
+
         UNSTARTED: -1,
         ENDED: 0,
         PLAYING: 1,
@@ -844,11 +851,7 @@ var BreakPointVideo = new JS.Class({
 
     // ===== Constructor ===== //
     initialize: function(elementId) {
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-        
+        BreakPointVideo.loadYoutubeAPIScript(); 
 
 
         $iframe = $('.player-video-id'); // TODO refactor this
@@ -1159,6 +1162,10 @@ function onYouTubePlayerReady(playerId) {
       ytplayer = document.getElementById("myytplayer");
     // ytplayer = document.getElementById("iframePlayer");
 }
+
+// function onYouTubeIframeAPIReady(){
+    
+// }
 
 // yeah this needs to be called from the window context.
 // I'll figure out scopes later..

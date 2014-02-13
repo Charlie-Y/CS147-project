@@ -2,9 +2,9 @@
     {{!-- {{> menubar}} --}}
     <!-- All the html and stuff goes here -->
 
-      {{!-- <iframe id="myYTPlayer" type="text/html" width="640" height="385" src="http://www.youtube.com/embed/moSFlvxnbgk?enablejsapi=1&version=3" allowfullscreen frameborder="0" id="iframePlayer">  </iframe> --}}
+      <!-- <iframe id="myYTPlayer" type="text/html" width="640" height="385" src="http://www.youtube.com/embed/moSFlvxnbgk?enablejsapi=1&version=3" allowfullscreen frameborder="0" id="iframePlayer">  </iframe>  -->
 
-  <script type="text/javascript" src="/js/swfobject.js"></script>    
+<!--  <script type="text/javascript" src="/js/swfobject.js"></script>    
   <div id="ytapiplayer">
     You need Flash player 8+ and JavaScript enabled to view this video.
   </div>
@@ -15,12 +15,19 @@
     var atts = { id: "myytplayer" };
     swfobject.embedSWF("http://www.youtube.com/v/moSFlvxnbgk?enablejsapi=1&playerapiid=ytplayer&version=3",
                        "ytapiplayer", "425", "356", "8", null, null, params, atts);
-  </script>
+  </script> -->
+
+
+<!-- http://stackoverflow.com/questions/19603618/how-do-i-get-the-reference-to-an-existing-youtube-player
+
+http://stackoverflow.com/questions/7443578/youtube-iframe-api-how-do-i-control-a-iframe-player-thats-already-in-the-html?rq=1
+
+http://stackoverflow.com/questions/7988476/listening-for-youtube-event-in-javascript-or-jquery/7988536#7988536 -->
 
     <!-- <div class="smartphone-landscape" id=""> -->
     <!-- <div class="" id="" >  -->
 
-    <div class="" id="" ng-controller="BreakPointCtrl" >
+    <div class="" id="player" ng-controller="BreakPointCtrl" >
     <!-- <div class="smartphone-landscape" id="player" >  -->
         <div class="player-main">
             <div class="player-video-id" data-video-id="{{videoId}}"></div>
