@@ -2,7 +2,10 @@
 $slate-grey: #1b1b1b;
 $header-height: 40px;
 $active-breakpoint-color: #000094;
-
+$slider-height: 10px;
+$current-slider-z: 3;
+$slider-breakpoint-z:4;
+$side-nav-z:5;
 
 #container{
     background: $slate-grey;
@@ -89,8 +92,24 @@ $BREAKPOINT_HEIGHT: 45px;
         width: 100%;
         // height: 100%;
         background: #777777;
+        height:$slider-height;
+    }
 
-        height:10px;
+    .filled-slider{
+        height: 100%;
+        // width:100%;
+        // position: absolute;
+        // left: 95%;
+        background: #800000;
+    }
+
+    .current-breakpoint-slider{
+        background:rgba(0,200,0,.5);
+        height: 100%;
+        position: relative;
+        top: -$slider-height;
+        // width: 5%;
+        z-index: $current-slider-z;
     }
 
     .slider-breakpoints{
@@ -103,7 +122,7 @@ $BREAKPOINT_HEIGHT: 45px;
         position:absolute;
         cursor: pointer;
         left:0;
-
+        z-index: $slider-breakpoint-z;
     }
 
     %active-slider-breakpoint-img{// can't extend nested selectors
@@ -127,7 +146,7 @@ $BREAKPOINT_HEIGHT: 45px;
     }
 
     %active-slider-breakpoint-icon{// can't extend nested selectors
-        color:$active-breakpoint-color;
+        color:#2920f5;
     }
 
     .slider-breakpoint-icon{
@@ -135,7 +154,6 @@ $BREAKPOINT_HEIGHT: 45px;
         font-size: 20px;
         // figure out transitions etc. 
         color: #eeeeee;
-
         &:active{
             color:#0000ff;
         }
@@ -148,14 +166,6 @@ $BREAKPOINT_HEIGHT: 45px;
     }
     .slider-breakpoint-icon.active{
         @extend %active-slider-breakpoint-icon;
-    }
-
-    .filled-slider{
-        height: 100%;
-        // width:100%;
-        // position: absolute;
-        // left: 95%;
-        background: #800000;
     }
 
     .control-buttons{
@@ -190,7 +200,7 @@ $BREAKPOINT_HEIGHT: 45px;
     }
 
     .control-current-time{
-
+        color: #dddddd;
     }
 
 
@@ -224,6 +234,7 @@ $BREAKPOINT_HEIGHT: 45px;
         position: absolute;
         top:0;
         right:0;
+        z-index: $side-nav-z;
     }
 
     // little menu thing....

@@ -29,12 +29,22 @@
     width: 100%;
     background: #777777;
     height: 10px; }
+  #player .filled-slider {
+    height: 100%;
+    background: #800000; }
+  #player .current-breakpoint-slider {
+    background: rgba(0, 200, 0, 0.5);
+    height: 100%;
+    position: relative;
+    top: -10px;
+    z-index: 3; }
   #player .slider-breakpoints {
     height: 10px; }
   #player .slider-breakpoint {
     position: absolute;
     cursor: pointer;
-    left: 0; }
+    left: 0;
+    z-index: 4; }
   #player .slider-breakpoint-img.active, #player .slider-breakpoint-img:hover {
     border: solid 2px #ff0000;
     top: -2px;
@@ -44,7 +54,7 @@
     width: 20px;
     vertical-align: top; }
   #player .slider-breakpoint-icon:hover, #player .slider-breakpoint-icon.active {
-    color: #000094; }
+    color: #2920f5; }
   #player .slider-breakpoint-icon {
     cursor: pointer;
     font-size: 20px;
@@ -53,9 +63,6 @@
       color: #0000ff; }
     #player .slider-breakpoint-icon.to-remove {
       color: #ff0000; }
-  #player .filled-slider {
-    height: 100%;
-    background: #800000; }
   #player .control-buttons {
     padding-left: 20px; }
   #player .control-button {
@@ -71,6 +78,8 @@
       color: #0000ff; }
   #player .control-time {
     color: #999999; }
+  #player .control-current-time {
+    color: #dddddd; }
   #player .control-sound, #player .control-nosound {
     font-size: 0.8em; }
   #player .hidden {
@@ -86,7 +95,8 @@
     background: #252525;
     position: absolute;
     top: 0;
-    right: 0; }
+    right: 0;
+    z-index: 5; }
   #player .player-menu {
     height: 30px;
     color: #cccccc;

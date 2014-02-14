@@ -20,8 +20,14 @@ var app = angular.module("BreakPoint", []);
 
 
 var BreakPointCtrl = function($scope) {
+    
+    // ==== Class static constants ====//
+
+    var NO_CURRENT = undefined;
+
     $scope.breakpoints = [];
-    $scope.currentBreakpoint = {};
+    $scope.currentBreakpoint = NO_CURRENT;
+    $scope.segmentDisplayBreakpoints = [];
 
     window.$scope = $scope;
 
@@ -37,6 +43,7 @@ var BreakPointCtrl = function($scope) {
                     callback: $scope.onVideoLoaded
                 });
             $scope.bpPlayer = bpPlayer;
+
             // $scope.breakpoints = $scope.bpPlayer.breakpoints;
             // $scope.controls = bpPlayer.controls
             // console.log("setting breakpoints");
@@ -50,14 +57,40 @@ var BreakPointCtrl = function($scope) {
     }
 
     $scope.sliderBreakpointLeft = function(bp){
-        return $scope.controls.xPercentFromTime(bp.startTime);
+        if (bp != undefined){
+            return $scope.controls.xPercentFromTime(bp.startTime, {offset: true});
+        }
     }
 
     $scope.onVideoLoaded = function(){
         $scope.controls = $scope.bpPlayer.controls
         $scope.breakpoints = $scope.bpPlayer.breakpoints;
+        $scope.video = $scope.bpPlayer.video
         // console.log("onVideoLoaded");
+        var thisControls = $scope.controls;
+        var thisScope = $scope;
+
+        // $scope.currentTime = $scope.video.getTime();
+
+        $scope.updateTimeIntervalId = window.setInterval(function(){
+            thisControls.updateTime();
+            thisScope.reactToTime();
+        }, 300);
+
         $scope.$apply();
+    }
+
+    $scope.reactToTime = function(){
+        // if the thing has left teh range of the currentbreakpoint
+        // then pause or go back and repeat.
+
+        if ($scope.hasCurrentBreakpoint()){
+            if ($scope.video.getTime() > $scope.currentBreakpoint.endTime){
+                // todo - let people leave from current breakpoints
+                $scope.video.pauseVideo();
+                $scope.video.seekTo($scope.currentBreakpoint.startTime);
+            }
+        }
     }
 
     // move these to directive?
@@ -67,11 +100,15 @@ var BreakPointCtrl = function($scope) {
 
     var setCurrentBreakpoint = function(bp){
         if ($scope.isCurrentBreakpoint(bp)){
-            $scope.currentBreakpoint = {};
+            $scope.currentBreakpoint = NO_CURRENT;
         } else {
             $scope.currentBreakpoint = bp;
+            console.log("currentBreakpoint " + $scope.currentBreakpoint.toString());
         }
-        console.log("currentBreakpoint " + $scope.currentBreakpoint.toString());
+    }
+
+    $scope.hasCurrentBreakpoint = function(){
+        return $scope.currentBreakpoint != NO_CURRENT;
     }
 
     $scope.isCurrentBreakpoint = function(bp){
@@ -86,7 +123,6 @@ var BreakPointCtrl = function($scope) {
         setCurrentBreakpoint(bp);
     }
 
-
     $scope.clickedSliderBreakpoint = function(bp){
         if (!$scope.isCurrentBreakpoint(bp)){
             $scope.bpPlayer.goToBreakpoint(bp);
@@ -94,11 +130,53 @@ var BreakPointCtrl = function($scope) {
         setCurrentBreakpoint(bp);
     }
 
+    // ====== Slider display methods ===== //
+
+    $scope.getSegmentDisplayBreakpoints = function(){
+        var result;
+        var breakpoints = $scope.segmentDisplayBreakpoints;
+        if ($scope.hasCurrentBreakpoint()){
+            var currentBp = $scope.currentBreakpoint;
+            var index = breakpoints.indexOf(currentBp);
+            if (index > -1){
+                result = $scope.segmentDisplayBreakpoints;
+            } else {
+                result = [currentBp].concat(breakpoints);
+            }
+        } else {
+            result = $scope.segmentDisplayBreakpoints;
+        }
+        // console.log('foo');
+        return result;
+    }
+
+    // a slider breakpoint is a breakpoint whose slider
+    // will be displayed
+    $scope.addSegmentDisplayBreakpoint = function(bp){
+        $scope.segmentDisplayBreakpoints.push(bp)
+    };
+
+    $scope.removeSegmentDisplayBreakpoint = function(bp){
+        var breakpoints = $scope.segmentDisplayBreakpoints;
+        var bpIndex = breakpoints.indexOf(bp);
+        if (bpIndex > -1) {
+            breakpoints.splice(bpIndex, 1);
+            // console.log("Breakpoint removed "+ bp.breakPointId);
+        }
+    };
+
+    $scope.sliderSegmentLeft = function(bp){
+        return $scope.controls.xPercentFromTime(bp.startTime);
+    }
+
+    $scope.sliderSegmentWidth = function(bp){
+        return $scope.controls.xPercentFromTime(bp.duration());
+    }
+
 
     // ========= Click listeners ========== //
 
     $scope.clickedSlider = function($event){
-        // console.log(event);
         $scope.controls.onSliderClick($event);
     }
 
