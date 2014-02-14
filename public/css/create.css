@@ -1,0 +1,27 @@
+.container {
+     margin-top: 120px;
+}
+
+.thumbnails {
+     display: block;
+     width: 200px;
+     margin: 0 auto;
+     box-shadow: 1px 1px 1px #A0A0A0;
+}
+
+.description {
+     color: gray;
+     font-weight: 300;
+     font-size: 11pt;
+}
+
+.videoitem {
+     margin-bottom: 10px;
+}
+
+.title {
+     color: white;
+     font-weight: 700;
+     font-size: 15pt;
+}
+
