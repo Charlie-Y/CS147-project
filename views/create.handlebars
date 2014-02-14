@@ -10,7 +10,7 @@
 	<link href="/css/introHCI.css" rel="stylesheet">
 	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>
 	<link href="/css/application.css" rel="stylesheet">
-	<script src="create.js" type="text/javascript"></script>
+	<!-- <script src="create.js" type="text/javascript"></script>-->
 </head>
 
 <body>
@@ -29,18 +29,61 @@
 	<div class = "row text-center">
 		<div id="buttons">
      		 <a><input id="query" type="text"/><button id="search-button" onclick="search()">Search</button></a>
+     		 	<img id = "search-contents">
     	</div>
     	<div id="search-container">
     	</div>
-    	<pre id = "response"></pre>
+    	<img id = "search-contents">
     </div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-
     <script>
-		// Helper function to display JavaScript value on HTML page.
+		//Okay, so the showResponse function contains all the AJAX code and Youtube API search goes that is triggered when the
+		//button is clicked. So far I can display a list of videos, but the positioning is off and I haven't linked it to another
+		//project yet.
 		function showResponse(response) {
 		    var responseString = JSON.stringify(response, '', 2);
+		  	console.log(response.items[0].snippet.thumbnails.default.url);
+		    loadXMLDoc();
 		    console.log(responseString);
+		 	function loadXMLDoc() {
+		 		var xmlhttp;
+		 		if(window.XMLHttpRequest){
+		 			xmlhttp=new XMLHttpRequest();
+		 		}else {
+		 			xmlhttp = newActiveXObject("Microsoft.XMLHTTP");
+		 		}
+		 		var ImgOne;
+		 		var container;
+		 		var desc;
+		 		var title;
+		 		var titleTxt;
+		 		var text;
+		    	for(i = 0; i < (response.items).length; i++) {
+		    		//I tried to teach myself Ajax (before today's lecture), and so I basically created a container, 
+		    		//div and used a thumbnail image, description, and title, to identify the project. I was a little confused
+		    		//about what we wanted to extract from the user click. Do we want to return the video id? Do we want
+		    		//to go to the Youtube url for the user to view the video? Would love your input!
+		 			container = document.createElement("div"); 
+		 			ImgOne = document.createElement("img");
+		 			desc = document.createElement("p");
+		 			title = document.createElement("h");
+		 			titleTxt = document.createTextNode(response.items[i].snippet.title);
+		 			text = document.createTextNode(response.items[i].snippet.description);
+		 			desc.appendChild(text);
+		 			title.appendChild(titleTxt);
+		 			title.setAttribute('id', "title");
+		 			desc.setAttribute('id', "descriptions");
+		 			container.setAttribute('id',"everything-search");
+		 			ImgOne.setAttribute('src', response.items[i].snippet.thumbnails.default.url);
+		 			ImgOne.setAttribute('class', "thumbnails");
+		 			container.appendChild(ImgOne);
+		 			container.appendChild(desc);
+		 			container.appendChild(title);
+		 			document.body.appendChild(container);
+		 		}
+		 		xmlhttp.open("GET","create",true);
+				xmlhttp.send();
+		 	}
 		}
 
 		// Called automatically when JavaScript client library is loaded.
@@ -52,7 +95,7 @@
 		function onYouTubeApiLoad() {
 		    // This API key is intended for use only in this lesson.
 		    // See http://goo.gl/PdPA1 to get a key for your own applications.
-		    gapi.client.setApiKey('AIzaSyCZ3Xe72tMKmRsD_UxziY1PaGetuB5zlKg');
+		    gapi.client.setApiKey('AIzaSyBCvmFiLUeMX4TXRMI7Ep26vO066nVyByg');
 		}
 
 		function search() {
@@ -74,7 +117,6 @@
 		    showResponse(response);
 		}
 	</script>
-
     <script src="https://apis.google.com/js/client.js?onload=onClientLoad"></script>
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="/js/bootstrap.min.js"></script>

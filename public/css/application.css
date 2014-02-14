@@ -11,7 +11,7 @@ h1, h2, h3, h4, h5, h6, p {
 
 .container {
      width: 90%;
-     margin-top: 50px;
+     margin-top: 60px;
      margin-left: auto;
      margin-right: auto;
      border-radius: 10px;
@@ -58,7 +58,29 @@ h1, h2, h3, h4, h5, h6, p {
 a:hover {
      text-decoration: none;
 }
-
+select:focus,
+textarea:focus,
+button:focus,
 input:focus {
     outline: none;
+}
+
+.warning {
+    position: fixed;
+    top: 230px;
+    color: #303030;
+    width: 90%;
+    background: rgba(255,255,255,0.87);
+    text-align: center;
+    font-size: 15pt;
+    left: 5%;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 1px 1px 1px #303030;
+    display: none;
+    font-weight: 300;
+}
+
+.warning span {
+    font-size: 20pt;
 }

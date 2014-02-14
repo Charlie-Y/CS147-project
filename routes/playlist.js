@@ -16,6 +16,9 @@ exports.view = function(req, res){
 	    	}
 	  	},
 	  	thumbnail_of: function(id) {
+	  		if (id == undefined) {
+	  			return "/images/placeholder.jpg";
+	  		}
 	  		for (var i=0; i < data.videos.length; i++) {
 	    		var elem = data.videos[i];
 	    		if (elem.id == id) {

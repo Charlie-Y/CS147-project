@@ -44,6 +44,8 @@ var help = require('./routes/help');
 var create = require('./routes/create');
 var setlist = require('./routes/setlist');
 var createsetlist = require('./routes/createsetlist');
+var addtosetlist = require('./routes/addtosetlist');
+
 
 // Example route
 // var user = require('./routes/user');
@@ -73,6 +75,8 @@ app.use(
 );
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
+app.use(express.urlencoded());
 
 // development only
 if ('development' == app.get('env')) {
@@ -86,7 +90,6 @@ app.get('/sandbox', sandbox.view);
 app.get('/sandbox/:videoId', sandbox.view);
 
 app.get('/setlist/:setlistId', setlist.view);
-app.get('/setlist/:setlistId/add/:videoId', setlist.add);
 app.get('/setlist/:setlistId/remove/:videoId', setlist.remove);
 app.get('/setlist/:setlistId/remove', setlist.delete);
 
@@ -94,6 +97,9 @@ app.get('/playlist', playlist.view);
 app.get('/help', help.view);
 app.get('/create', create.view);
 app.get('/createsetlist', createsetlist.view);
+app.post('/createsetlist', createsetlist.create);
+
+app.get('/addtosetlist/:setlistId', addtosetlist.view);
 
 // Example route
 // app.get('/users', user.list);

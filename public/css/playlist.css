@@ -9,7 +9,7 @@ hr {
 }
 
 .container {
-	margin-top: 110px;
+	margin-top: 120px;
 }
 .searchbar {
      background-color:#606060;
@@ -123,6 +123,9 @@ hr {
 .setlistvideo {
 	border-bottom: 1px dotted rgb(180,180,180);
 	color: rgb(180,180,180);
+	line-height: 1.1;
+	padding-top: 3px;
+	padding-bottom: 3px;
 }
 
 .setlistvideos {
@@ -134,6 +137,7 @@ hr {
 .setlistnum {
 	font-weight: 700;
 	color: #ee5259;
+	text-align: center;
 }
 
 .add {

@@ -79,12 +79,12 @@
 							</div>
 						<div class="setlistdescription"> {{description}} <br/> </div>
 						<div class="setlistvideos">
-							<span class="setlistnum">{{setlistvids.length}} videos including: </span>
+							<div class="setlistnum">[ {{setlistvids.length}} videos ] </div>
 							{{#setlistvids}}
 							<div class="setlistvideo" onclick="window.location='/sandbox/1'">{{title_of this}}</div>
 							{{/setlistvids}}
 						</div>
-						<div class="add"><span class="glyphicon glyphicon-plus-sign"></span> ADD TO SETLIST</div>
+						<div class="add" onclick="window.location='/addtosetlist/{{id}}'"><span class="glyphicon glyphicon-plus-sign"></span> ADD TO SETLIST</div>
 						<div class="foldbutton setlistfoldbutton"><span class="glyphicon glyphicon-chevron-up"></div>
 					</div>
 				</div>

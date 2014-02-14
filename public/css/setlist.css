@@ -50,17 +50,20 @@
 }
 
 .add, .remove {
-	width: 100%;
-	margin: 0 auto;
+	width: 46%;
+	margin-right: 2%;
+	margin-left: 2%;
 	color: #eb006f;
 	background-color: rgba(0,0,0,0.5);
-	font-weight: 400;
-	font-size: 11pt;
+	font-weight: 300;
+	font-size: 15pt;
 	text-align: center;
 	line-height: 1.0;
-	padding: 5px;
-	border-radius: 20px;
-	box-shadow: 2px 2px 2px #101010;
+	padding: 10px 5px 10px 5px;
+	border-radius: 10px;
+	box-shadow: 1px 1px 1px #101010;
+	float: left;
+	margin-bottom: 10px;
 }
 
 .add:hover, .remove:hover {
@@ -69,25 +72,37 @@
 }
 
 .ic {
-	font-size: 15pt;
-	margin-bottom: 3px;
+	height: 40px;
+	width: 30%;
+	float: left;
 }
 
-.row {
-	margin-bottom: 20px;
+.ic span {
+	vertical-align: middle;
 }
+
+.icw {
+	padding-left: 5px;
+	width: 65%;
+	float: left;
+}
+
+.small {
+	margin-top: 2px;
+	font-size: 11pt;
+	color: white;
+	font-weight: 300;
+	font-style: italic;
+}
+
 
 #gobacktop {
 	margin-top: 5px;
 	color:  #eb006f;
 }
 
-.icw {
-	color: #E0E0E0;
-}
-
 #delete {
-	background-color: #505050;
+	background-color: #808080;
 	color: white;
 	font-weight: 600;
 	font-size: 12.5pt;
@@ -103,4 +118,9 @@
 
 #delete span {
 	margin-right: 10px;
+}
+
+.divisor {
+	visibility: hidden;
+	font-size: 1pt;
 }
