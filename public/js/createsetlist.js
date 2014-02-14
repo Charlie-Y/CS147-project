@@ -16,7 +16,7 @@ function CreateSetlist(button) {
 			$("#title").css('border', '1px solid #eb006f');
 			$("#warning").fadeIn();
 			$(".warningmessage").html("Title can't be blank");
-			$(".warning").fadeIn("fast", function() {
+			$(".warning").fadeIn(function() {
 				setTimeout(function() {
 					$(".warning").fadeOut("slow");
 				}, 2000);

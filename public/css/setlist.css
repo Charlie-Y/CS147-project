@@ -50,21 +50,20 @@
 }
 
 .add, .remove {
-	width: 44%;
-	margin-right: 3%;
-	margin-left: 3%;
+	width: 46%;
+	margin-right: 2%;
+	margin-left: 2%;
 	color: #eb006f;
 	background-color: rgba(0,0,0,0.5);
 	font-weight: 300;
 	font-size: 15pt;
 	text-align: center;
 	line-height: 1.0;
-	padding: 10px;
+	padding: 10px 5px 10px 5px;
 	border-radius: 10px;
 	box-shadow: 1px 1px 1px #101010;
 	float: left;
-	height: 60px;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 
 .add:hover, .remove:hover {

@@ -30,16 +30,16 @@ function FoldedList(button){
 
 	button.click(function() {
 		if(!open) {
-			$(this).next().slideDown('slow');
+			$(this).parent().next().slideDown('slow');
 			open = true;
 		} else {
-			$(this).next().slideUp('slow');
+			$(this).parent().next().slideUp('slow');
 			open = false;
 		}
 	});
 
 	button.next().find(".foldbutton").click(function() {
-		$(this).parent().slideUp();
+		$(this).parent().next().slideUp();
 		open = false;
 	})
 }
@@ -55,7 +55,7 @@ function AddToSetlist(button) {
 
 		if (values.length == 0) {
 			$(".warningmessage").html("You must select at least one video");
-			$(".warning").fadeIn("fast", function() {
+			$(".warning").fadeIn(function() {
 				setTimeout(function() {
 					$(".warning").fadeOut("slow");
 				}, 2000);
