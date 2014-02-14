@@ -3,7 +3,6 @@
 
 // Call this function when the page loads (the "ready" event)
 $(document).ready(function() {
-	console.log("hello");
 	initializePage();
 });
 
@@ -16,9 +15,16 @@ function CreateSetlist(button) {
 		if (empty) {
 			$("#title").css('border', '1px solid #eb006f');
 			$("#warning").fadeIn();
+			$(".warningmessage").html("Title can't be blank");
+			$(".warning").fadeIn("fast", function() {
+				setTimeout(function() {
+					$(".warning").fadeOut("slow");
+				}, 2000);
+			});
+
 		} else {
 			$.post("/createsetlist", { 'title': title, 'description': description }, function(data) {
-				window.location.href = "/addtoplaylist/" + data.id;
+				window.location.href = "/addtosetlist/" + data.id;
 			});
 		}
 	});

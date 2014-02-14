@@ -120,3 +120,8 @@
 #delete span {
 	margin-right: 10px;
 }
+
+.divisor {
+	visibility: hidden;
+	font-size: 1pt;
+}

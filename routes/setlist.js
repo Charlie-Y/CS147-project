@@ -10,20 +10,24 @@ exports.view = function(req, res) {
 	  		return parseInt(index) + 1;
 	  	}
 	};
-
+	data.setlistId = req.params.setlistId;
 	Setlist.findOne({'id':req.params.setlistId}, function (err, setlist) {
 		data.title = setlist.title;
 		data.description = setlist.description;
 		var vidids = setlist.setlistvids;
 		data.videos = [];
-		for (var i=0; i < vidids.length; i++) {
-			Video.findOne({'id': vidids[i]}, function (err, video) {
-				data.videos.push(video);
+		if (vidids.length == 0) {
+			res.render('setlist', data);
+		} else {
+			for (var i=0; i < vidids.length; i++) {
+				Video.findOne({'id': vidids[i]}, function (err, video) {
+					data.videos.push(video);
 
-				if (data.videos.length == vidids.length) {
-					res.render('setlist', data);
-				}
-			});
+					if (data.videos.length == vidids.length) {
+						res.render('setlist', data);
+					}
+				});
+			}
 		}
 	});
 }
