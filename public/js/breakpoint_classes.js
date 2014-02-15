@@ -42,6 +42,7 @@ console.log("breakpoint_classes.js");
 // TODO - error checking to make sure that nothing breaks
     // make sure breakpoint times are well ordered - or oreder them on creation
     // make sure functions don't break that are empty
+    // clicking outside of current breakpoints fails miserably
 
 // todo - main functionality = show duration on hover in slider
 // todo - currentBreakpoint functionality with repeats
@@ -121,7 +122,7 @@ var BreakPointPlayer = new JS.Class({
         SMARTPHONE_WIDTH: '320', // also in portrait orientation
         SIDE_NAV_WIDTH: '130',
         VIDEO_WIDTH: '350', // landscape
-        VIDEO_HEIGHT: '250', // landscape, confusing i know
+        VIDEO_HEIGHT: '250', // landscape, confusing i an
         VIDEO_CONTROL_HEIGHT: '70',
 
         SIDE_NAV_WIDTH_P: 0.20,
@@ -142,7 +143,7 @@ var BreakPointPlayer = new JS.Class({
 
         USE_DEV_BREAKPOINTS: true,
 
-        CONTROLS: 1, // 0 for no default youtube controls, 1 for youtube controls
+        CONTROLS: 0, // 0 for no default youtube controls, 1 for youtube controls
         AUTOPLAY: true
 
         
@@ -512,8 +513,8 @@ var BreakPointVideoControls = new JS.Class({
         this.$filledSlider.css('width', percent + "%");
 
         // update the display time
-        if ( this.$maxTime.text().length == 0){
-            // console.log("Settting time");
+        if ( $.trim( this.$maxTime.text() ).length == 0){
+            console.log("Settting time");
             var displayMaxTime = BreakPoint.timeInMinsSeconds(maxTime);
             this.$maxTime.text(displayMaxTime);
         }

@@ -85,6 +85,7 @@ if ('development' == app.get('env')) {
 
 // Add routes here
 app.get('/', index.view);
+app.get('/video', video.watchVideo);
 app.get('/video/:id', video.watchVideo);
 app.get('/sandbox', sandbox.view);
 app.get('/sandbox/:videoId', sandbox.view);

@@ -87,7 +87,7 @@ var BreakPointCtrl = function($scope) {
         if ($scope.hasCurrentBreakpoint()){
             if ($scope.video.getTime() > $scope.currentBreakpoint.endTime){
                 // todo - let people leave from current breakpoints
-                $scope.video.pauseVideo();
+                // $scope.video.pauseVideo();
                 $scope.video.seekTo($scope.currentBreakpoint.startTime);
             }
         }
@@ -197,6 +197,22 @@ var BreakPointCtrl = function($scope) {
         $scope.controls.clickedAddBreakpoint();
     }
 
+    // ======== Playback speed ====== ///
+
+    $scope.playbackRateExists = function(rate){
+        if ($scope.video){
+            var availableRates = $scope.video.availablePlaybackRates();
+            var index = availableRates.indexOf((rate));
+            return index > -1
+        } 
+        return false;
+    }
+
+    $scope.clickedPlaybackRate = function(rate){
+        console.log("clickedPlaybackRate: " + rate);
+        $scope.video.setPlaybackRate(rate);
+        $scope.video.playVideo();
+    }
 
 }
 
