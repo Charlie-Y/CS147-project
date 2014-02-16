@@ -36,24 +36,25 @@
 		</div>
 
 		<div class="divisor">---</div>
-		{{#each videos}}
-			<div class="videoitem">
-				<div class="number">ROUTINE #{{add_one @index}}</div>
-				<div class="thumbnails" style="background: url({{imageURL}}); background-size: cover" onclick="window.location='/sandbox/1'">
-					<div class="over"><span class="helper"></span><span class="glyphicon glyphicon glyphicon-play-circle"></span></div>
-					</div>
+			{{#each videos}}
+				<div class="videoitem">
+					<div class="number">ROUTINE #{{add_one @index}}</div>
+					<div class="thumbnails" style="background: url({{imageURL}}); background-size: cover" onclick="window.location='/video'">
+						<div class="over"><span class="helper"></span><span class="glyphicon glyphicon glyphicon-play-circle"></span></div>
+						</div>
 
-				<div class="title">{{title}}</div>
-				<div class="description"> {{description}} </div>
-				<div class="removebutton" id="{{id}}"> REMOVE </div>
+					<div class="title">{{title}}</div>
+					<div class="description"> {{description}} </div>
+					<div class="removebutton" id="{{id}}"> REMOVE </div>
+				</div>
+				<div class="divider"></div>
+			{{/each}}
+		<div class='guide'>{{#if videos.length}}{{else}}Setlist is empty. Try adding videos.{{/if}}</div>
 
-			</div>
-			<div class="divider"></div>
-		{{/each}}
-
+		<a name="bottom"></a>
 		<div id="delete"><span class="glyphicon glyphicon-trash"></span> DELETE SETLIST </div>
 	</div>
-	
+	{{>notification}}
 	<a href="#top"><div id="gobacktop"> GO BACK TO TOP <span class="glyphicon glyphicon-arrow-up"></span></div></a>
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="/js/bootstrap.min.js"></script>

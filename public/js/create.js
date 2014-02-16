@@ -42,9 +42,9 @@ function showResponse(response) {
     		//div and used a thumbnail image, description, and title, to identify the project. I was a little confused
     		//about what we wanted to extract from the user click. Do we want to return the video id? Do we want
     		//to go to the Youtube url for the user to view the video? Would love your input!
-    		html += '<div class="videoitem"><div class="title">'+response.items[i].snippet.title+'</div> \
+    		html += '<a href="/video"><div class="videoitem"><div class="title">'+response.items[i].snippet.title+'</div> \
     			<div class="description">'+response.items[i].snippet.description+'</div> \
-    			<img class="thumbnails" src="'+response.items[i].snippet.thumbnails.default.url+'"></div><hr>';
+    			<img class="thumbnails" src="'+response.items[i].snippet.thumbnails.default.url+'"></div></a><hr>';
  		}
  		$(".container").html(html);
  		xmlhttp.open("GET","create",true);
@@ -63,6 +63,9 @@ function onYouTubeApiLoad() {
     // See http://goo.gl/PdPA1 to get a key for your own applications.
     gapi.client.setApiKey('AIzaSyBIuxGStWI52F5QUf88lV8HHl3hy8Qo3JU');
 }
+// LOCAL KEY: gapi.client.setApiKey('AIzaSyBCvmFiLUeMX4TXRMI7Ep26vO066nVyByg');
+// HEROKU KEY: gapi.client.setApiKey('AIzaSyBIuxGStWI52F5QUf88lV8HHl3hy8Qo3JU');
+
 
 function search() {
 	var query = $("#query").val();

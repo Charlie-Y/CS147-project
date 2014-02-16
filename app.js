@@ -92,15 +92,19 @@ app.get('/sandbox/:videoId', sandbox.view);
 
 app.get('/setlist/:setlistId', setlist.view);
 app.get('/setlist/:setlistId/remove/:videoId', setlist.remove);
-app.get('/setlist/:setlistId/remove', setlist.delete);
+app.get('/setlist/:setlistId/delete', setlist.delete);
 
 app.get('/playlist', playlist.view);
+app.post('/playlist', playlist.search);
+
 app.get('/help', help.view);
 app.get('/create', create.view);
 app.get('/createsetlist', createsetlist.view);
 app.post('/createsetlist', createsetlist.create);
 
 app.get('/addtosetlist/:setlistId', addtosetlist.view);
+app.post('/addtosetlist/:setlistId', addtosetlist.add);
+app.post('/addtosetlist/:setlistId/search', addtosetlist.search);
 
 // Example route
 // app.get('/users', user.list);

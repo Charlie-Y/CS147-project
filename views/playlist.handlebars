@@ -17,7 +17,7 @@
 
 <body>
 	<div class="row menubar">
-		<a href="/"><div class="col-xs-2"><span class="helper"></span><span class="glyphicon glyphicon-chevron-left"></span></div></a>
+		<a id="back" href="/"><div class="col-xs-2"><span class="helper"></span><span class="glyphicon glyphicon-chevron-left"></span></div></a>
 		<a href="/"><div class="col-xs-8"><span class="helper"></span><img src="/images/logowhite.png"/></div></a>
 		<div class="col-xs-2"></div>
 	</div>
@@ -30,21 +30,24 @@
 	
 	<a name="top"></a>
 
-	<div class="container">
+	<div class="container default">
 		<div class="folded"><span class="glyphicon glyphicon-time"></span>RECENTLY WATCHED</div>
 		<div class="list">
 			<div class="block">
-				{{#each recentlyWatched}}
-					<div class="videoitem">
+				{{#if recentlyWatched.length}}
+					{{#each recentlyWatched}}
+						<div class="videoitem">
+							<div class="thumbnails" style="background: url({{imageURL}}); background-size: cover" onclick="window.location='/video/{{id}}'">
+								<div class="over"><span class="helper"></span><span class="glyphicon glyphicon glyphicon-play-circle"></span></div>
+							</div>
 
-						<div class="thumbnails" style="background: url({{imageURL}}); background-size: cover" onclick="window.location='/video/{{id}}'">
-							<div class="over"><span class="helper"></span><span class="glyphicon glyphicon glyphicon-play-circle"></span></div>
+							<div class="title">{{title}}</div>
+							<div class="description"> {{description}} </div>
 						</div>
-
-						<div class="title">{{title}}</div>
-						<div class="description"> {{description}} </div>
-					</div>
-				{{/each}}
+					{{/each}}
+				{{else}}
+					<div class='guide'> You have no breakpoint videos. </div>
+				{{/if}}
 			</div>
 			<div class="foldbutton"><span class="glyphicon glyphicon-chevron-up"></div>
 		</div>
@@ -52,47 +55,59 @@
 		<div class="folded"><span class="glyphicon glyphicon-plus-sign"></span>RECENTLY CREATED</div>
 		<div class="list">
 			<div class="block">
-				{{#each recentlyCreated}}
-					<div class="videoitem">
-					<a href="/video/{{id}}">
-						<div class="thumbnails" style="background: url({{imageURL}}); background-size: cover">
-							<div class="over"><span class="helper"></span><span class="glyphicon glyphicon glyphicon-play-circle"></span></div>
+				{{#if recentlyCreated.length}}
+					{{#each recentlyCreated}}
+						<div class="videoitem">
+						<a href="/video/{{id}}">
+							<div class="thumbnails" style="background: url({{imageURL}}); background-size: cover">
+								<div class="over"><span class="helper"></span><span class="glyphicon glyphicon glyphicon-play-circle"></span></div>
+							</div>
+						</a>
+							<div class="title">{{title}}</div>
+							<div class="description"> {{description}} </div>
 						</div>
-					</a>
-						<div class="title">{{title}}</div>
-						<div class="description"> {{description}} </div>
-					</div>
-				{{/each}}
+					{{/each}}
+				{{else}}
+					<div class='guide'> You have no breakpoint videos. </div>
+				{{/if}}
 			</div>
 			<div class="foldbutton"><span class="glyphicon glyphicon-chevron-up"></div>
 		</div>
 		
 		<div class="folded"><span class="glyphicon glyphicon-list-alt"></span>YOUR SETLISTS</div>
 		<div class="list">
-			{{#each setlists}}
-				<div class="setlistitem">
-					<div class="folded setlisttitle">{{title}}</div>
-					<div class="list">
-							<div class="thumbnails" style="background: url({{thumbnail_of setlistvids.[0]}}); background-size: cover" onclick="window.location='/setlist/{{id}}'">
-								<div class="over"><span class="helper"></span><span class="glyphicon glyphicon glyphicon-play-circle"></span></div>
+			{{#if setlists.length}}
+				{{#each setlists}}
+					<div class="setlistitem">
+						<div class="folded setlisttitle">{{title}}</div>
+						<div class="list">
+								<div class="thumbnails" style="background: url({{thumbnail_of setlistvids.[0]}}); background-size: cover" onclick="window.location='/setlist/{{id}}'">
+									<div class="over"><span class="helper"></span><span class="glyphicon glyphicon glyphicon-play-circle"></span></div>
+								</div>
+							<div class="setlistdescription"> {{description}} <br/> </div>
+							<div class="setlistvideos">
+								<div class="setlistnum">[ {{setlistvids.length}} videos ] </div>
+								{{#setlistvids}}
+								<div class="setlistvideo" onclick="window.location='/video'">{{title_of this}}</div>
+								{{/setlistvids}}
 							</div>
-						<div class="setlistdescription"> {{description}} <br/> </div>
-						<div class="setlistvideos">
-							<div class="setlistnum">[ {{setlistvids.length}} videos ] </div>
-							{{#setlistvids}}
-							<div class="setlistvideo" onclick="window.location='/sandbox/1'">{{title_of this}}</div>
-							{{/setlistvids}}
+							<div class="add" onclick="window.location='/addtosetlist/{{id}}'"><span class="glyphicon glyphicon-plus-sign"></span> ADD TO SETLIST</div>
+							<div class="foldbutton setlistfoldbutton"><span class="glyphicon glyphicon-chevron-up"></div>
 						</div>
-						<div class="add" onclick="window.location='/addtosetlist/{{id}}'"><span class="glyphicon glyphicon-plus-sign"></span> ADD TO SETLIST</div>
-						<div class="foldbutton setlistfoldbutton"><span class="glyphicon glyphicon-chevron-up"></div>
 					</div>
-				</div>
-			{{/each}}
+				{{/each}}
+			{{else}}
+				<div class='guide'> You have no setlist. Create one! </div>
+			{{/if}}
 			<div class="foldbutton" id="lastbutton"><span class="glyphicon glyphicon-chevron-up"></div>
 		</div>
 		<div class="createplaylist" onclick="window.location='/createsetlist'"> <span class="glyphicon glyphicon-plus"></span> CREATE NEW SETLIST </div>
 	</div>
-	
+
+	<div class="searchlist"></div>
+	<div id="backToFullList" onclick="toDefaultView(event)"><span class="glyphicon glyphicon-arrow-left"></span> BACK TO MAIN LIST</div>
+
+	{{>warning}}
 	<a href="#top"><div id="gobacktop"> GO BACK TO TOP <span class="glyphicon glyphicon-arrow-up"></span></div></a>
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="/js/bootstrap.min.js"></script>

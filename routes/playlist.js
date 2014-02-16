@@ -2,7 +2,6 @@ var mongoose = require('mongoose');
 Video = mongoose.model('Video');
 Setlist = mongoose.model('Setlist');
 
-
 exports.view = function(req, res){
 	var data = {};
 
@@ -51,5 +50,12 @@ exports.view = function(req, res){
 				});
 			});
 		});
+	});
+}
+
+exports.search = function(req, res){
+	Video.find( { keyword: { $in: req.body.query.toLowerCase().split(" ") } }, function (err, videos) {
+		if (err) console.log(err);
+		res.json(videos);
 	});
 }

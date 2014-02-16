@@ -1,13 +1,83 @@
 'use strict';
 
-
 // Call this function when the page loads (the "ready" event)
 $(document).ready(function() {
 	initializePage();
 	$(".folded").each(function() {
 		new FoldedList($(this));
 	});
+	$("#submit").click(searchVideo);
+	$("#query").on('keyup', textfieldListener);
+	$("#backToFullList").css("display", "none");
 })
+
+function textfieldListener() {
+	console.log($(this).val());
+	if ($(this).val() == "") {
+		toDefaultView();
+	}
+}
+
+function searchVideo() {
+	var query = $("#query").val();
+	if (query == "" || query == "Search your videos...") {
+		$(".warning .message").html("Type keywords to search for");
+		$(".warning").fadeIn(function() {
+			setTimeout(function() {
+				$(".warning").fadeOut();
+			}, 1500);
+		});
+	} else {
+		var jqxhr = $.post(document.URL, { 'query': query })
+			.done(function(data) {
+				$("#backToFullList").css("display", "");
+				$(".default").css("display", "none");
+	  			$(".searchlist").css("display", "");
+
+				var html = ""
+				if (data.length == 0) {
+					html = "<div class='guide' id='novidfound'>No video found</div>"
+				} else {
+					for (var i=0; i < data.length; i++) {
+						var video = data[i];
+						var newitem = '<div class="videoitem">\
+						<a href="/video/"'+ video.id +'">\
+							<div class="thumbnails" style="background: url('+video.imageURL+'); background-size: cover">\
+								<div class="over"><span class="helper"></span><span class="glyphicon glyphicon glyphicon-play-circle"></span></div>\
+							</div>\
+						</a>\
+							<div class="title">'+video.title+'</div>\
+							<div class="description">'+video.description+'</div>\
+						</div>';
+						html += newitem;
+					}
+				}
+				$(".searchlist").html(html);
+
+				$('<div/>', {
+				    text: 'Search results:',
+				    class: 'searchresulttitle'
+				}).prependTo('.searchlist');
+				$(".searchlist").slideDown();
+				$("#back").attr("href","/playlist");
+		  	})
+			.fail(function() {
+				alert( "error" );
+			});
+	}
+}
+
+function toDefaultView(event) {
+	if (event) {
+		event.preventDefault();
+		$("#query").val("");
+	}
+	$(".default").css("display", "");
+	$(".searchlist").html("");
+	$(".searchlist").css("display", "none");
+	$("#back").attr("href","/");
+	$("#backToFullList").css("display", "none");
+}
 
 
 function FoldedList(button){

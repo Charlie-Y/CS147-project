@@ -35,22 +35,55 @@ function RemoveButton(button){
 function Remove(button) {
 	button.click(function() {
 		var id = $(this).attr("id");
-		$(this).parent().next().remove();
-		$(this).parent().remove();
+		var button = $(this);
 
-		var i=1;
-		$(".number").each(function() {
-			$(this).html("ROUTINE #" + i);
-			i++;
-		});
+		/* Remove fragment identifier */
+		var currURL = document.URL;
+		var index = currURL.indexOf('#');
+		if (index > 0) currURL = currURL.substring(0, index);
 
-		$.get(document.URL + "/remove/" + id);
+		var jqxhr = $.get(currURL + "/remove/" + id)
+			.done(function(data) {
+				$(".notification .message").html("Video has been removed from setlist");
+				$(".notification").fadeIn(function() {
+					setTimeout(function() {
+						$(".notification").fadeOut("slow");
+					}, 1000);
+				});
+
+				console.log(data);
+				button.parent().next().remove();
+				button.parent().remove();
+				if (data.num_vids > 0) {
+					var i=1;
+					$(".number").each(function() {
+						$(this).html("ROUTINE #" + i);
+						i++;
+					});
+				} else {
+					$(".guide").text("Setlist is empty. Try adding videos.")
+				}
+
+		  	})
+			.fail(function() {
+				alert( "error" );
+			});
 	});
 }
 
 function Delete(button) {
 	button.click(function() {
-		$.get(document.URL + "/remove");
-		window.location.href = "/playlist";
+		var jqxhr = $.get(document.URL + "/delete")
+			.done(function(data) {
+				$(".notification .message").html("Setlist has been deleted");
+				$(".notification").fadeIn(function() {
+					setTimeout(function() {
+						window.location.href = "/playlist";
+					}, 1000);
+				});		
+		  	})
+			.fail(function() {
+				alert( "error" );
+			});
 	});
 }
