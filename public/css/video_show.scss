@@ -15,23 +15,6 @@ $side-nav-z:5;
     height: 0 !important;
 }
 
-/* Smartphones (portrait and landscape) ----------- */
-// @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-// /* Styles */
-// }
-
-/* Smartphones (landscape) ----------- */
-// @media only screen and (min-width : 321px) {
-// /* Styles */
-//     #container{
-//         background: blue !mportant;
-//     }
-// }
-
-/* Smartphones (portrait) ----------- */
-// @media only screen and (max-width : 320px) {
-// /* Styles */
-// }
 
 // RIght now these are in the breakpoint_classes js folder as well...
 // TODO - these will be set dynamically sooner or later
@@ -50,6 +33,45 @@ $MENU_HEIGHT: 0;
 $MENU_HEIGHT: 30px;
 $BREAKPOINTS_HEIGHT: $SMARTPHONE_WIDTH - $MENU_HEIGHT;
 $BREAKPOINT_HEIGHT: 45px;
+
+#portrait-warning {
+    position: absolute;
+    top: 80px;
+    text-align: center;
+    width: 100%;
+}
+
+#warning-message {
+    color: white;
+    font-size: 20pt;
+    text-align: center;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+#warning-logo {
+    margin-top: 30px;
+    width: 200px;
+}
+
+@media only screen and (orientation : landscape) {
+    #landscape-view {
+        display: '';
+    }
+    #portrait-warning {
+        display: none;
+    }
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (orientation : portrait) {
+    #portrait-warning {
+        display: '';
+    }
+    #landscape-view {
+        display: none;
+    }
+}
 
 .smartphone-landscape{
     width:$SMARTPHONE_HEIGHT;
