@@ -183,7 +183,7 @@ $BREAKPOINT_HEIGHT: 45px;
     .control-button .fa{
         // @include transition(width, .2s, ease-in);
         cursor:pointer;
-        color: #eeeeee;
+        color: #999999;
         // figure out transitions etc. 
         &:hover{
             color:#0080ff;
@@ -191,6 +191,10 @@ $BREAKPOINT_HEIGHT: 45px;
         &:active{
             color:#0000ff;
         }
+    }
+
+    .control-repeat.active{
+        color:#0000ff;
     }
 
     .control-button.playback-button, .control-pauseplay{
@@ -224,7 +228,7 @@ $BREAKPOINT_HEIGHT: 45px;
     }
 
 
-    .add-breakpoint-helper{
+    .control-helper{
         font-size: .5em;
     }
 
