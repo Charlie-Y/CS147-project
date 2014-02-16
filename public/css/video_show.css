@@ -83,9 +83,15 @@
     color: #4c4c4c; }
     #player .control-button.playback-button.active, #player .control-pauseplay.active {
       color: #ffffff; }
+  #player .control-pauseplay {
+    font-size: 13px; }
+  #player .control-button.playback-button {
+    font-size: 11px; }
   #player .control-max-time {
+    font-size: 10px;
     color: #999999; }
   #player .control-current-time {
+    font-size: 10px;
     color: #dddddd; }
   #player .control-sound, #player .control-nosound {
     font-size: 0.8em; }
@@ -171,6 +177,12 @@
     color: #666666;
     margin-left: 6px;
     display: inline; }
+
+.breakpoint-empty {
+  color: #e6e6e6;
+  text-align: center;
+  padding: 8px 5px;
+  display: inline-block; }
 
 .complaint {
   color: white; }

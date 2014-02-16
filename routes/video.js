@@ -37,10 +37,11 @@ exports.watchVideo = function(req, res){
          //    res.render('video_show',data);
 
          // })
-        Video.find({id: videoId}, function (err, video) {
-            data.video = video[0];
+        Video.find({id: videoId}, function (err, videos) {
+            data.video = videos[0];
+            data.ytid = data.video.videoURL;
+
             console.log(data);
-            data.ytid = video.videoURL;
            // /* MongoDB operations are asynchronous! So call render.send in a callback after db operation is complete. Otherwise, the page will be rendered before data gets returned. */
             res.render('video_show',data);
         });

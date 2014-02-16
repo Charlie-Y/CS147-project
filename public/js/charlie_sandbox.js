@@ -211,6 +211,10 @@ var BreakPointCtrl = function($scope) {
 
     $scope.clickedRemoveBreakpoint = function(bp){
         // console.log("clickedRemoveBreakpoint");
+        if (bp == $scope.currentBreakpoint){
+            $scope.clearCurrentBreakpoint();
+        }
+
         $scope.bpPlayer.removeBreakPoint(bp);
     }
 
@@ -226,13 +230,20 @@ var BreakPointCtrl = function($scope) {
     // ======== Playback speed ====== ///
 
     $scope.currentPlaybackRate = 1;
+    $scope.playbackRateIntervalId = -1;
 
     $scope.playbackRateExists = function(rate){
         if ($scope.video){
-            var availableRates = $scope.video.availablePlaybackRates();
-            var index = availableRates.indexOf((rate));
-            return index > -1
-        } 
+            if ($scope.video.playbackRateExists(rate)){
+                return true;
+            }
+            // if they playbackrate isn't given by the youtube api
+            // then we can bootstrap this with some janky ass shit
+            // for the slow down speeds. speed up not so much
+            if ( rate == .25 | rate == .5){
+                return true;
+            }
+        }
         return false;
     }
 
@@ -242,17 +253,39 @@ var BreakPointCtrl = function($scope) {
             $scope.currentPlaybackRate = 1;
             rate = 1;
         }
-        $scope.video.setPlaybackRate(rate);
-        // $scope.video.playVideo();
+        // if youtube offers the functionality
+        if ($scope.video.playbackRateExists(rate)){
+            $scope.video.setPlaybackRate(rate);
+        } else {
+            jankSetPlaybackRate(rate);
+        }
         $scope.currentPlaybackRate = rate;
+    }
+
+    // uses setInterval
+    var jankSetPlaybackRate = function(rate){
+        clearJankPlayback();
+        if ( rate == 1){
+            return;
+        }
+        var intervalTime = 50;
+
+        var intervalId = setInterval( function(){
+            // if the video is playing...
+                // for every set interval of some sort
+                // if the speed is set to .25%, then the video needs to play for 
+                // 25% of the time, then stop for 75% of the time. 
+        }, intervalTime);
+        
+    }
+
+    var clearJankPlayback = function(){
+        // window.clear interval or so.
+        clearInterval($scope.playbackRateIntervalId);
     }
 
     $scope.playbackActive = function(rate){
         return $scope.currentPlaybackRate == rate;
-    }
-
-    $scope.clickedSetMaxTime = function(){
-
     }
 
     // ========= addBreakpoint functionality ==== //
@@ -292,7 +325,15 @@ var BreakPointCtrl = function($scope) {
 
     // ===== Feedback functionality ==== //
 
+    // ===== Breakpoint renaming stuff // 
 
+    $scope.breakpointNameUpdate = function($event, bp){
+        console.log(bp.toString());
+        console.log($event.toString());
+
+    }
+
+    console.log("fin charlie_sanbox.js");
 
 
 }

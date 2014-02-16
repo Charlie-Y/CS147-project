@@ -203,18 +203,23 @@ $BREAKPOINT_HEIGHT: 45px;
             color:#ffffff;
         }
     }
+    .control-pauseplay{
+        font-size: 13px;
+    }
+
+    .control-button.playback-button{
+        font-size: 11px;
+    }
 
     .control-time{
         // color: #999999;
     }
-
-
     .control-max-time{
+        font-size: 10px;
         color: #999999;
-
     }
-
     .control-current-time{
+        font-size: 10px;
         color: #dddddd;
     }
 
@@ -343,6 +348,13 @@ $BREAKPOINT_HEIGHT: 45px;
         margin-left: 6px;
         display: inline;
     }
+}
+
+.breakpoint-empty{
+    color: #e6e6e6;
+    text-align: center;
+    padding: 8px 5px;
+    display: inline-block;
 }
 
 .complaint{

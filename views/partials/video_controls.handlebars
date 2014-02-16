@@ -1,3 +1,5 @@
+<!-- All the speed controls etc -->
+
 <a href="#" class="control-button playback-button" ng-show="playbackRateExists(.25)" ng-click="clickedPlaybackRate(.25)" ng-class="{active: playbackActive(.25)}">
     .25x
 </a>
@@ -13,6 +15,9 @@
 <a href="#" class="control-button playback-button"  ng-show="playbackRateExists(2)" ng-click="clickedPlaybackRate(2)" ng-class="{active: playbackActive(2)}">
     2x
 </a>
+
+<!-- Time display. set in breakpoint_classes.js, fn updateTime() -->
+
 <a href="#" class="control-time">
     <a class="control-current-time">
     </a> /
@@ -22,6 +27,9 @@
 <a href="#"  class="control-button" ng-click="clickedVolume()">
     <i class="fa fa-volume-up control-sound" ></i>
 </a>
+
+<!-- Breakpoint controls. these will be refactored soon -->
+
 <a href="#" class="control-button" ng-show="true" ng-click="clickedAddBreakpoint()">
     <i class="fa fa-plus control-addBreakpoint" ></i>
     <span class="control-helper add-new">
@@ -32,14 +40,14 @@
 <a href="#" class="control-button" ng-show="hasCurrentBreakpoint()" ng-click="clickedSetEndTime()">
     <i class="fa fa-clock-o control-addBreakpoint"></i>
     <span class="control-helper finish">
-        Set new end time
+        Set end time
     </span>
 </a>
 
 <a class="control-button" href="#" ng-show="hasCurrentBreakpoint()"  ng-click="clickedLoopOnCurrent(event)" >
     <i class="fa fa-repeat control-repeat" ng-class="{active: loopOnCurrent}" ></i>
     <span class="control-helper">
-        Loop on current
+        Loop on Breakpoints
     </span>
 </a>
 

@@ -56,13 +56,19 @@ http://stackoverflow.com/questions/7988476/listening-for-youtube-event-in-javasc
             </a> 
             <div class="player-breakpoints" id="player-breakpoints"> 
                 <ul class='breakpoints-ul'>
+                    <li class="breakpoint-li">
+                        <span href="#" ng-show="breakpoints.length == 0"onclick="return false;" class=" breakpoint-empty">
+                            No breakpoints set
+                        </span>
+
+                    </li>
                     <li class="breakpoint-li" ng-repeat="bp in breakpoints">
                         <a class="breakpoint" href=
                         "#" data-bp-id="\{{bp.breakPointId}}" ng-click="clickedBreakpoint(bp)" ng-class="{active: isCurrentBreakpoint(bp)}" ng-mouseenter="addSegmentDisplayBreakpoint(bp)" ng-mouseleave="removeSegmentDisplayBreakpoint(bp)">
                             <div class="breakpoint-time">
                                 \{{bp.displayStartTime()}} - \{{bp.displayEndTime()}}
                             </div>
-                            <div class="breakpoint-name" contenteditable='true'>
+                            <div class="breakpoint-name" contenteditable='true' ng-keyup="breakpointNameUpdate($event, bp);" ng-dblclick>
                                 \{{bp.desc}}
                             </div>
                         </a>

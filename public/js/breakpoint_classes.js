@@ -36,14 +36,14 @@ console.log("breakpoint_classes.js");
 // todo - create draggable element at end of filled slider
 // todo - scroll to breakpoint on click
 // todo - max breakpoints?
-// todo - speed buttons
 // todo - resize button
 // todo - show feedback on various things, like edits etx. 
 // todo - make clicking on text also click on icon
 // todo - decimal printing
-// todo - breakpoint easing functionality - modify existing segmnts bit by bit
+// todo - time easing functionality - modify existing segmnts bit by bit
     // like - move forward half a second, move backwards half a second etc..
-
+// todo style control buttons
+// todo - app
 
 // TODO - error checking to make sure that nothing breaks
     // make sure breakpoint times are well ordered - or oreder them on creation
@@ -913,6 +913,14 @@ var BreakPointVideo = new JS.Class({
     playVideo: function() {
         this.youtubePlayer.playVideo();
     },
+    isPlaying: function(){
+        var state = this.getYTPlayerState();
+        return state == YT.PlayerState.PLAYING;
+    },
+    isPaused: function(){
+        var state = this.getYTPlayerState();
+        return state == YT.PlayerState.PAUSED;
+    }
     pauseVideo: function() {
         this.youtubePlayer.pauseVideo();
     },
@@ -946,6 +954,12 @@ var BreakPointVideo = new JS.Class({
     },
     availablePlaybackRates: function(){
         return this.youtubePlayer.getAvailablePlaybackRates();
+    },
+    playbackRateExists: function(rate){
+        return false;
+        var availableRates = this.availablePlaybackRates();
+        var index = availableRates.indexOf((rate));
+        return index > -1;
     },
     // returns true if it worked
     setPlaybackRate: function(rate){
@@ -1036,10 +1050,11 @@ var BreakPoint = new JS.Class({
             mins = Math.floor(timeInSeconds / 60)
             seconds = timeInSeconds % 60
             // return {'mins': mins, 'seconds': seconds}
+            seconds = Math.round(seconds * 10)/10;
             if (seconds < 10){
                 seconds = "0" + seconds
             }
-            return mins + " : " + seconds
+            return mins + " : " + seconds;
         },
         secondsFromDisplayTime: function(time) {
             // this sucks. so nope.
