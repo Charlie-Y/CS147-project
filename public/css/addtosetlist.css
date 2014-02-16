@@ -62,56 +62,6 @@ input[type='checkbox'] {
 
 }
 
-.guide {
-	text-align: center;
-	font-weight: 300;
-	color: white;
-	font-size: 14pt;
-	margin-top:15px;
-	margin-bottom: 15px;
-	line-height: 1.2;
-}
-
-.searchbar {
-     background-color:#606060;
-     height: 60px;
-     text-align: center;
-     margin: 0;
-     position: fixed;
-     width: 100%;
-     left: 0;
-     top: 45px;
-     z-index: 10000;
-}
-
-.searchbar a {
-     color: white;
-}
-
-#query {
-	width: 100%;
-	border-radius: 30px;
-	height: 42px;
-	font-size: 12pt;
-	font-family: "Roboto";
-	font-weight: 200;
-	padding-left: 15px;
-	padding-right: 15px;
-	vertical-align: middle;
-	font-style: italic;
-	color: #808080;
-}
-
-.searchbar span {
-     height: 60px;
-     color: white;
-}
-
-.helper {
-    display: inline-block;
-    height: 100%;
-    vertical-align: middle;
-}
 
 .container {
 	margin-top: 120px;
@@ -146,3 +96,11 @@ input[type='checkbox'] {
 	top: 117px;
 }
 
+#novidfound {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+#instruction {
+	font-size: 13pt;
+}

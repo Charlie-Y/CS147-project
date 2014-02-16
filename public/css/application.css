@@ -14,7 +14,6 @@ h1, h2, h3, h4, h5, h6, p {
      margin-top: 60px;
      margin-left: auto;
      margin-right: auto;
-     border-radius: 10px;
      padding: 10px;
 }
 
@@ -66,24 +65,30 @@ input:focus {
     outline: none;
 }
 
-.warning {
+.warning, .notification {
     position: fixed;
     top: 230px;
     color: #303030;
     width: 90%;
     background: rgba(255,255,255,0.87);
     text-align: center;
-    font-size: 15pt;
+    font-size: 14pt;
     left: 5%;
     border-radius: 5px;
     padding: 15px;
     box-shadow: 1px 1px 1px #303030;
     display: none;
     font-weight: 300;
+    z-index: 1000;
 }
 
 .warning span {
     font-size: 20pt;
+}
+
+.notification img {
+    width: 15%;
+    margin: 3px;
 }
 
 .searchbar {
@@ -120,4 +125,46 @@ input:focus {
 .searchbar span {
      height: 60px;
      color: white;
+}
+
+* {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+input, textarea /*.contenteditable?*/ {
+    -webkit-touch-callout:default;
+    -webkit-user-select:text;
+    -moz-user-select:text;
+    -ms-user-select:text;
+    user-select:text;
+}
+
+.guide {
+    text-align: center;
+    font-weight: 300;
+    color: white;
+    font-size: 14pt;
+    margin-top:15px;
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+#backToFullList {
+    width: 65%;
+    background-color: #303030;
+    border-radius: 5px;
+    color: #E0E0E0;
+    box-shadow: 1px 1px 1px black;
+    padding: 5px;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 600;
+    text-align: center;
+    font-size: 13pt;
 }

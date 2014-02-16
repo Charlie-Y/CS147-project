@@ -2,7 +2,6 @@ var mongoose = require('mongoose');
 Video = mongoose.model('Video');
 Setlist = mongoose.model('Setlist');
 
-
 exports.view = function(req, res){
 	var data = {};
 
@@ -51,5 +50,21 @@ exports.view = function(req, res){
 				});
 			});
 		});
+	});
+}
+
+exports.search = function(req, res){
+	var vids = []
+	Video.textSearch(req.body.query, function (err, videos) {
+		console.log(req.body.query);
+		console.log(err);
+		if (videos != null) {
+			results = videos.results;
+			for (var i=0; i < results.length; i++) {
+				vids.push(results[i].obj);
+			}
+			console.log(vids);
+			res.json(vids);
+		}
 	});
 }

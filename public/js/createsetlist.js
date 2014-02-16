@@ -14,8 +14,7 @@ function CreateSetlist(button) {
 		var empty = /^\s*$/.test(title);
 		if (empty) {
 			$("#title").css('border', '1px solid #eb006f');
-			$("#warning").fadeIn();
-			$(".warningmessage").html("Title can't be blank");
+			$(".warning .message").html("Title can't be blank");
 			$(".warning").fadeIn(function() {
 				setTimeout(function() {
 					$(".warning").fadeOut("slow");
@@ -23,9 +22,19 @@ function CreateSetlist(button) {
 			});
 
 		} else {
-			$.post("/createsetlist", { 'title': title, 'description': description }, function(data) {
-				window.location.href = "/addtosetlist/" + data.id;
-			});
+			var jqxhr = $.post("/createsetlist", { 'title': title, 'description': description })
+				.done(function(data) {
+					$(".notification .message").html("Setlist has been created");
+					$(".notification").fadeIn(function() {
+						setTimeout(function() {
+							window.location.href = "/addtosetlist/" + data.id;
+						}, 1500);
+					});		
+			  	})
+				.fail(function() {
+					alert( "error" );
+				});
+
 		}
 	});
 }

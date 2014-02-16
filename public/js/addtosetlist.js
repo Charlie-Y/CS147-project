@@ -3,14 +3,71 @@
 
 // Call this function when the page loads (the "ready" event)
 $(document).ready(function() {
-	initializePage();
 	$(".folded").each(function() {
 		new FoldedList($(this));
 	});
 	$("input[type=checkbox]").each(function() {
 		new Highlight($(this));
 	});
+
+	$("#query").on('keyup', searchVideo);
+
+	$("#query").click(function() {
+		$("#query").css("font-style","normal");
+		$("#query").css("color","black");
+		$("#query").css("font-size", "13pt");
+		$("#query").val("");
+		$('#query').keyup();
+	});
+
+	new AddToSetlist($("#add"));
+	$("#novidfound").css("display", "none");
+	$("#backToFullList").css("display", "none");
+
 })
+
+function searchVideo() {
+	var query = $(this).val();
+	if (query == "") {
+		toDefaultView();
+	} else {
+		var jqxhr = $.post(document.URL + "/search", { 'query': query })
+			.done(function(data) {
+				$("#backToFullList").css("display", "");
+				$(".videoitem").css("display", "none");
+
+				if (data.length == 0) {
+					$("#novidfound").css("display", "");
+				} else {
+					$("#novidfound").css("display", "none");
+					for (var i=0; i < data.length; i++) {
+						var video_id = data[i];
+						$("#video_" + video_id).css("display", "");
+					}
+				}
+
+				$("#back").removeAttr("href");
+				$("#back").attr("onclick", "toDefaultView(event)");
+		  	})
+			.fail(function() {
+				alert( "error" );
+			});
+	}
+}
+
+function toDefaultView(event) {
+	if (event) {
+		event.preventDefault();
+		$("#query").val("");
+		$('#query').keyup();
+	}
+	$("#backToFullList").css("display", "none");
+	$(".videoitem").css("display", "");
+	$("#back").removeAttr("onclick");
+	$("#novidfound").css("display","none");
+	var URL = document.URL.replace("addtosetlist", "setlist");
+	$("#back").attr("href",URL);
+}
 
 
 function Highlight(button) {
@@ -22,8 +79,6 @@ function Highlight(button) {
 	    }
 	});
 }
-
-
 
 function FoldedList(button){
 	var open = false;
@@ -54,48 +109,25 @@ function AddToSetlist(button) {
 		}).get();
 
 		if (values.length == 0) {
-			$(".warningmessage").html("You must select at least one video");
+			$(".warning .message").html("You must select at least one video");
 			$(".warning").fadeIn(function() {
 				setTimeout(function() {
 					$(".warning").fadeOut("slow");
 				}, 2000);
 			});
-			//warning.fadeOut("slow", function() {
-			//};
-		}
-		/*
-		$("input[type=checkbox]:checked").each(function() {
-     		alert( $(this).val() );
-		});
-		var empty = /^\s*$/.test(title);
-		if (empty) {
-			$("#title").css('border', '1px solid #eb006f');
-			$("#warning").fadeIn();
 		} else {
-			$.post("/createsetlist", { 'title': title, 'description': description }, function(data) {
-				window.location.href = "/addtoplaylist/" + data.id;
-			});
-		}
-		*/
-	});
-}
-
-
-/*
- * Function that is called when the document is ready.
- */
-function initializePage() {
-	var searched = false;
-	$("#query").click(function() {
-		if (!searched) {
-			$("#query").css("font-style","normal");
-			$("#query").css("color","black");
-			$("#query").css("font-size", "13pt");
-			$("#query").val("");
-			searched = true;
+			var jqxhr = $.post(document.URL, { 'newvids': values })
+				.done(function(data) {
+					$(".notification .message").text(values.length + " videos have been added");
+					$(".notification").fadeIn(function() {
+						setTimeout(function() {
+							window.location.href = "/setlist/" + data.setlistId + "#bottom";
+						}, 1500);
+					});		
+			  	})
+				.fail(function() {
+					alert( "error" );
+				});
 		}
 	});
-
-	new AddToSetlist($("#add"));
 }
-

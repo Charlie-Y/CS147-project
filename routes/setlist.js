@@ -32,7 +32,6 @@ exports.view = function(req, res) {
 	});
 }
 
-
 exports.remove = function(req, res) {
 	var setlistId = req.params.setlistId;
 	var videoId = req.params.videoId;
@@ -42,20 +41,21 @@ exports.remove = function(req, res) {
 		for (var i=0; i < updatedList.length; i++) {
 			if (updatedList[i] == videoId) {
 				updatedList.splice(i,1);
+				break;
 			}
 		}
 		Setlist.update({'id':setlistId}, {$set: {'setlistvids': updatedList}}, function (err, setlist) {
 			if (err) console.log(err);
+			console.log(updatedList.length);
+			res.json({num_vids: updatedList.length});
 		});
 	});
-}
-
-exports.add = function(req, res) {
 }
 
 exports.delete = function(req,res) {
 	var setlistId = req.params.setlistId;
 	Setlist.remove({'id': setlistId}, function (err, setlist) {
 		if (err) console.log(err);
+		res.send();
 	});
 }

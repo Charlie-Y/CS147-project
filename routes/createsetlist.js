@@ -8,8 +8,6 @@ exports.view = function(req, res){
 }
 
 exports.create = function(req, res) {
-	console.log(req.body.title);
-	console.log(req.body.description);
 	req.body.id = 5;
 	Setlist.create(req.body, function(err, setlist) {
 		if (err) console.log(err);

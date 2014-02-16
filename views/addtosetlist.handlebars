@@ -16,7 +16,7 @@
 
 <body>
 	<div class="row menubar">
-		<a href="/setlist/{{setlistId}}"><div class="col-xs-2"><span class="helper"></span><span class="glyphicon glyphicon-chevron-left"></span></div></a>
+		<a href="/setlist/{{setlistId}}" id="back"><div class="col-xs-2"><span class="helper"></span><span class="glyphicon glyphicon-chevron-left"></span></div></a>
 		<a href="/"><div class="col-xs-8"><span class="helper"></span><img src="/images/logowhite.png"/></div></a>
 		<div class="col-xs-2"></div>
 	</div>
@@ -32,10 +32,10 @@
 
 	<div class="container">
 		<div class="pagetitle">ADD TO <br/> <span class="setlisttitle"> {{title}} </span></div>
-		<div class="guide"> Check videos to add <br/></div>
+		<div class="guide" id="instruction"> Check videos to add <br/></div>
 		
 		{{#each videos}}
-			<div class="videoitem">
+			<div class="videoitem" id="video_{{id}}">
 				<div class="block"><input type="checkbox" value="{{id}}"><div class="folded title">{{title}}</div></div>
 				<div class="list">
 					<div class="thumbnails" style="background: url({{imageURL}}); background-size: cover">
@@ -44,10 +44,13 @@
 				</div>
 			</div>
 		{{/each}}
+
+		<div id='novidfound' class='guide'>No video found</div>
+		<div id="backToFullList" onclick="toDefaultView(event)"><span class="glyphicon glyphicon-arrow-left"></span> BACK TO FULL LIST</div>
 	</div>
 
-	<div class="warning"><span class="glyphicon glyphicon-exclamation-sign"></span><div class="warningmessage"></div></div>
-	
+	{{>warning}}
+	{{>notification}}
 	<a href="#top"><div id="gobacktop"> GO BACK TO TOP <span class="glyphicon glyphicon-arrow-up"></span></div></a>
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
