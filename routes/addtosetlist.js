@@ -38,7 +38,7 @@ exports.add = function(req, res){
 		Setlist.update({'id':setlistId}, {$set: {'setlistvids': updatedList}}, function (err, setlist) {
 			if (err) console.log(err);
 			data["setlistId"] = setlistId;
-			res.json('addtosetlist', data);
+			res.json(data);
 		});
 	});
 }
