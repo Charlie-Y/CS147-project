@@ -40,6 +40,9 @@ console.log("breakpoint_classes.js");
 // todo - resize button
 // todo - show feedback on various things, like edits etx. 
 // todo - make clicking on text also click on icon
+// todo - decimal printing
+// todo - breakpoint easing functionality - modify existing segmnts bit by bit
+    // like - move forward half a second, move backwards half a second etc..
 
 
 // TODO - error checking to make sure that nothing breaks
@@ -144,7 +147,8 @@ var BreakPointPlayer = new JS.Class({
         SLIDER_BREAKPOINT_HEIGHT: '20',
         SLIDER_BREAKPOINT_WIDTH: '20',
 
-        USE_DEV_BREAKPOINTS: true,
+        USE_DEV_BREAKPOINTS: false,
+        // USE_DEV_BREAKPOINTS: true,
 
         CONTROLS: 0, // 0 for no default youtube controls, 1 for youtube controls
         AUTOPLAY: true
@@ -428,15 +432,18 @@ var BreakPointPlayer = new JS.Class({
     },
 
     loadBreakPoints: function(){
+        var rawBreakpoints;
         if (BreakPointPlayer.USE_DEV_BREAKPOINTS){
-            var rawBreakpoints =  BreakPoint.devBreakpoints();
-            for (var i = rawBreakpoints.length - 1; i >= 0; i--) {
-                var raw = rawBreakpoints[i]
-                var bp = BreakPoint.initFromData(raw);
-                this.addBreakPoint(bp)
-            }
-            this.sortBreakPoints();
+            rawBreakpoints =  BreakPoint.devBreakpoints();
+        } else {
+            rawBreakpoints = breakpointData; // loaded in page by handlebars
         }
+        for (var i = rawBreakpoints.length - 1; i >= 0; i--) {
+            var raw = rawBreakpoints[i]
+            var bp = BreakPoint.initFromData(raw);
+            this.addBreakPoint(bp)
+        }
+        this.sortBreakPoints();
     },
 
     sortBreakPoints: function(){
@@ -1017,7 +1024,13 @@ var BreakPoint = new JS.Class({
             return breakpoints;
         },
         initFromData: function(raw){
-            return  new BreakPoint(raw.startTime, raw.endTime, raw.desc, raw.breakPointId);
+            // Database interface here!
+            if (raw.start){ raw.startTime = raw.start};
+            if (raw.end){ raw.endTime = raw.end};
+            if (raw.name){ raw.desc = raw.name};
+            if (raw._id){ raw.databaseId = raw._id}; // is this right?
+
+            return  new BreakPoint(raw.startTime, raw.endTime, raw.desc, raw.breakPointId, raw.databaseId);
         },
         timeInMinsSeconds: function(timeInSeconds) {
             mins = Math.floor(timeInSeconds / 60)
@@ -1028,19 +1041,24 @@ var BreakPoint = new JS.Class({
             }
             return mins + " : " + seconds
         },
+        secondsFromDisplayTime: function(time) {
+            // this sucks. so nope.
+        },
         ID_COUNT: 0,
         getClientSideId: function(){
             return BreakPoint.ID_COUNT++;
         }
+
     },
 
     // ===== Contructor ====== //
 
-    initialize: function(startTime, endTime, desc, breakPointId){
+    initialize: function(startTime, endTime, desc, breakPointId, databaseId){
         this.startTime = startTime;
         this.endTime = endTime;
         this.desc = desc;
         // this.breakPointId = breakPointId;
+        this.databaseId = -1;
         this.breakPointId = BreakPoint.getClientSideId();
     },
 

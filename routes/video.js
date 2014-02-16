@@ -21,7 +21,9 @@ exports.watchVideo = function(req, res){
                 {filename:'font-awesome.min.css'}
             ];
         data.videoId = videoId;
-
+        data.helpers = {
+            json: function(context) { return JSON.stringify(context);}    
+        };
         /* Query like this.
            In the callback function, the fetched video is returned. (for sample video object, look at videoseed.json)
            video has all the attributes needed (title, breakpoints, created, etc.)
@@ -51,7 +53,11 @@ exports.watchVideo = function(req, res){
                     {filename: 'video_show.css'},
                     {filename:'font-awesome.min.css'}
                 ],
-                ytid: videoYTID
+                ytid: videoYTID,
+                helpers: {
+                    json: function(context) { return JSON.stringify(context);}    
+                }
+                
             });
     }
 };

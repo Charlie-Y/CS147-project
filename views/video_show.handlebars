@@ -27,8 +27,6 @@ http://stackoverflow.com/questions/7988476/listening-for-youtube-event-in-javasc
     <!-- <div class="smartphone-landscape" id=""> -->
     <!-- <div class="" id="" >  -->
 
-    {{ytID}}
-
     <div class="" id="player" ng-controller="BreakPointCtrl" >
         <div class="player-main">
             <div class="player-video-id" data-video-id="{{ytid}}"></div>
@@ -73,11 +71,17 @@ http://stackoverflow.com/questions/7988476/listening-for-youtube-event-in-javasc
                 </ul>
             </div>
         </div>
-
-
         {{!-- <button class="debug-button" ng-click="logBreakPoints()" >CLICK ME</button> --}}
-
     </div>
+
+    <script>
+    // Breakpoint data!
+    {{#if video.breakpoints}}
+        var breakpointData = {{{json video.breakpoints}}};
+    {{else}}
+        var breakpointData =[];
+    {{/if}}
+    </script>
 
 
          
