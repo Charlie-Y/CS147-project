@@ -138,6 +138,7 @@ var BreakPointCtrl = function($scope) {
         // }
         // setCurrentBreakpoint(bp);
         $scope.currentBreakpoint = bp;
+        $scope.video.playVideo();
     }
 
 
@@ -194,7 +195,7 @@ var BreakPointCtrl = function($scope) {
     $scope.clickedSlider = function($event){
         // if they clickoutside the current breakpoint, then
         // reset the current breakpoint
-        console.log($event);
+        // console.log($event);
         if ($event.toElement.classList.contains('current-breakpoint-slider')){
             $scope.onCurrentSlider = true;
         } else {
@@ -242,7 +243,7 @@ var BreakPointCtrl = function($scope) {
             rate = 1;
         }
         $scope.video.setPlaybackRate(rate);
-        $scope.video.playVideo();
+        // $scope.video.playVideo();
         $scope.currentPlaybackRate = rate;
     }
 
@@ -269,7 +270,15 @@ var BreakPointCtrl = function($scope) {
         var bp = $scope.currentBreakpoint;
         if (bp != undefined){
             var endTime = $scope.video.getTime();
-            bp.endTime = endTime;
+            var oldEndTime = bp.endTime;
+
+            // move this checking into the breakpoint class
+            if (endTime < bp.startTime){
+                bp.endTime = oldEndTime;
+                bp.startTime = endTime;
+            } else {
+                bp.endTime = endTime;
+            }
             $scope.video.pauseVideo()
             $scope.onCurrentSlider = true;
         }

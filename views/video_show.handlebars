@@ -27,9 +27,11 @@ http://stackoverflow.com/questions/7988476/listening-for-youtube-event-in-javasc
     <!-- <div class="smartphone-landscape" id=""> -->
     <!-- <div class="" id="" >  -->
 
+    {{ytID}}
+
     <div class="" id="player" ng-controller="BreakPointCtrl" >
         <div class="player-main">
-            <div class="player-video-id" data-video-id="{{video.videoURL}}"></div>
+            <div class="player-video-id" data-video-id="{{ytid}}"></div>
             <div class="iframe-wrapper">
                 <div class="player-iframe" id="player-iframe"> Video loading! Sit tight</div>
             </div>
@@ -41,7 +43,7 @@ http://stackoverflow.com/questions/7988476/listening-for-youtube-event-in-javasc
                 </div>
                 <div class="main-slider" ng-click="clickedSlider($event)">
                     <div class="filled-slider"></div>
-                    <div class="current-breakpoint-slider" ng-repeat="bp in getSegmentDisplayBreakpoints()" style="left:\{{sliderSegmentLeft(bp)}}%; width:\{{sliderSegmentWidth(bp)}}%" ng-click="clickedOnFilledSlider($event)"></div>
+                    <div class="current-breakpoint-slider" ng-repeat="bp in getSegmentDisplayBreakpoints()" style="left:\{{sliderSegmentLeft(bp)}}%; width:\{{sliderSegmentWidth(bp)}}%" ng-click="clickedOnCurrentSlider($event)"></div>
                 </div>
                 <div class="control-buttons">
                     {{> video_controls}}

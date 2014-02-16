@@ -8,7 +8,10 @@ Setlist = mongoose.model('Setlist');
 exports.watchVideo = function(req, res){
 
     var videoId = req.params.id; 
+    var videoYTID = req.query.ytid;
     console.log('looking for video: ' + videoId);
+    console.log(req.query);
+
     if (videoId != undefined){
         var data = {};
         data.layout = 'angular_layout';
@@ -35,6 +38,7 @@ exports.watchVideo = function(req, res){
         Video.find({id: videoId}, function (err, video) {
             data.video = video[0];
             console.log(data);
+            data.ytid = video.videoURL;
            // /* MongoDB operations are asynchronous! So call render.send in a callback after db operation is complete. Otherwise, the page will be rendered before data gets returned. */
             res.render('video_show',data);
         });
@@ -47,7 +51,7 @@ exports.watchVideo = function(req, res){
                     {filename: 'video_show.css'},
                     {filename:'font-awesome.min.css'}
                 ],
-                'videoYTID': videoId
+                ytid: videoYTID
             });
     }
 };
