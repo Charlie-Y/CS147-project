@@ -48,28 +48,24 @@ exports.search = function(req, res){
 	var data = {};
 
 	var vids = []
-	Video.textSearch(req.body.query, function (err, videos) {
-		console.log(req.body.query);
-		console.log(err);
-		if (videos != null) {
-			results = videos.results;
-			for (var i=0; i < results.length; i++) {
-				vids.push(results[i].obj.id);
-			}
-
-			Setlist.findOne({'id':setlistId}, function (err, setlist) {
-				var currentList = setlist.setlistvids;
-				var i=0;
-				while (true) {
-					if (i==vids.length) break;
-					if (currentList.indexOf(vids[i]) > -1) {
-						vids.splice(i,1);
-					} else {
-						i += 1;
-					}
-				}
-				res.json(vids);
-			});
+	Video.find({ keyword: { $in: req.body.query.toLowerCase().split(" ") } }, function (err, videos) {
+		if(err) console.log(err);
+		for (var i=0; i < videos.length; i++) {
+			vids.push(videos[i].id);
 		}
+
+		Setlist.findOne({'id':setlistId}, function (err, setlist) {
+			var currentList = setlist.setlistvids;
+			var i=0;
+			while (true) {
+				if (i==vids.length) break;
+				if (currentList.indexOf(vids[i]) > -1) {
+					vids.splice(i,1);
+				} else {
+					i += 1;
+				}
+			}
+			res.json(vids);
+		});
 	});
 }

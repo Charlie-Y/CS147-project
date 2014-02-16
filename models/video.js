@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var textSearch = require('mongoose-text-search');
 
 var Video = new mongoose.Schema({
 	  title: String
@@ -8,16 +7,12 @@ var Video = new mongoose.Schema({
 	, lastWatched: Date
 	, created: Date
 	, id: Number
+	, keyword: [ String ]
 	, videoURL: String
 	, imageURL: String
 	, breakpoints: [{ name: String, start: String, end: String }]
 });
 
-Video.plugin(textSearch);
-
-Video.index({
-    title:"text",
-    description:"text"
-});
+Video.index( { keyword: 1 } );
 
 module.exports.Video = Video;
