@@ -43,42 +43,28 @@ http://stackoverflow.com/questions/7988476/listening-for-youtube-event-in-javasc
                 <div class="main-slider" ng-click="clickedSlider($event)">
                     <div class="filled-slider"></div>
                     <!-- <div class="current-breakpoint-slider" style="left:\{{currentSliderLeft()}}%;" ng-show="hasCurrentBreakpoint()"> -->
-
                     <div class="current-breakpoint-slider" ng-repeat="bp in getSegmentDisplayBreakpoints()" style="left:\{{sliderSegmentLeft(bp)}}%; width:\{{sliderSegmentWidth(bp)}}%"></div>
-
                     <!-- <div ng-repeat=""class="current-breakpoint-slider" style="left:\{{currentSliderLeft()}}%; width:\{{currentSliderWidth()}}%" ng-show="showBreakpointSlider()"></div> -->
-
-
                 </div>
                 <div class="control-buttons">
 
-                    <a href="#" class="control-button" ng-show="playbackRateExists(.25)">
-                        <i class="fa fa-play" ng-click="clickedPlaybackRate(.25)"></i>.25x
+
+
+                    <a href="#" class="control-button playback-button" ng-show="playbackRateExists(.25)" ng-click="clickedPlaybackRate(.25)" ng-class="{active: playbackActive(.25)}">
+                        .25x
                     </a>
-                    <a href="#" class="control-button" ng-show="playbackRateExists(.5)">
-                        <i class="fa fa-play " ng-click="clickedPlaybackRate(.5)"></i>.5x
-
+                    <a href="#" class="control-button playback-button" ng-show="playbackRateExists(.5)" ng-click="clickedPlaybackRate(.5)" ng-class="{active: playbackActive(.5)}">
+                        .5x
                     </a>
-                    
-                    <a href="#" class="control-button">
-                            <i class="fa fa-play control-pauseplay" ng-click="clickedPausePlay()"></i>
+                    <a href="#" class="control-button playback-button">
+                            <i class="fa fa-play control-pauseplay" ng-click="clickedPausePlay()" ng-class="{active: playbackActive(1)}"></i>
                     </a>
-
-                    <a href="#" class="control-button" ng-show="playbackRateExists(1.5)">
-                        <i class="fa fa-play " ng-click="clickedPlaybackRate(1.5)"></i>1.5x
-
+                    <a href="#" class="control-button playback-button" ng-show="playbackRateExists(1.5)" ng-click="clickedPlaybackRate(1.5)" ng-class="{active: playbackActive(1.5)}">
+                        1.5x
                     </a>
-                    <a href="#" class="control-button" ng-show="playbackRateExists(2)">
-                        <i class="fa fa-play " ng-click="clickedPlaybackRate(2)"></i>2x
-
+                    <a href="#" class="control-button playback-button"  ng-show="playbackRateExists(2)" ng-click="clickedPlaybackRate(2)" ng-class="{active: playbackActive(2)}">
+                        2x
                     </a>
-
-
-                    
-
-
-
-
                     <a href="#" class="control-time">
                         <a class="control-current-time">
                         </a> /
@@ -98,7 +84,7 @@ http://stackoverflow.com/questions/7988476/listening-for-youtube-event-in-javasc
             </div>
         </div>
         <div class="player-sidenav">
-            <a href="/" onclick="goBack();">
+            <a href="#" onclick="history.go(-1);return false;">
                 <div class="player-menu" >
                     Back 
                 </div>

@@ -199,6 +199,8 @@ var BreakPointCtrl = function($scope) {
 
     // ======== Playback speed ====== ///
 
+    $scope.currentPlaybackRate = 1;
+
     $scope.playbackRateExists = function(rate){
         if ($scope.video){
             var availableRates = $scope.video.availablePlaybackRates();
@@ -210,8 +212,17 @@ var BreakPointCtrl = function($scope) {
 
     $scope.clickedPlaybackRate = function(rate){
         console.log("clickedPlaybackRate: " + rate);
+        if (rate == $scope.currentPlaybackRate){
+            $scope.currentPlaybackRate = 1;
+            rate = 1;
+        }
         $scope.video.setPlaybackRate(rate);
         $scope.video.playVideo();
+        $scope.currentPlaybackRate = rate;
+    }
+
+    $scope.playbackActive = function(rate){
+        return $scope.currentPlaybackRate == rate;
     }
 
 }

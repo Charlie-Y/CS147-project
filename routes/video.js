@@ -14,7 +14,7 @@ exports.watchVideo = function(req, res){
         data.layout = 'angular_layout';
         data.cssFiles = 
             [
-               {filename: 'charlie_sandbox.css'},
+               {filename: 'video_show.css'},
                 {filename:'font-awesome.min.css'}
             ];
         data.videoId = videoId;
