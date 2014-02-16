@@ -35,8 +35,8 @@
 		<div class="guide" id="instruction"> Check videos to add <br/></div>
 		
 		{{#each videos}}
-			<div class="videoitem" id="video_{{id}}">
-				<div class="block"><input type="checkbox" value="{{id}}"><div class="folded title">{{title}}</div></div>
+			<div class="videoitem" id="video_{{_id}}">
+				<div class="block"><input type="checkbox" value="{{_id}}"><div class="folded title">{{title}}</div></div>
 				<div class="list">
 					<div class="thumbnails" style="background: url({{imageURL}}); background-size: cover">
 					</div>

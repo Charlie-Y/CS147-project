@@ -39,13 +39,13 @@
 			{{#each videos}}
 				<div class="videoitem">
 					<div class="number">ROUTINE #{{add_one @index}}</div>
-					<div class="thumbnails" style="background: url({{imageURL}}); background-size: cover" onclick="window.location='/video'">
+					<div class="thumbnails" style="background: url({{imageURL}}); background-size: cover" onclick="window.location='/video/{{_id}}'">
 						<div class="over"><span class="helper"></span><span class="glyphicon glyphicon glyphicon-play-circle"></span></div>
 						</div>
 
 					<div class="title">{{title}}</div>
 					<div class="description"> {{description}} </div>
-					<div class="removebutton" id="{{id}}"> REMOVE </div>
+					<div class="removebutton" id="{{_id}}"> REMOVE </div>
 				</div>
 				<div class="divider"></div>
 			{{/each}}

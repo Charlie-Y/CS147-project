@@ -9,7 +9,7 @@ exports.view = function(req, res){
 	    title_of: function(id) {
 	    	for (var i=0; i < data.videos.length; i++) {
 	    		var elem = data.videos[i];
-	    		if (elem.id == id) {
+	    		if (elem._id == id) {
 	    			return elem.title;
 	    		}
 	    	}
@@ -20,7 +20,7 @@ exports.view = function(req, res){
 	  		}
 	  		for (var i=0; i < data.videos.length; i++) {
 	    		var elem = data.videos[i];
-	    		if (elem.id == id) {
+	    		if (elem._id == id) {
 	    			return elem.imageURL;
 	    		}
 	    	}
@@ -40,7 +40,7 @@ exports.view = function(req, res){
 			}
 			Video.find({}, {}, options, function (err, videos) {
 				data.recentlyWatched = videos;
-				var options = {
+				options = {
 				    "limit": 5,
 				    "sort": {"created": -1}
 				}
