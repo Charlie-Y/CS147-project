@@ -38,6 +38,9 @@ console.log("breakpoint_classes.js");
 // todo - max breakpoints?
 // todo - speed buttons
 // todo - resize button
+// todo - show feedback on various things, like edits etx. 
+// todo - make clicking on text also click on icon
+
 
 // TODO - error checking to make sure that nothing breaks
     // make sure breakpoint times are well ordered - or oreder them on creation
@@ -48,7 +51,7 @@ console.log("breakpoint_classes.js");
 // todo - currentBreakpoint functionality with repeats
     // on playing a breakpoint
     // play selected breakpoint
-
+    // todo edit breakpoints etc.
 
 // extra - track times? 
 // extra - mark segments as finished
@@ -514,7 +517,6 @@ var BreakPointVideoControls = new JS.Class({
 
         // update the display time
         if ( $.trim( this.$maxTime.text() ).length == 0){
-            console.log("Settting time");
             var displayMaxTime = BreakPoint.timeInMinsSeconds(maxTime);
             this.$maxTime.text(displayMaxTime);
         }
@@ -658,11 +660,23 @@ var BreakPointVideoControls = new JS.Class({
     },
 
 
+    // ======== New Breakpoint functionality ==== ///
+
+    // Basically don't add breakpoints until they have been finished
+    // they should default to the entire length of the video
+
     clickedAddBreakpoint: function(event){
         // var totallyValidId = Math.floor(Math.random() * 38902);
         var time = Math.round(this.getVideo().getTime());
-        var bp = new BreakPoint(time, "New Breakpoint" , -1);
+        var endTime = this.maxTime();
+
+        var bp = new BreakPoint(time, endTime, "New Breakpoint" , -1);
         this.breakPointPlayer.addBreakPointWithUpdate(bp);
+        return bp;
+    },
+
+    clickedSaveBreakpoint: function(event){
+
     },
 
 

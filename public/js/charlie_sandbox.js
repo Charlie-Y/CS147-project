@@ -28,6 +28,8 @@ var BreakPointCtrl = function($scope) {
     $scope.breakpoints = [];
     $scope.currentBreakpoint = NO_CURRENT;
     $scope.segmentDisplayBreakpoints = [];
+    $scope.loopOnCurrent = false;
+    $scope.onCurrentSlider = false;
 
     window.$scope = $scope;
 
@@ -84,11 +86,14 @@ var BreakPointCtrl = function($scope) {
         // if the thing has left teh range of the currentbreakpoint
         // then pause or go back and repeat.
 
-        if ($scope.hasCurrentBreakpoint()){
-            if ($scope.video.getTime() > $scope.currentBreakpoint.endTime){
-                // todo - let people leave from current breakpoints
-                // $scope.video.pauseVideo();
-                $scope.video.seekTo($scope.currentBreakpoint.startTime);
+        if ($scope.loopOnCurrent && $scope.onCurrentSlider){
+            if ($scope.hasCurrentBreakpoint()){
+                if ($scope.video.getTime() > $scope.currentBreakpoint.endTime){
+                    // todo - let people leave from current breakpoints
+                    // if $scope.looping on breakpoint
+                    // $scope.video.pauseVideo();
+                    $scope.video.seekTo($scope.currentBreakpoint.startTime);
+                }
             }
         }
     }
@@ -100,7 +105,7 @@ var BreakPointCtrl = function($scope) {
 
     var setCurrentBreakpoint = function(bp){
         if ($scope.isCurrentBreakpoint(bp)){
-            $scope.currentBreakpoint = NO_CURRENT;
+            $scope.clearCurrentBreakpoint();
         } else {
             $scope.currentBreakpoint = bp;
             console.log("currentBreakpoint " + $scope.currentBreakpoint.toString());
@@ -115,6 +120,10 @@ var BreakPointCtrl = function($scope) {
         return bp == $scope.currentBreakpoint;
     }
 
+    $scope.clearCurrentBreakpoint = function(){
+        $scope.currentBreakpoint = NO_CURRENT;
+    }
+
     $scope.clickedBreakpoint = function(bp){
         // console.log("clickedBreakpoint");
         if (!$scope.isCurrentBreakpoint(bp)){
@@ -124,10 +133,16 @@ var BreakPointCtrl = function($scope) {
     }
 
     $scope.clickedSliderBreakpoint = function(bp){
-        if (!$scope.isCurrentBreakpoint(bp)){
+        // if (!$scope.isCurrentBreakpoint(bp)){
             $scope.bpPlayer.goToBreakpoint(bp);
-        }
-        setCurrentBreakpoint(bp);
+        // }
+        // setCurrentBreakpoint(bp);
+        $scope.currentBreakpoint = bp;
+    }
+
+
+    $scope.clickedLoopOnCurrent = function(event){
+        $scope.loopOnCurrent = !$scope.loopOnCurrent;
     }
 
     // ====== Slider display methods ===== //
@@ -177,7 +192,19 @@ var BreakPointCtrl = function($scope) {
     // ========= Click listeners ========== //
 
     $scope.clickedSlider = function($event){
+        // if they clickoutside the current breakpoint, then
+        // reset the current breakpoint
+        console.log($event);
+        if ($event.toElement.classList.contains('current-breakpoint-slider')){
+            $scope.onCurrentSlider = true;
+        } else {
+            $scope.onCurrentSlider = false;
+        }
         $scope.controls.onSliderClick($event);
+    }
+
+    $scope.clickedOnCurrentSlider = function($event){
+        $scope.onCurrentSlider = true;
     }
 
 
@@ -193,9 +220,7 @@ var BreakPointCtrl = function($scope) {
     $scope.clickedVolume = function(){
         $scope.controls.toggleVolumeButton();
     }
-        $scope.clickedAddBreakpoint = function(){
-        $scope.controls.clickedAddBreakpoint();
-    }
+
 
     // ======== Playback speed ====== ///
 
@@ -224,6 +249,42 @@ var BreakPointCtrl = function($scope) {
     $scope.playbackActive = function(rate){
         return $scope.currentPlaybackRate == rate;
     }
+
+    $scope.clickedSetMaxTime = function(){
+
+    }
+
+    // ========= addBreakpoint functionality ==== //
+
+    // $scope.modifyingBreakpoint = false;
+
+    $scope.clickedAddBreakpoint = function(){
+        // hide the menu?
+        var newBp = $scope.controls.clickedAddBreakpoint();
+        // $scope.addingBreakpoint = true;
+        setCurrentBreakpoint(newBp);
+    }
+
+    $scope.clickedSetEndTime = function(){
+        var bp = $scope.currentBreakpoint;
+        if (bp != undefined){
+            var endTime = $scope.video.getTime();
+            bp.endTime = endTime;
+            $scope.video.pauseVideo()
+            $scope.onCurrentSlider = true;
+        }
+    }
+
+
+    $scope.clickedSaveBreakpoint = function(){
+        $scope.controls.clickedSaveBreakpoint();
+        // $scope.addingBreakpoint = false;
+    }
+
+    // ===== Feedback functionality ==== //
+
+
+
 
 }
 
