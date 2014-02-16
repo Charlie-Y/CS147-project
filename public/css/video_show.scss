@@ -193,9 +193,17 @@ $BREAKPOINT_HEIGHT: 45px;
         }
     }
 
+    .control-button.playback-button, .control-pauseplay{
+        color:#4c4c4c;
+        &.active{
+            color:#ffffff;
+        }
+    }
+
     .control-time{
         // color: #999999;
     }
+
 
     .control-max-time{
         color: #999999;
