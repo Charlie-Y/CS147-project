@@ -452,7 +452,12 @@ var BreakPointPlayer = new JS.Class({
         });
     },
 
-    // ======= Control logic? ===== //
+    exportBreakpoints: function(){
+        var dbBreakpoints = this.breakpoints.map( BreakPoint.dbTranslate);
+        // translates all the breakpoints and returns them in an array
+        return dbBreakpoints;
+    },
+
 
 
 
@@ -920,7 +925,7 @@ var BreakPointVideo = new JS.Class({
     isPaused: function(){
         var state = this.getYTPlayerState();
         return state == YT.PlayerState.PAUSED;
-    }
+    },
     pauseVideo: function() {
         this.youtubePlayer.pauseVideo();
     },
@@ -1057,8 +1062,16 @@ var BreakPoint = new JS.Class({
             return mins + " : " + seconds;
         },
         secondsFromDisplayTime: function(time) {
-            // this sucks. so nope.
+            // this sucks. so nope. have to deal with hours etc.
+            // i had one problem and i;m keeping it that way
         },
+        // returns a breakpoint that matches the database
+        // breakpoints: [{ name: String, start: String, end: String, pid: String, speed: Number, repeat: Boolean }]
+        // right now its just name, start, end, 
+        dbTranslate: function(bp){
+
+        },
+
         ID_COUNT: 0,
         getClientSideId: function(){
             return BreakPoint.ID_COUNT++;

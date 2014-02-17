@@ -88,6 +88,8 @@ app.get('/', index.view);
 app.get('/video', video.watchVideo);
 app.get('/video/?ytid=:ytID', video.watchVideo);
 app.get('/video/:id', video.watchVideo);
+app.post('/video/update/:id', video.updateBreakpoints);
+
 app.get('/sandbox', sandbox.view);
 app.get('/sandbox/:videoId', sandbox.view);
 

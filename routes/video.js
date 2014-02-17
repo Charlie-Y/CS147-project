@@ -40,7 +40,7 @@ exports.watchVideo = function(req, res){
         Video.find({_id: videoId}, function (err, video) {
             data.video = video[0];
             console.log(data);
-            data.ytid = video.youtubeid;
+            data.ytid = data.video.youtubeid;
            // /* MongoDB operations are asynchronous! So call render.send in a callback after db operation is complete. Otherwise, the page will be rendered before data gets returned. */
             res.render('video_show',data);
         });
@@ -61,3 +61,11 @@ exports.watchVideo = function(req, res){
             });
     }
 };
+
+exports.updateBreakpoints = function( req, res){
+    // Ajax route to update the video
+    var videoId = req.params.id;
+    Video.update({_id: videoId})
+
+
+}
