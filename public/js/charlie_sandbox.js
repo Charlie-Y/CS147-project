@@ -334,8 +334,15 @@ var BreakPointCtrl = function($scope) {
 
     }
 
+    // ======= Saving and updating functionality === //
+
     console.log("fin charlie_sanbox.js");
 
+    $scope.updateBreakpointsData = function(){
+        if (videoDBID != undefined){
+            $scope.bpPlayer.updateBreakpointsData(videoDBID);
+        }
+    }
 
 }
 

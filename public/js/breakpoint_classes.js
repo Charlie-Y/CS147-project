@@ -461,7 +461,7 @@ var BreakPointPlayer = new JS.Class({
     },
 
     updateBreakpointsData: function(videoId) {
-        var id = videoId ||'4bfa81198cf5fc1002a42b95';
+        var id = videoId;
         var data = this.exportBreakpoints();
         // console.log("Sending: " + JSON.stringify(data));
         $.post('/video/update/' + id, data, this.updatedBreakpointsCallback);
