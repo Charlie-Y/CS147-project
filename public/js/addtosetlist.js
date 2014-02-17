@@ -11,7 +11,7 @@ $(document).ready(function() {
 	});
 
 	$("#query").on('keyup', searchVideo);
-
+	$("#query").on('keypress', stopRKey);
 	$("#query").click(function() {
 		$("#query").css("font-style","normal");
 		$("#query").css("color","black");
@@ -25,6 +25,14 @@ $(document).ready(function() {
 	$("#backToFullList").css("display", "none");
 
 })
+
+function stopRKey(evt) {
+   var evt = (evt) ? evt : ((event) ? event : null);
+   var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+   if ((evt.keyCode == 13) && (node.type=="text")) {
+   		return false;
+   }
+}
 
 function searchVideo() {
 	var query = $(this).val();

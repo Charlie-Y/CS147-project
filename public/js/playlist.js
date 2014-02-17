@@ -8,6 +8,8 @@ $(document).ready(function() {
 	});
 	$("#submit").click(searchVideo);
 	$("#query").on('keyup', textfieldListener);
+	$("#query").on('keypress', stopRKey);
+
 	$("#backToFullList").css("display", "none");
 })
 
@@ -16,6 +18,15 @@ function textfieldListener() {
 	if ($(this).val() == "") {
 		toDefaultView();
 	}
+}
+
+function stopRKey(evt) {
+   var evt = (evt) ? evt : ((event) ? event : null);
+   var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+   if ((evt.keyCode == 13) && (node.type=="text")) {
+   		searchVideo();
+   		return false;
+   }
 }
 
 function searchVideo() {
@@ -41,7 +52,7 @@ function searchVideo() {
 					for (var i=0; i < data.length; i++) {
 						var video = data[i];
 						var newitem = '<div class="videoitem">\
-						<a href="/video/"'+ video._id +'">\
+						<a href="/video/'+ video._id +'">\
 							<div class="thumbnails" style="background: url('+video.imageURL+'); background-size: cover">\
 								<div class="over"><span class="helper"></span><span class="glyphicon glyphicon glyphicon-play-circle"></span></div>\
 							</div>\
