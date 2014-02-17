@@ -42,8 +42,9 @@ console.log("breakpoint_classes.js");
 // todo - decimal printing
 // todo - time easing functionality - modify existing segmnts bit by bit
     // like - move forward half a second, move backwards half a second etc..
-// todo style control buttons
-// todo - app
+// todo - style control buttons
+// todo - 
+// todo - don't overwrite breakpoint fields that done't need to be
 
 // TODO - error checking to make sure that nothing breaks
     // make sure breakpoint times are well ordered - or oreder them on creation
