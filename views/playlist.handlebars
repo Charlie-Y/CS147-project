@@ -37,7 +37,7 @@
 				{{#if recentlyWatched.length}}
 					{{#each recentlyWatched}}
 						<div class="videoitem">
-							<div class="thumbnails" style="background: url({{imageURL}}); background-size: cover" onclick="window.location='/video/{{id}}'">
+							<div class="thumbnails" style="background: url({{imageURL}}); background-size: cover" onclick="window.location='/video/{{_id}}'">
 								<div class="over"><span class="helper"></span><span class="glyphicon glyphicon glyphicon-play-circle"></span></div>
 							</div>
 
@@ -58,8 +58,8 @@
 				{{#if recentlyCreated.length}}
 					{{#each recentlyCreated}}
 						<div class="videoitem">
-						<a href="/video/{{id}}">
-							<div class="thumbnails" style="background: url({{imageURL}}); background-size: cover">
+						<a href="/video/{{_id}}">
+							<div class="thumbnails" style="background: url({{imageURL}}); background-size: cover" onclick="window.location='/video/{{_id}}'">
 								<div class="over"><span class="helper"></span><span class="glyphicon glyphicon glyphicon-play-circle"></span></div>
 							</div>
 						</a>
@@ -81,7 +81,7 @@
 					<div class="setlistitem">
 						<div class="folded setlisttitle">{{title}}</div>
 						<div class="list">
-								<div class="thumbnails" style="background: url({{thumbnail_of setlistvids.[0]}}); background-size: cover" onclick="window.location='/setlist/{{id}}'">
+								<div class="thumbnails" style="background: url({{thumbnail_of setlistvids.[0]}}); background-size: cover" onclick="window.location='/setlist/{{_id}}'">
 									<div class="over"><span class="helper"></span><span class="glyphicon glyphicon glyphicon-play-circle"></span></div>
 								</div>
 							<div class="setlistdescription"> {{description}} <br/> </div>
@@ -91,7 +91,7 @@
 								<div class="setlistvideo" onclick="window.location='/video'">{{title_of this}}</div>
 								{{/setlistvids}}
 							</div>
-							<div class="add" onclick="window.location='/addtosetlist/{{id}}'"><span class="glyphicon glyphicon-plus-sign"></span> ADD TO SETLIST</div>
+							<div class="add" onclick="window.location='/addtosetlist/{{_id}}'"><span class="glyphicon glyphicon-plus-sign"></span> ADD TO SETLIST</div>
 							<div class="foldbutton setlistfoldbutton"><span class="glyphicon glyphicon-chevron-up"></div>
 						</div>
 					</div>

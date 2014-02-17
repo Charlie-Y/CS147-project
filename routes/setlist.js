@@ -11,7 +11,7 @@ exports.view = function(req, res) {
 	  	}
 	};
 	data.setlistId = req.params.setlistId;
-	Setlist.findOne({'id':req.params.setlistId}, function (err, setlist) {
+	Setlist.findOne({'_id':req.params.setlistId}, function (err, setlist) {
 		data.title = setlist.title;
 		data.description = setlist.description;
 		var vidids = setlist.setlistvids;
@@ -20,7 +20,7 @@ exports.view = function(req, res) {
 			res.render('setlist', data);
 		} else {
 			for (var i=0; i < vidids.length; i++) {
-				Video.findOne({'id': vidids[i]}, function (err, video) {
+				Video.findOne({'_id': vidids[i]}, function (err, video) {
 					data.videos.push(video);
 
 					if (data.videos.length == vidids.length) {
@@ -36,7 +36,7 @@ exports.remove = function(req, res) {
 	var setlistId = req.params.setlistId;
 	var videoId = req.params.videoId;
 
-	Setlist.findOne({'id': setlistId}, {'setlistvids': 1}, function (err, setlist) {
+	Setlist.findOne({'_id': setlistId}, {'setlistvids': 1}, function (err, setlist) {
 		var updatedList = setlist.setlistvids;
 		for (var i=0; i < updatedList.length; i++) {
 			if (updatedList[i] == videoId) {
@@ -44,7 +44,7 @@ exports.remove = function(req, res) {
 				break;
 			}
 		}
-		Setlist.update({'id':setlistId}, {$set: {'setlistvids': updatedList}}, function (err, setlist) {
+		Setlist.update({'_id':setlistId}, {$set: {'setlistvids': updatedList}}, function (err, setlist) {
 			if (err) console.log(err);
 			console.log(updatedList.length);
 			res.json({num_vids: updatedList.length});
@@ -54,7 +54,7 @@ exports.remove = function(req, res) {
 
 exports.delete = function(req,res) {
 	var setlistId = req.params.setlistId;
-	Setlist.remove({'id': setlistId}, function (err, setlist) {
+	Setlist.remove({'_id': setlistId}, function (err, setlist) {
 		if (err) console.log(err);
 		res.send();
 	});

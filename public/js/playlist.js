@@ -41,7 +41,7 @@ function searchVideo() {
 					for (var i=0; i < data.length; i++) {
 						var video = data[i];
 						var newitem = '<div class="videoitem">\
-						<a href="/video/"'+ video.id +'">\
+						<a href="/video/"'+ video._id +'">\
 							<div class="thumbnails" style="background: url('+video.imageURL+'); background-size: cover">\
 								<div class="over"><span class="helper"></span><span class="glyphicon glyphicon glyphicon-play-circle"></span></div>\
 							</div>\

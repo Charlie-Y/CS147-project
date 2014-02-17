@@ -4,9 +4,36 @@
 .glyphicon-list {
   height: 0 !important; }
 
-/* Smartphones (portrait and landscape) ----------- */
-/* Smartphones (landscape) ----------- */
+#portrait-warning {
+  position: absolute;
+  top: 80px;
+  text-align: center;
+  width: 100%; }
+
+#warning-message {
+  color: white;
+  font-size: 20pt;
+  text-align: center;
+  padding-left: 10%;
+  padding-right: 10%; }
+
+#warning-logo {
+  margin-top: 30px;
+  width: 200px; }
+
+@media only screen and (orientation: landscape) {
+  #landscape-view {
+    display: ''; }
+  #portrait-warning {
+    display: none; } }
+
 /* Smartphones (portrait) ----------- */
+@media only screen and (orientation: portrait) {
+  #portrait-warning {
+    display: ''; }
+  #landscape-view {
+    display: none; } }
+
 .smartphone-landscape {
   width: 480px;
   height: 320px;

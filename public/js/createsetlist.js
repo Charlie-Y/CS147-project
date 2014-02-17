@@ -27,7 +27,7 @@ function CreateSetlist(button) {
 					$(".notification .message").html("Setlist has been created");
 					$(".notification").fadeIn(function() {
 						setTimeout(function() {
-							window.location.href = "/addtosetlist/" + data.id;
+							window.location.href = "/addtosetlist/" + data._id;
 						}, 1500);
 					});		
 			  	})

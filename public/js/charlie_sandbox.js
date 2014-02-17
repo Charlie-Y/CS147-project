@@ -139,6 +139,7 @@ var BreakPointCtrl = function($scope) {
         // setCurrentBreakpoint(bp);
         $scope.currentBreakpoint = bp;
         $scope.video.playVideo();
+        $scope.onCurrentSlider = true;
     }
 
 

@@ -8,9 +8,11 @@ exports.view = function(req, res){
 }
 
 exports.create = function(req, res) {
-	req.body.id = 5;
+	//req.body._id = mongoose.Types.ObjectId();
 	Setlist.create(req.body, function(err, setlist) {
+		console.log(req.body);
+		console.log(setlist);
 		if (err) console.log(err);
-		res.send(setlist);
+		res.json(setlist);
 	});
 }

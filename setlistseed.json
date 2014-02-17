@@ -2,13 +2,13 @@
 	{
 		"title": "Hip Hop playlist",
 		"description": "for hip hop vids",
-		"id": "1",
-		"setlistvids": ["1","3","5"]
+		"_id": "4bfa81198cf5fc1002a42b81",
+		"setlistvids": ["4bfa81198cf5fc1002a42b91","4bfa81198cf5fc1002a42b93","4bfa81198cf5fc1002a42b95"]
 	},
 	{
 		"title": "Contemporary playlist",
 		"description": "for contemporary vids",
-		"id": "2",
-		"setlistvids": ["2","4","6"]
+		"_id": "4bfa81198cf5fc1002a42b82",
+		"setlistvids": ["4bfa81198cf5fc1002a42b92","4bfa81198cf5fc1002a42b94","4bfa81198cf5fc1002a42b96"]
 	}
 ]

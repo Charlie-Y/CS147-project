@@ -6,11 +6,10 @@ var Video = new mongoose.Schema({
 	, duration: String
 	, lastWatched: Date
 	, created: Date
-	, id: Number
 	, keyword: [ String ]
-	, videoURL: String
+	, youtubeid: String
 	, imageURL: String
-	, breakpoints: [{ name: String, start: String, end: String }]
+	, breakpoints: [{ name: String, start: String, end: String, pid: String, speed: Number, repeat: Boolean }]
 });
 
 Video.index( { keyword: 1 } );
