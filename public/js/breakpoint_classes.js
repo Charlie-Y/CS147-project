@@ -1,4 +1,4 @@
-console.log("breakpoint_classes.js");
+ console.log("breakpoint_classes.js");
 
 //----- FIRST TODO -----
 
@@ -974,7 +974,7 @@ var BreakPointVideo = new JS.Class({
         return this.youtubePlayer.getAvailablePlaybackRates();
     },
     playbackRateExists: function(rate){
-        return false;
+        // return false;
         var availableRates = this.availablePlaybackRates();
         var index = availableRates.indexOf((rate));
         return index > -1;
