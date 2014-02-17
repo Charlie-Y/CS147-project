@@ -453,12 +453,24 @@ var BreakPointPlayer = new JS.Class({
     },
 
     exportBreakpoints: function(){
-        var dbBreakpoints = this.breakpoints.map( BreakPoint.dbTranslate);
+        var dbBreakpoints = this.breakpoints.map( function(x){
+            return BreakPoint.dbTranslate(x);
+        });
         // translates all the breakpoints and returns them in an array
-        return dbBreakpoints;
+        return {breakpoints: dbBreakpoints};
     },
 
+    updateBreakpointsData: function(videoId) {
+        var id = videoId ||'4bfa81198cf5fc1002a42b95';
+        var data = this.exportBreakpoints();
+        // console.log("Sending: " + JSON.stringify(data));
+        $.post('/video/update/' + id, data, this.updatedBreakpointsCallback);
+    },
 
+    updatedBreakpointsCallback: function( data, status){
+        console.log("status: " + status); 
+        // console.log("response data " + JSON.stringify(data));
+    }
 
 
 });
@@ -1069,7 +1081,7 @@ var BreakPoint = new JS.Class({
         // breakpoints: [{ name: String, start: String, end: String, pid: String, speed: Number, repeat: Boolean }]
         // right now its just name, start, end, 
         dbTranslate: function(bp){
-
+            return {name: bp.desc, start: bp.startTime, end: bp.endTime};
         },
 
         ID_COUNT: 0,

@@ -65,7 +65,14 @@ exports.watchVideo = function(req, res){
 exports.updateBreakpoints = function( req, res){
     // Ajax route to update the video
     var videoId = req.params.id;
-    Video.update({_id: videoId})
+    var breakpoints = req.body.breakpoints;
+    // console.log("Breakpoints: " + JSON.stringify(breakpoints));
+    console.log("updateBreakpoints at video: " + videoId);
 
-
+    Video.update({_id: videoId}, {breakpoints: breakpoints}, function( err, num, raw){
+        res.json({status: err, raw: raw});
+        // console.log('Num' + num);
+        // console.log('Err' + err);
+        // console.log('raw' + JSON.stringify(raw));
+    });
 }
