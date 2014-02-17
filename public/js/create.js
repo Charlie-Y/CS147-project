@@ -1,23 +1,5 @@
 
-$(document).ready(function() {
-	$.getScript( "https://apis.google.com/js/client.js?onload=onClientLoad", function( data, textStatus, jqxhr ) {
-	  console.log( data ); // Data returned
-	  console.log( textStatus ); // Success
-	  console.log( jqxhr.status ); // 200
-	  console.log( "Load was performed." );
-	});
 
-	var searched = false;
-	$("#query").click(function() {
-		if (!searched) {
-			$("#query").css("font-style","normal");
-			$("#query").css("color","black");
-			$("#query").css("font-size", "13pt");
-			$("#query").val("");
-			searched = true;
-		}
-	});
-})
 
 
 //Okay, so the showResponse function contains all the AJAX code and Youtube API search goes that is triggered when the
@@ -36,16 +18,21 @@ function showResponse(response) {
  			xmlhttp = newActiveXObject("Microsoft.XMLHTTP");
  		}
 
-   		var html = "";
+   		var html = "<div class='guide'> Click on a video to add breakpoints </div>";
     	for(i = 0; i < (response.items).length; i++) {
     		//I tried to teach myself Ajax (before today's lecture), and so I basically created a container, 
     		//div and used a thumbnail image, description, and title, to identify the project. I was a little confused
     		//about what we wanted to extract from the user click. Do we want to return the video id? Do we want
     		//to go to the Youtube url for the user to view the video? Would love your input!
-    		html += '<a href="/video"><div class="videoitem"><div class="title">'+response.items[i].snippet.title+'</div> \
+    		html += '<a href="/video"><div class="videoitem"> \
+                <div class="thumbnails" style="background: url('+response.items[i].snippet.thumbnails.high.url+'); background-size: cover"> \
+                    <div class="over"><span class="helper"></span><span class="glyphicon glyphicon glyphicon-plus"></span></div> \
+                </div> \
+                <div class="title">'+response.items[i].snippet.title+'</div> \
     			<div class="description">'+response.items[i].snippet.description+'</div> \
-    			<img class="thumbnails" src="'+response.items[i].snippet.thumbnails.default.url+'"></div></a><hr>';
+    			</div></a>';
  		}
+        html += '<a href="#top"><div id="gobacktop"> GO BACK TO TOP <span class="glyphicon glyphicon-arrow-up"></span></div></a>';
  		$(".container").html(html);
  		xmlhttp.open("GET","create",true);
 		xmlhttp.send();
@@ -61,16 +48,24 @@ function onClientLoad() {
 function onYouTubeApiLoad() {
     // This API key is intended for use only in this lesson.
     // See http://goo.gl/PdPA1 to get a key for your own applications.
-     gapi.client.setApiKey('AIzaSyBIuxGStWI52F5QUf88lV8HHl3hy8Qo3JU');
-    // gapi.client.setApiKey('AIzaSyBCvmFiLUeMX4TXRMI7Ep26vO066nVyByg');
+    //gapi.client.setApiKey('AIzaSyBIuxGStWI52F5QUf88lV8HHl3hy8Qo3JU');
+     gapi.client.setApiKey('AIzaSyBCvmFiLUeMX4TXRMI7Ep26vO066nVyByg');
 
 }
 // LOCAL KEY: gapi.client.setApiKey('AIzaSyBCvmFiLUeMX4TXRMI7Ep26vO066nVyByg');
 // HEROKU KEY: gapi.client.setApiKey('AIzaSyBIuxGStWI52F5QUf88lV8HHl3hy8Qo3JU');
 
 
-function search() {
-	var query = $("#query").val();
+function search(tag) {
+    console.log(tag);
+    $(".placeholder").fadeOut("slow", function() {
+        $(".container").fadeIn();
+    });
+
+    var query = $("#query").val();
+    if (tag) {
+	   query = tag;
+    }
 
     // Use the JavaScript client library to create a search.list() API call.
     var request = gapi.client.youtube.search.list({
@@ -87,3 +82,46 @@ function search() {
 function onSearchResponse(response) {
     showResponse(response);
 }
+
+function stopRKey(evt) {
+   var evt = (evt) ? evt : ((event) ? event : null);
+   var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+   if ((evt.keyCode == 13) && (node.type=="text")) {
+        search();
+        return false;
+   }
+}
+
+$(document).ready(function() {
+    $("#query").on('keypress', stopRKey);
+
+    $.getScript( "https://apis.google.com/js/client.js?onload=onClientLoad", function( data, textStatus, jqxhr ) {
+      console.log( data ); // Data returned
+      console.log( textStatus ); // Success
+      console.log( jqxhr.status ); // 200
+      console.log( "Load was performed." );
+
+        var searched = false;
+        $("#query").click(function() {
+            if (!searched) {
+                $("#query").css("font-style","normal");
+                $("#query").css("color","black");
+                $("#query").css("font-size", "13pt");
+                $("#query").val("");
+                searched = true;
+            }
+        });
+
+        $(".container").css("display", "none");
+        $(".tag").click(function() {
+            search($(this).text());
+        });
+
+        $.each($('.tag'), function(key, value) {
+            var random = Math.random()*3000+500;
+            $(value).css({opacity: 0.0}).animate({opacity: 1.0}, random);
+        });
+    });
+
+
+})
