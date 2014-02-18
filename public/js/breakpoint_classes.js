@@ -1,64 +1,38 @@
  console.log("breakpoint_classes.js");
 
-//----- FIRST TODO -----
 
-/*
+/* Higher priority todos */
 
-    Refactor piece by piece into an angular app.
-
-    the angular app should set bind all the listeneres and setup all the html
-    and that makes sense. 
-
-*/
-
-
-// TODO -refactor, controls and listeners seem all over the place right now
-
-    // like breakpoints giving bad times
-// todo make a poper control system after first agreeing on what it should look like
-// and how it should respond
 // Todo make the loaders and savers hit the database - first set up a database
-// todo - maybe impossibly get image thumbnails. based on the dimensions of the final,
-// this might not actually be necessary
-// todo - show buffered times...
+// todo - time easing functionality - modify existing segmnts bit by bit
+    // like - move forward half a second, move backwards half a second etc..
+    // disable buttons that don't work now. 
+// todo - make it work on mobile
+
+
+/* Lower priority todos*/ //lower because they are easier and more relevant
 
 // todo - drag and preview functionality
 // todo - scroll to breakpoint
-// todo - active breakpoint fun
-// todo - css resize fonts
-// todo - style the out of this thing
-// todo - hover and show times
 // todo - display todos on blankness
-// todo - content editable - with save
-// todo - link up menu buttons -
-// todo - set max aspect ratio on player
+// todo - css resize fonts 
+// todo - edit breakpoint names
 // todo - hide side nav button
-// todo - create draggable element at end of filled slider
-// todo - scroll to breakpoint on click
 // todo - max breakpoints?
-// todo - resize button
 // todo - show feedback on various things, like edits etx. 
-// todo - make clicking on text also click on icon
-// todo - decimal printing
-// todo - time easing functionality - modify existing segmnts bit by bit
-    // like - move forward half a second, move backwards half a second etc..
-// todo - style control buttons
-// todo - 
 // todo - don't overwrite breakpoint fields that done't need to be
 
-// TODO - error checking to make sure that nothing breaks
-    // make sure breakpoint times are well ordered - or oreder them on creation
-    // make sure functions don't break that are empty
-    // clicking outside of current breakpoints fails miserably
+/* Lowest priority todos */
 
-// todo - main functionality = show duration on hover in slider
-// todo - currentBreakpoint functionality with repeats
-    // on playing a breakpoint
-    // play selected breakpoint
-    // todo edit breakpoints etc.
+// todo - maybe impossibly get image thumbnails. based on the dimensions of the final,
+    // this might not actually be necessary
+// todo - show buffered times...
+// todo - hover and show times
+    // mobile focus
+// todo - set max aspect ratio on player
+// todo - create draggable element at end of filled slider
+// mark as finished / hide breakpoints 
 
-// extra - track times? 
-// extra - mark segments as finished
 
 // ===== Finished functionality checklist ==== //
 
@@ -93,14 +67,6 @@ BreakPoint
 
     video time strings
 
-
-*/
-
-
-/*
- ======== Finished todos ======== 
-
- // todo - menubar gets in way of top breakpoint clicking
 
 */
 
@@ -622,12 +588,10 @@ var BreakPointVideoControls = new JS.Class({
     // deprecated thanks to angular
     setControlListeners: function(){
         var thisControls = this;
-        
         // update to video time
         // this.updateTimeIntervalId = window.setInterval(function(){
         //     thisControls.updateTime();
         // }, 300);
-
     },
 
     // handles the playing, pausing etc.
@@ -753,10 +717,10 @@ var BreakPointVideoControls = new JS.Class({
 
         // build all the html elements
         // this.renderControlBreakpoints();
-        this.renderSpeedControls();
+        // this.renderSpeedControls();
 
         // set all the event listeners
-        this.setControlListeners();
+        // this.setControlListeners();
 
     },
 
@@ -988,12 +952,26 @@ var BreakPointVideo = new JS.Class({
     },
 
 
-    // ======== Breakpoint code =========
+    // ======== Breakpoint code ========= //
 
     gotoBreakPoint: function(breakPoint){
         var timeInSeconds = breakPoint.startTime;
         this.seekTo(timeInSeconds, true);
     },
+
+    // ======== Other control methods === //
+
+    incTime: function(amount){
+        this.pauseVideo();
+        var currentTime = this.getTime();
+        this.seekTo(currentTime + amount);
+    },
+
+    devTime: function(amount){
+        this.pauseVideo();
+        var currentTime = this.getTime();
+        this.seekTo(currentTime - amount);
+    }
 
 
     // ========= Html related methods ====== //
@@ -1068,7 +1046,7 @@ var BreakPoint = new JS.Class({
             mins = Math.floor(timeInSeconds / 60)
             seconds = timeInSeconds % 60
             // return {'mins': mins, 'seconds': seconds}
-            seconds = Math.round(seconds * 10)/10;
+            seconds = Math.round(seconds * 100)/100;
             if (seconds < 10){
                 seconds = "0" + seconds
             }

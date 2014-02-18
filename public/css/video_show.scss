@@ -138,7 +138,7 @@ $BREAKPOINT_HEIGHT: 45px;
 
     .slider-breakpoints{
         // width:100%;   
-        height: 10px;
+        // height: 10px;
         // background: #004080;
     }
 
@@ -146,6 +146,8 @@ $BREAKPOINT_HEIGHT: 45px;
         position:absolute;
         cursor: pointer;
         left:0;
+        font-size: 1.2em;
+        top: -10px;
         z-index: $slider-breakpoint-z;
     }
 
@@ -194,18 +196,22 @@ $BREAKPOINT_HEIGHT: 45px;
 
     .control-buttons{
         padding-left:20px;
+        padding-bottom: 8px;
+        position: relative;
     }
 
     .control-button{
         font-size: 1.2em; // todo responsive
         display: inline-block;
         padding:5px;
+        // padding-top:0;
     }
     // all icons in the button bar
     .control-button .fa{
         // @include transition(width, .2s, ease-in);
         cursor:pointer;
         color: #999999;
+
         // figure out transitions etc. 
         &:hover{
             color:#0080ff;
@@ -248,18 +254,38 @@ $BREAKPOINT_HEIGHT: 45px;
 
     .control-sound, .control-nosound{
         font-size: .8em;
+        // font-size: 10px;
     }
 
     .hidden{
         opacity: 0;
     }
 
-
-    .control-helper{
-        font-size: .5em;
+    .fa.with-text{
+        text-align: center;
+        display: block;
+        position: relative;
+        top:5px;
     }
 
+    .control-divider{
+        font-size: 1.2em;
+        color:rgb(46, 46, 46);
+        display: none;
+    }
 
+    .breakpoint-related-controls{
+        position: absolute;
+        right: 15px;
+    }
+
+    .control-helper{
+        top:5px;
+        position: relative;
+        font-size: 10px;
+        display: block;
+        text-align: center;
+    }
 
     .player-iframe{
         width: $VIDEO_WIDTH;

@@ -1,20 +1,8 @@
 'use strict';
 
-console.log('sandbox.js');
-
-
-// Call this function when the page loads (the "ready" event)
-
-
-
+console.log('video_show.js');
 
 var bpPlayer; // GLOBAL MUAHHAHAHA
-
-
-/*
- * Function that is called when the document is ready.
- */
-
 
 var app = angular.module("BreakPoint", []);
 
@@ -318,6 +306,22 @@ var BreakPointCtrl = function($scope) {
         }
     }
 
+    $scope.clickedSetStartTime = function(){
+        var bp = $scope.currentBreakpoint;
+        if (bp != undefined){
+            var startTime = $scope.video.getTime();
+            var oldStartTime = bp.startTime;
+
+            if (startTime > bp.endTime){
+                bp.startTime = oldStartTime;
+                bp.endTime = startTime;
+            } else {
+                bp.startTime = startTime;
+            }
+            $scope.video.pauseVideo();
+            $scope.onCurrentSlider = true;
+        }
+    }
 
     $scope.clickedSaveBreakpoint = function(){
         $scope.controls.clickedSaveBreakpoint();
@@ -331,12 +335,9 @@ var BreakPointCtrl = function($scope) {
     $scope.breakpointNameUpdate = function($event, bp){
         console.log(bp.toString());
         console.log($event.toString());
-
     }
 
     // ======= Saving and updating functionality === //
-
-    console.log("fin charlie_sanbox.js");
 
     $scope.updateBreakpointsData = function(){
         if (videoDBID != undefined){
