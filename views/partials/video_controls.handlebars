@@ -27,17 +27,33 @@
 
 <span class="control-divider">|</span>
 
-<a href="#"  class="control-button" ng-click="clickedVolume()">
+
+<span class="control-fine">
+    <a href="#" class="control-button" ng-click="clickedIncTime(-.1)">
+        <i class="fa fa-angle-double-left with-text"></i>
+        <span class="control-helper">
+            -01.s
+        </span>
+    </a>
+
+    <a href="#" class="control-button" ng-click="clickedIncTime(.1)">
+        <i class="fa fa-angle-double-right with-text"></i>
+        <span class="control-helper">
+            +01.s
+        </span>
+    </a>
+</span>
+
+
+<a href="#"  class="control-button hide" ng-click="clickedVolume()">
     <i class="fa fa-volume-up control-sound" ></i>
+
 </a>
 
 <span class="control-divider">|</span>
 <!-- Breakpoint controls. these will be refactored soon -->
 
 <span class="breakpoint-related-controls">
-
-    
-
     <a href="#" class="control-button" ng-show="hasCurrentBreakpoint()" ng-click="clickedSetStartTime()">
         <i class="fa fa-step-backward control-addBreakpoint with-text"></i>
         <span class="control-helper finish">

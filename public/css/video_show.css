@@ -1,6 +1,9 @@
 #container {
   background: #1b1b1b; }
 
+.hide {
+  display: none !important; }
+
 .glyphicon-list {
   height: 0 !important; }
 
@@ -100,13 +103,14 @@
     #player .slider-breakpoint-icon.to-remove {
       color: #ff0000; }
   #player .control-buttons {
-    padding-left: 20px;
+    padding-left: 10px;
     padding-bottom: 8px;
     position: relative; }
   #player .control-button {
     font-size: 1.2em;
     display: inline-block;
-    padding: 5px; }
+    padding: 5px;
+    padding-top: 0px; }
   #player .control-button .fa {
     cursor: pointer;
     color: #999999; }
@@ -141,20 +145,20 @@
     text-align: center;
     display: block;
     position: relative;
-    top: 5px; }
+    top: 7px; }
   #player .control-divider {
     font-size: 1.2em;
-    color: #2e2e2e;
-    display: none; }
+    color: #2e2e2e; }
   #player .breakpoint-related-controls {
     position: absolute;
-    right: 15px; }
+    right: 10px; }
   #player .control-helper {
-    top: 5px;
+    top: 7px;
     position: relative;
     font-size: 10px;
     display: block;
-    text-align: center; }
+    text-align: center;
+    color: #999999; }
   #player .player-iframe {
     width: 350px;
     height: 270px; }
@@ -220,10 +224,10 @@
       color: #610030; }
 
 .breakpoint {
-  -moz-transition: all 0.2s ease-in;
-  -o-transition: all 0.2s ease-in;
-  -webkit-transition: all 0.2s ease-in;
-  transition: all 0.2s ease-in;
+  -moz-transition: all 0.4s ease-in;
+  -o-transition: all 0.4s ease-in;
+  -webkit-transition: all 0.4s ease-in;
+  transition: all 0.4s ease-in;
   max-height: 45px;
   display: block;
   font-size: 0.8em;

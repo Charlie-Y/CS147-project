@@ -323,6 +323,10 @@ var BreakPointCtrl = function($scope) {
         }
     }
 
+    $scope.clickedIncTime = function(amount){
+        $scope.video.incTime(amount);
+    }
+
     $scope.clickedSaveBreakpoint = function(){
         $scope.controls.clickedSaveBreakpoint();
         // $scope.addingBreakpoint = false;

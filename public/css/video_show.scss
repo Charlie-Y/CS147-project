@@ -11,15 +11,19 @@ $side-nav-z:5;
     background: $slate-grey;
 }
 
+.hide{
+    display: none !important;
+}
+
 .glyphicon-list{
     height: 0 !important;
 }
 
-@mixin cp-transition-all{
-    -moz-transition: all 0.2s ease-in;
-    -o-transition: all 0.2s ease-in;
-    -webkit-transition: all 0.2s ease-in;
-    transition: all 0.2s ease-in;
+@mixin cp-transition-all($time){
+    -moz-transition: all $time ease-in;
+    -o-transition: all $time ease-in;
+    -webkit-transition: all $time ease-in;
+    transition: all $time ease-in;
 }
 
 
@@ -139,7 +143,7 @@ $BREAKPOINT_HEIGHT: 45px;
         position: absolute;
         top: 0;
 
-        @include cp-transition-all;
+        @include cp-transition-all(0.2s);
         // top: -$slider-height;
         // width: 5%;
         z-index: $current-slider-z;
@@ -152,7 +156,7 @@ $BREAKPOINT_HEIGHT: 45px;
     }
 
     .slider-breakpoint{
-        @include cp-transition-all;
+        @include cp-transition-all(0.2s);
 
         position:absolute;
         cursor: pointer;
@@ -206,7 +210,7 @@ $BREAKPOINT_HEIGHT: 45px;
     }
 
     .control-buttons{
-        padding-left:20px;
+        padding-left:10px;
         padding-bottom: 8px;
         position: relative;
     }
@@ -215,7 +219,7 @@ $BREAKPOINT_HEIGHT: 45px;
         font-size: 1.2em; // todo responsive
         display: inline-block;
         padding:5px;
-        // padding-top:0;
+        padding-top:0px;
     }
     // all icons in the button bar
     .control-button .fa{
@@ -278,26 +282,27 @@ $BREAKPOINT_HEIGHT: 45px;
         text-align: center;
         display: block;
         position: relative;
-        top:5px;
+        top:7px;
     }
 
     .control-divider{
         font-size: 1.2em;
         color:rgb(46, 46, 46);
-        display: none;
+        // display: none;
     }
 
     .breakpoint-related-controls{
         position: absolute;
-        right: 15px;
+        right: 10px;
     }
 
     .control-helper{
-        top:5px;
+        top:7px;
         position: relative;
         font-size: 10px;
         display: block;
         text-align: center;
+        color:#999999;
     }
 
     .player-iframe{
@@ -393,7 +398,7 @@ $BREAKPOINT_HEIGHT: 45px;
 }
 
 .breakpoint{
-    @include cp-transition-all;
+    @include cp-transition-all(0.4s);
     max-height: $BREAKPOINT_HEIGHT;
     display: block;
     font-size: .8em;
