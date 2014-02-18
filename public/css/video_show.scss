@@ -15,6 +15,13 @@ $side-nav-z:5;
     height: 0 !important;
 }
 
+@mixin cp-transition-all{
+    -moz-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
+    -webkit-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+}
+
 
 // RIght now these are in the breakpoint_classes js folder as well...
 // TODO - these will be set dynamically sooner or later
@@ -120,10 +127,10 @@ $BREAKPOINT_HEIGHT: 45px;
 
     .filled-slider{
         height: 100%;
+        background: #800000;
         // width:100%;
         // position: absolute;
         // left: 95%;
-        background: #800000;
     }
 
     .current-breakpoint-slider{
@@ -131,6 +138,8 @@ $BREAKPOINT_HEIGHT: 45px;
         height: 100%;
         position: absolute;
         top: 0;
+
+        @include cp-transition-all;
         // top: -$slider-height;
         // width: 5%;
         z-index: $current-slider-z;
@@ -143,6 +152,8 @@ $BREAKPOINT_HEIGHT: 45px;
     }
 
     .slider-breakpoint{
+        @include cp-transition-all;
+
         position:absolute;
         cursor: pointer;
         left:0;
@@ -241,6 +252,7 @@ $BREAKPOINT_HEIGHT: 45px;
 
     .control-time{
         // color: #999999;
+        padding: 0 8px;
     }
     .control-max-time{
         font-size: 10px;
@@ -262,6 +274,7 @@ $BREAKPOINT_HEIGHT: 45px;
     }
 
     .fa.with-text{
+        font-size: .8em;
         text-align: center;
         display: block;
         position: relative;
@@ -380,6 +393,7 @@ $BREAKPOINT_HEIGHT: 45px;
 }
 
 .breakpoint{
+    @include cp-transition-all;
     max-height: $BREAKPOINT_HEIGHT;
     display: block;
     font-size: .8em;

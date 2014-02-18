@@ -65,8 +65,16 @@
     height: 100%;
     position: absolute;
     top: 0;
+    -moz-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
+    -webkit-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
     z-index: 3; }
   #player .slider-breakpoint {
+    -moz-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
+    -webkit-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
     position: absolute;
     cursor: pointer;
     left: 0;
@@ -116,6 +124,8 @@
     font-size: 13px; }
   #player .control-button.playback-button {
     font-size: 11px; }
+  #player .control-time {
+    padding: 0 8px; }
   #player .control-max-time {
     font-size: 10px;
     color: #999999; }
@@ -127,6 +137,7 @@
   #player .hidden {
     opacity: 0; }
   #player .fa.with-text {
+    font-size: 0.8em;
     text-align: center;
     display: block;
     position: relative;
@@ -209,6 +220,10 @@
       color: #610030; }
 
 .breakpoint {
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
   max-height: 45px;
   display: block;
   font-size: 0.8em;
