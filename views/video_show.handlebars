@@ -55,7 +55,7 @@ http://stackoverflow.com/questions/7988476/listening-for-youtube-event-in-javasc
             </div>
         </div>
         <div class="player-sidenav">
-            <a href="#" onclick="history.go(-1);return false;">
+            <a href="" onclick="history.go(-1);return false;">
                 <div class="player-menu" >
                     Back 
                 </div>
@@ -63,14 +63,14 @@ http://stackoverflow.com/questions/7988476/listening-for-youtube-event-in-javasc
             <div class="player-breakpoints" id="player-breakpoints"> 
                 <ul class='breakpoints-ul'>
                     <li class="breakpoint-li">
-                        <span href="#" ng-show="breakpoints.length == 0"onclick="return false;" class=" breakpoint-empty">
+                        <span href="" ng-show="breakpoints.length == 0"onclick="return false;" class=" breakpoint-empty">
                             No breakpoints set
                         </span>
 
                     </li>
                     <li class="breakpoint-li" ng-repeat="bp in breakpoints">
                         <a class="breakpoint" href=
-                        "#" data-bp-id="\{{bp.breakPointId}}" ng-click="clickedBreakpoint(bp)" ng-class="{active: isCurrentBreakpoint(bp)}" ng-mouseenter="addSegmentDisplayBreakpoint(bp)" ng-mouseleave="removeSegmentDisplayBreakpoint(bp)">
+                        "" data-bp-id="\{{bp.breakPointId}}" ng-click="clickedBreakpoint(bp)" ng-class="{active: isCurrentBreakpoint(bp)}" ng-mouseenter="addSegmentDisplayBreakpoint(bp)" ng-mouseleave="removeSegmentDisplayBreakpoint(bp)">
                             <div class="breakpoint-time">
                                 \{{bp.displayStartTime()}} - \{{bp.displayEndTime()}}
                             </div>
