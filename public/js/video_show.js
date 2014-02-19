@@ -126,7 +126,7 @@ var BreakPointCtrl = function($scope) {
         // }
         // setCurrentBreakpoint(bp);
         $scope.currentBreakpoint = bp;
-        $scope.video.playVideo();
+        // $scope.video.playVideo();
         $scope.onCurrentSlider = true;
     }
 
@@ -205,6 +205,9 @@ var BreakPointCtrl = function($scope) {
         }
 
         $scope.bpPlayer.removeBreakPoint(bp);
+
+        // update the db
+        $scope.updateBreakpointsData();
     }
 
     $scope.clickedPausePlay = function(){
@@ -286,6 +289,9 @@ var BreakPointCtrl = function($scope) {
         var newBp = $scope.controls.clickedAddBreakpoint();
         // $scope.addingBreakpoint = true;
         setCurrentBreakpoint(newBp);
+
+        // update the db
+        $scope.updateBreakpointsData();
     }
 
     $scope.clickedSetEndTime = function(){
@@ -293,6 +299,7 @@ var BreakPointCtrl = function($scope) {
         if (bp != undefined){
             var endTime = $scope.video.getTime();
             var oldEndTime = bp.endTime;
+            if (endTime == oldEndTime){ return };
 
             // move this checking into the breakpoint class
             if (endTime < bp.startTime){
@@ -303,6 +310,9 @@ var BreakPointCtrl = function($scope) {
             }
             $scope.video.pauseVideo()
             $scope.onCurrentSlider = true;
+
+            // update the db
+            $scope.updateBreakpointsData();
         }
     }
 
@@ -311,6 +321,7 @@ var BreakPointCtrl = function($scope) {
         if (bp != undefined){
             var startTime = $scope.video.getTime();
             var oldStartTime = bp.startTime;
+            if (startTime == oldStartTime) { return };
 
             if (startTime > bp.endTime){
                 bp.startTime = oldStartTime;
@@ -320,6 +331,9 @@ var BreakPointCtrl = function($scope) {
             }
             $scope.video.pauseVideo();
             $scope.onCurrentSlider = true;
+
+            // update the db
+            $scope.updateBreakpointsData();
         }
     }
 
@@ -327,10 +341,10 @@ var BreakPointCtrl = function($scope) {
         $scope.video.incTime(amount);
     }
 
-    $scope.clickedSaveBreakpoint = function(){
-        $scope.controls.clickedSaveBreakpoint();
+    // $scope.clickedSaveBreakpoint = function(){
+        // $scope.controls.clickedSaveBreakpoint();
         // $scope.addingBreakpoint = false;
-    }
+    // }
 
     // ===== Feedback functionality ==== //
 
@@ -339,13 +353,20 @@ var BreakPointCtrl = function($scope) {
     $scope.breakpointNameUpdate = function($event, bp){
         console.log(bp.toString());
         console.log($event.toString());
+        // get the new name
+
+        // update the db
+        // $scope.updateBreakpointsData();
     }
 
     // ======= Saving and updating functionality === //
 
     $scope.updateBreakpointsData = function(){
         if (videoDBID != undefined){
+            console.log("Updating database");
             $scope.bpPlayer.updateBreakpointsData(videoDBID);
+        } else {
+            $scope.bpPlayer.saveBreakpointsLocal();
         }
     }
 

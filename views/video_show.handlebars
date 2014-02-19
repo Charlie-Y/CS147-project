@@ -4,7 +4,6 @@
     {{!-- {{> menubar}} --}}
     <!-- All the html and stuff goes here -->
 
-      <!-- <iframe id="myYTPlayer" type="text/html" width="640" height="385" src="http://www.youtube.com/embed/moSFlvxnbgk?enablejsapi=1&version=3" allowfullscreen frameborder="0" id="iframePlayer">  </iframe>  -->
 
 <!--  <script type="text/javascript" src="/js/swfobject.js"></script>    
   <div id="ytapiplayer">
@@ -33,7 +32,12 @@ http://stackoverflow.com/questions/7988476/listening-for-youtube-event-in-javasc
         <div class="player-main">
             <div class="player-video-id" data-video-id="{{ytid}}"></div>
             <div class="iframe-wrapper">
-                <div class="player-iframe" id="player-iframe"> Video loading! Sit tight</div>
+                {{#if video}}
+                    <iframe id="player-iframe" type="text/html" width="640" height="385" src="http://www.youtube.com/embed/{{ytid}}?enablejsapi=1&version=3&controls=0" allowfullscreen frameborder="0" id="iframePlayer">  </iframe> 
+                {{else }}
+                    <div class="player-iframe" id="player-iframe">     Video loading! Sit tight</div>
+                {{/if}}
+
             </div>
             <div class="player-controls">
                 <div class="slider-breakpoints" ng-model='breakpoints'>
@@ -94,6 +98,10 @@ http://stackoverflow.com/questions/7988476/listening-for-youtube-event-in-javasc
     {{/if}}
     {{#if video}}
         var videoDBID = "{{{video._id}}}";
+        var videoDB = {{{json video}}};
+    {{else}}
+        var videoDBID = undefined;
+        var videoDB = undefined;
     {{/if}}
 
     </script>

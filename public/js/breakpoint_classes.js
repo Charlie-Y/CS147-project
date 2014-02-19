@@ -3,10 +3,7 @@
 
 /* Higher priority todos */
 
-// Todo make the loaders and savers hit the database - first set up a database
-// todo - time easing functionality - modify existing segmnts bit by bit
-    // like - move forward half a second, move backwards half a second etc..
-    // disable buttons that don't work now. 
+// Todo make the loaders and savers hit the database 
 // todo - make it work on mobile
 
 
@@ -118,9 +115,9 @@ var BreakPointPlayer = new JS.Class({
         // USE_DEV_BREAKPOINTS: true,
 
         CONTROLS: 0, // 0 for no default youtube controls, 1 for youtube controls
-        AUTOPLAY: true
+        AUTOPLAY: true,
 
-        
+        LOCAL_VIDS: "some_key"
 
         // ====== Class methods ====== //
 
@@ -291,7 +288,7 @@ var BreakPointPlayer = new JS.Class({
         $breakpointContainer.width(sideNavWidth);
         $breakpointContainer.height(totalHeight - stats.MENU_HEIGHT);
 
-        $breakpoint.css('height',breakpointHeight);
+        // $breakpoint.css('height',breakpointHeight);
 
     },
 
@@ -403,7 +400,11 @@ var BreakPointPlayer = new JS.Class({
         if (BreakPointPlayer.USE_DEV_BREAKPOINTS){
             rawBreakpoints =  BreakPoint.devBreakpoints();
         } else {
-            rawBreakpoints = breakpointData; // loaded in page by handlebars
+            if (this.usingDBVideo()){
+                rawBreakpoints = breakpointData; // loaded in page by handlebars
+            } else {
+                rawBreakpoints = this.getBreakpointsLocal();
+            }
         }
         for (var i = rawBreakpoints.length - 1; i >= 0; i--) {
             var raw = rawBreakpoints[i]
@@ -427,6 +428,11 @@ var BreakPointPlayer = new JS.Class({
         return {breakpoints: dbBreakpoints};
     },
 
+    usingDBVideo: function(){
+        return videoDB != undefined;
+        // defined in video_show.handlebars. not very modular
+    },
+
     updateBreakpointsData: function(videoId) {
         var id = videoId;
         var data = this.exportBreakpoints();
@@ -437,8 +443,32 @@ var BreakPointPlayer = new JS.Class({
     updatedBreakpointsCallback: function( data, status){
         console.log("status: " + status); 
         // console.log("response data " + JSON.stringify(data));
-    }
+    },
 
+    // uses local storage to save for videos that don't have breakpoints
+    saveBreakpointsLocal: function(){
+        // console.log("saving local breakpoints");
+        if (localStorage.videos == undefined){
+            localStorage.videos = JSON.stringify({}) //  a hash of video ids to breakpoint arrays
+        }
+        var updatedVideos = JSON.parse(localStorage.videos);
+        var ytId = this.video.ytId;
+        updatedVideos[ytId] = this.breakpoints;
+        localStorage.videos = JSON.stringify(updatedVideos);
+    },
+
+    getBreakpointsLocal: function (){
+        if (localStorage.videos == undefined){
+            localStorage.videos = JSON.stringify({}) //  a hash of video ids to breakpoint arrays
+        }
+        // console.log("loading local breakpoints");
+        var bps = JSON.parse(localStorage.videos)[this.video.ytId];
+        if (bps == undefined){
+            return []
+        } else {
+            return (bps);
+        }
+    }
 
 });
 
@@ -831,7 +861,7 @@ var BreakPointVideo = new JS.Class({
         this.youtubePlayer = youtubePlayer;
     },
     onPlayerReady: function (event) {
-        // console.log("onPlayerReady");
+        console.log("onPlayerReady");
         // console.log(event.target.breakPointVideo.toString());
         // event.target.stopVideo();   
         // event.target.playVideo();  
@@ -1182,7 +1212,7 @@ function onYouTubePlayerReady(playerId) {
 // I'll figure out scopes later..
 // I really want to move this into one of the classes but i have problems...
 function onYouTubeIframeAPIReady() {
-    // console.log("onYouTubeIframeAPIReady");
+    console.log("onYouTubeIframeAPIReady");
     var player;
     var video = BreakPointVideo.getMainInstance();
     player = new YT.Player(video.elementId, {
