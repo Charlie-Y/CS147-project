@@ -105,14 +105,11 @@
     #player .slider-breakpoint-icon.to-remove {
       color: #ff0000; }
   #player .control-buttons {
-    padding-left: 10px;
-    padding-bottom: 8px;
-    padding-top: 8px;
     position: relative; }
   #player .control-button {
     font-size: 1.2em;
     display: inline-block;
-    padding: 5px 7px;
+    padding: 15px 12px;
     padding-top: 0px; }
   #player .control-button .fa {
     cursor: pointer;

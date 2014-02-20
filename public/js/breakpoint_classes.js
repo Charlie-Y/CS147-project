@@ -337,8 +337,8 @@ var BreakPointPlayer = new JS.Class({
         var thisPlayer = this;
         window.addEventListener("orientationchange", function(){
             console.log("orientationchange");
-            setTimeout(function(){
-            thisPlayer.fitToScreen($(window)
+            setTimeout( function(){
+                thisPlayer.fitToScreen($(window));
             }, 500);
         });
     },
