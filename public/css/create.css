@@ -21,10 +21,10 @@
 .placeholder .instruction {
      text-align: center;
      color: white;
-     font-size: 18pt;
+     font-size: 16pt;
      position: absolute;
      top: 130px;
-     padding: 20px;
+     padding: 10px;
      width: 100%;
      font-weight: 300;
 }
