@@ -8,6 +8,7 @@ var http = require('http');
 var path = require('path');
 var handlebars = require('express3-handlebars');
 var sass = require('node-sass');
+var create = require('./routes/create');
 
 var mongoose = require("mongoose");
 var uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/test';
@@ -101,7 +102,10 @@ app.get('/playlist', playlist.view);
 app.post('/playlist', playlist.search);
 
 app.get('/help', help.view);
+app.post('/create', create.add);
 app.get('/create', create.view);
+//????
+//????
 app.get('/createsetlist', createsetlist.view);
 app.post('/createsetlist', createsetlist.create);
 

@@ -15,3 +15,5 @@ var Video = new mongoose.Schema({
 Video.index( { keyword: 1 } );
 
 module.exports.Video = Video;
+
+exports.Video = mongoose.model('Video', Video);
