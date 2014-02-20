@@ -6,3 +6,5 @@ var Setlist = new mongoose.Schema({
 });
 
 module.exports.Setlist = Setlist;
+
+exports.Setlist = mongoose.model('Setlist', Setlist);

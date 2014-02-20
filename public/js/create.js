@@ -1,10 +1,10 @@
-
-
-
-
 //Okay, so the showResponse function contains all the AJAX code and Youtube API search goes that is triggered when the
 //button is clicked. So far I can display a list of videos, but the positioning is off and I haven't linked it to another
 //project yet.
+
+var finalResponse;
+var i;
+
 function showResponse(response) {
     var responseString = JSON.stringify(response, '', 2);
   	console.log(response.items[0].snippet.thumbnails.default.url);
@@ -12,19 +12,20 @@ function showResponse(response) {
     console.log(responseString);
  	function loadXMLDoc() {
  		var xmlhttp;
+        var request;
  		if(window.XMLHttpRequest){
  			xmlhttp=new XMLHttpRequest();
  		}else {
  			xmlhttp = newActiveXObject("Microsoft.XMLHTTP");
  		}
-
+        finalResponse = response;
    		var html = "<div class='guide'> Click on a video to add breakpoints </div>";
     	for(i = 0; i < (response.items).length; i++) {
     		//I tried to teach myself Ajax (before today's lecture), and so I basically created a container, 
     		//div and used a thumbnail image, description, and title, to identify the project. I was a little confused
     		//about what we wanted to extract from the user click. Do we want to return the video id? Do we want
     		//to go to the Youtube url for the user to view the video? Would love your input!
-    		html += '<a href="/video"><div class="videoitem"> \
+    		html += '<a onclick = "addData('+i+');"><div class="videoitem"> \
                 <div class="thumbnails" style="background: url('+response.items[i].snippet.thumbnails.high.url+'); background-size: cover"> \
                     <div class="over"><span class="helper"></span><span class="glyphicon glyphicon glyphicon-plus"></span></div> \
                 </div> \
@@ -39,6 +40,16 @@ function showResponse(response) {
  	}
 }
 
+function addData(i) {
+    $.post("/create", finalResponse.items[i], callBack2);
+}
+
+ function callBack2(result) {
+    console.log(result);
+    window.location.href = "/video/"+result;
+//    alert(result);
+ }
+
 // Called automatically when JavaScript client library is loaded.
 function onClientLoad() {
     gapi.client.load('youtube', 'v3', onYouTubeApiLoad);
@@ -48,7 +59,7 @@ function onClientLoad() {
 function onYouTubeApiLoad() {
     // This API key is intended for use only in this lesson.
     // See http://goo.gl/PdPA1 to get a key for your own applications.
-    gapi.client.setApiKey('AIzaSyBIuxGStWI52F5QUf88lV8HHl3hy8Qo3JU');
+    gapi.client.setApiKey('AIzaSyBCvmFiLUeMX4TXRMI7Ep26vO066nVyByg');
     //gapi.client.setApiKey('AIzaSyBCvmFiLUeMX4TXRMI7Ep26vO066nVyByg');
 
 }
@@ -122,6 +133,4 @@ $(document).ready(function() {
             $(value).css({opacity: 0.0}).animate({opacity: 1.0}, random);
         });
     });
-
-
 })
