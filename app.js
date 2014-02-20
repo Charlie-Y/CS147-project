@@ -45,7 +45,7 @@ var create = require('./routes/create');
 var setlist = require('./routes/setlist');
 var createsetlist = require('./routes/createsetlist');
 var addtosetlist = require('./routes/addtosetlist');
-
+var editsetlist = require('./routes/editsetlist');
 
 // Example route
 // var user = require('./routes/user');
@@ -102,8 +102,12 @@ app.post('/playlist', playlist.search);
 
 app.get('/help', help.view);
 app.get('/create', create.view);
+
 app.get('/createsetlist', createsetlist.view);
 app.post('/createsetlist', createsetlist.create);
+
+app.get('/editsetlist/:setlistId', editsetlist.view);
+app.post('/editsetlist/:setlistId', editsetlist.edit);
 
 app.get('/addtosetlist/:setlistId', addtosetlist.view);
 app.post('/addtosetlist/:setlistId', addtosetlist.add);

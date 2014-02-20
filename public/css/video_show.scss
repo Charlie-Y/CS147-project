@@ -161,8 +161,7 @@ $BREAKPOINT_HEIGHT: 45px;
         position:absolute;
         cursor: pointer;
         left:0;
-        font-size: 1.2em;
-        top: -10px;
+        top: -15px;
         z-index: $slider-breakpoint-z;
     }
 
@@ -192,7 +191,7 @@ $BREAKPOINT_HEIGHT: 45px;
 
     .slider-breakpoint-icon{
         cursor:pointer;
-        font-size: 20px;
+        font-size: 25px;
         // figure out transitions etc. 
         color: #eeeeee;
         &:active{
@@ -211,16 +210,16 @@ $BREAKPOINT_HEIGHT: 45px;
     }
 
     .control-buttons{
-        padding-left:10px;
-        padding-bottom: 8px;
-        padding-top:8px;
+        // padding-left:10px;
+        // padding-bottom: 8px;
+        // padding-top:8px;
         position: relative;
     }
 
     .control-button{
         font-size: 1.2em; // todo responsive
         display: inline-block;
-        padding:5px 7px;
+        padding:15px 12px;
         padding-top:0px;
     }
     // all icons in the button bar

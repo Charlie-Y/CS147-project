@@ -81,8 +81,7 @@
     position: absolute;
     cursor: pointer;
     left: 0;
-    font-size: 1.2em;
-    top: -10px;
+    top: -15px;
     z-index: 4; }
   #player .slider-breakpoint-img.active, #player .slider-breakpoint-img:hover {
     border: solid 2px #ff0000;
@@ -96,7 +95,7 @@
     color: #2920f5; }
   #player .slider-breakpoint-icon {
     cursor: pointer;
-    font-size: 20px;
+    font-size: 25px;
     color: #eeeeee; }
     #player .slider-breakpoint-icon:active {
       color: #0000ff; }
@@ -105,14 +104,11 @@
     #player .slider-breakpoint-icon.to-remove {
       color: #ff0000; }
   #player .control-buttons {
-    padding-left: 10px;
-    padding-bottom: 8px;
-    padding-top: 8px;
     position: relative; }
   #player .control-button {
     font-size: 1.2em;
     display: inline-block;
-    padding: 5px 7px;
+    padding: 15px 12px;
     padding-top: 0px; }
   #player .control-button .fa {
     cursor: pointer;

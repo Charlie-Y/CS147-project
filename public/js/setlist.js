@@ -8,11 +8,11 @@ $(document).ready(function() {
 	$(".removebutton").each(function() {
 		new Remove($(this));
 	});
+
 })
 
-/*
- * Function that is called when the document is ready.
- */
+
+
 function initializePage() {
 	new RemoveButton($(".remove"));
 	new Delete($("#delete"));
