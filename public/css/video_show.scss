@@ -161,8 +161,7 @@ $BREAKPOINT_HEIGHT: 45px;
         position:absolute;
         cursor: pointer;
         left:0;
-        font-size: 1.2em;
-        top: -10px;
+        top: -15px;
         z-index: $slider-breakpoint-z;
     }
 
@@ -192,7 +191,7 @@ $BREAKPOINT_HEIGHT: 45px;
 
     .slider-breakpoint-icon{
         cursor:pointer;
-        font-size: 20px;
+        font-size: 25px;
         // figure out transitions etc. 
         color: #eeeeee;
         &:active{
