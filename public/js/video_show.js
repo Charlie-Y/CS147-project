@@ -7,19 +7,19 @@ var bpPlayer; // GLOBAL MUAHHAHAHA
 var app = angular.module("BreakPoint", []);
 
 
-var BreakPointCtrl = function($scope) {
+var BreakPointCtrl = function($scope, $timeout) {
     
     // ==== Class static constants ====//
 
     var NO_CURRENT = undefined;
 
-    $scope.breakpoints = [];
-    $scope.currentBreakpoint = NO_CURRENT;
-    $scope.segmentDisplayBreakpoints = [];
-    $scope.loopOnCurrent = false;
-    $scope.onCurrentSlider = false;
+    $scope.breakpoints = []; // just the bpPlayer.breakpoints
+    $scope.currentBreakpoint = NO_CURRENT; // current breakpoint 
+    $scope.segmentDisplayBreakpoints = []; // breakpoints that get to display green bars
+    $scope.loopOnCurrent = false; // 
+    $scope.onCurrentSlider = false; // helps determine if looping should happen
 
-    window.$scope = $scope;
+    window.$scope = $scope; // for the sake of console access.
 
     $(document).ready(function() {
         initializePage();
@@ -351,19 +351,37 @@ var BreakPointCtrl = function($scope) {
     // ===== Breakpoint renaming stuff // 
 
     $scope.breakpointNameUpdate = function($event, bp){
-        console.log(bp.toString());
-        console.log($event.toString());
-        // get the new name
+        // console.log("breakpointNameUpdate");
+        var newName = $.trim($event.srcElement.textContent);
+        bp.desc = newName;
+        $timeout(function () { $scope.updateBreakpointsData(); }, 0, false);
 
+        // console.log(bp.toString());
+        // console.log($event.toString());
+        // get the new name
         // update the db
         // $scope.updateBreakpointsData();
+    }
+
+    // this should be a directive you lazy basterd
+    $scope.blurOnEnter = function($event){
+        // console.log($event.toString());
+        // console.log("leaving textfield")
+        var keyCode = $event.keyCode;
+        if (keyCode == 13){
+            // $event.srcElement.blur();
+            $timeout(function () { $event.target.blur() }, 0, false);
+            $event.preventDefault();
+            return false;
+        }
+
     }
 
     // ======= Saving and updating functionality === //
 
     $scope.updateBreakpointsData = function(){
         if (videoDBID != undefined){
-            console.log("Updating database");
+            // console.log("Updating database");
             $scope.bpPlayer.updateBreakpointsData(videoDBID);
         } else {
             $scope.bpPlayer.saveBreakpointsLocal();

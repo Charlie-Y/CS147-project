@@ -199,7 +199,8 @@ $BREAKPOINT_HEIGHT: 45px;
             color:#0000ff;
         }
         &:hover{
-            @extend %active-slider-breakpoint-icon;
+            color:#000080;
+            // @extend %active-slider-breakpoint-icon;
         }
         &.to-remove{
             color: #ff0000;
@@ -418,10 +419,10 @@ $BREAKPOINT_HEIGHT: 45px;
 }
 
 .breakpoint-empty{
-    color: #e6e6e6;
+    color: #5F5F5F;
     text-align: center;
     padding: 8px 5px;
-    display: inline-block;
+    display: block;
 }
 
 .complaint{
