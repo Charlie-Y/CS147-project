@@ -101,6 +101,7 @@ app.get('/playlist', playlist.view);
 app.post('/playlist', playlist.search);
 
 app.get('/help', help.view);
+app.post('/create', create.add);
 app.get('/create', create.view);
 
 app.get('/createsetlist', createsetlist.view);
