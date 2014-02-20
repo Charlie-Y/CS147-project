@@ -165,7 +165,8 @@ var BreakPointPlayer = new JS.Class({
         this.callback = options.callback || function(){};
 
         this.video.breakPointPlayer = this;
-        this.setResizeListeners();
+        // this.setResizeListeners();
+        this.setOrientationListeners();
         this.breakpoints = [];
         this.breakpointsById = {};
 
@@ -315,6 +316,14 @@ var BreakPointPlayer = new JS.Class({
     setResizeListeners: function(){
         var thisPlayer = this;
         $(window).on('resize', function(){
+           thisPlayer.fitToScreen($(window));
+        });
+    },
+
+    setOrientationListeners: function(){
+        var thisPlayer = this;
+        window.addEventListener("orientationchange", function(){
+            console.log("orientationchange");
            thisPlayer.fitToScreen($(window));
         });
     },
