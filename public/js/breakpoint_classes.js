@@ -986,7 +986,13 @@ var BreakPointVideo = new JS.Class({
 
     gotoBreakPoint: function(breakPoint){
         var timeInSeconds = breakPoint.startTime;
+        // because pausing breaks for some reason
+        // on mobile
+        this.playVideo();
+
         this.seekTo(timeInSeconds, true);
+
+
     },
 
     // ======== Other control methods === //
