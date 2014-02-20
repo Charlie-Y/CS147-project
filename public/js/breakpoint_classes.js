@@ -20,7 +20,7 @@
 //  9) zooming broken or something
 //  10) replay once finished is broken
 //  11) slider clicking calculations are all off...
-// 12) doesn't work on s4?
+//  12) doesn't work on s4?
 
 /* Lower priority todos*/ //lower because they are easier and more relevant
 
