@@ -13,12 +13,14 @@
 //  3) youtube does not provide .5x playback speed. 
 //  4) the keyboard calls the resize listeners 
 //  5) content-editable does not work. 
-// deslecting current breakpiont does not work
-// buttons too small or somthing
+//  6) deslecting current breakpiont does not work
+//  7) buttons too small or somthing
     // should be resized on tablet
-// angular not loading on first
-// zooming broken or something
-// replay once finished is broken
+//  8) angular not loading on first
+//  9) zooming broken or something
+//  10) replay once finished is broken
+//  11) slider clicking calculations are all off...
+// 12) doesn't work on s4?
 
 /* Lower priority todos*/ //lower because they are easier and more relevant
 
@@ -911,7 +913,7 @@ var BreakPointVideo = new JS.Class({
         // console.log("State Cued: " + YT.PlayerState.CUED);
         if (event.data == YT.PlayerState.ENDED ){
             // console.log("video ended");
-            player.playVideo();
+            // player.playVideo();
         }
         if ((event.data == YT.PlayerState.PLAYING ) && !video.firstPlay){
         // if (!video.firstPlay){
