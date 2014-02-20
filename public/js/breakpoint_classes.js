@@ -6,11 +6,19 @@
 // Todo make the loaders and savers hit the database 
 // todo - make it work on mobile
 
+// Mobile only problems
+
 //  1) seeking to parts while the video is paused doesn't work and breaks the page. 
 //  2) incrementing .1s does not work at all. - b/c the pause crash
 //  3) youtube does not provide .5x playback speed. 
 //  4) the keyboard calls the resize listeners 
 //  5) content-editable does not work. 
+// deslecting current breakpiont does not work
+// buttons too small or somthing
+    // should be resized on tablet
+// angular not loading on first
+// zooming broken or something
+// replay once finished is broken
 
 /* Lower priority todos*/ //lower because they are easier and more relevant
 
@@ -329,7 +337,9 @@ var BreakPointPlayer = new JS.Class({
         var thisPlayer = this;
         window.addEventListener("orientationchange", function(){
             console.log("orientationchange");
-           thisPlayer.fitToScreen($(window));
+            setTimeout(function(){
+            thisPlayer.fitToScreen($(window)
+            }, 500);
         });
     },
 
