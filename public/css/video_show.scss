@@ -249,11 +249,14 @@ $BREAKPOINT_HEIGHT: 45px;
         }
     }
     .control-pauseplay{
-        font-size: 13px;
+        // font-size: 13px;
+        font-size:1.2em;
+
     }
 
     .control-button.playback-button{
-        font-size: 11px;
+        // font-size: 11px;
+        font-size:1.1em;
     }
 
     .control-time{
@@ -280,7 +283,7 @@ $BREAKPOINT_HEIGHT: 45px;
     }
 
     .fa.with-text{
-        font-size: .8em;
+        font-size: 1.2em;
         text-align: center;
         display: block;
         position: relative;

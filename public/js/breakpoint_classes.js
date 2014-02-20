@@ -6,6 +6,11 @@
 // Todo make the loaders and savers hit the database 
 // todo - make it work on mobile
 
+//  1) seeking to parts while the video is paused doesn't work and breaks the page. 
+//  2) incrementing .1s does not work at all. - b/c the pause crash
+//  3) youtube does not provide .5x playback speed. 
+//  4) the keyboard calls the resize listeners 
+//  5) content-editable does not work. 
 
 /* Lower priority todos*/ //lower because they are easier and more relevant
 
