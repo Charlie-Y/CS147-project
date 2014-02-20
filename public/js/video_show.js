@@ -232,9 +232,9 @@ var BreakPointCtrl = function($scope, $timeout) {
             // if they playbackrate isn't given by the youtube api
             // then we can bootstrap this with some janky ass shit
             // for the slow down speeds. speed up not so much
-            if ( rate == .25 | rate == .5){
-                return true;
-            }
+            // if ( rate == .25 | rate == .5){
+            //     return true;
+            // }
         }
         return false;
     }
@@ -308,7 +308,7 @@ var BreakPointCtrl = function($scope, $timeout) {
             } else {
                 bp.endTime = endTime;
             }
-            $scope.video.pauseVideo()
+            // $scope.video.pauseVideo()
             $scope.onCurrentSlider = true;
 
             // update the db
@@ -329,7 +329,7 @@ var BreakPointCtrl = function($scope, $timeout) {
             } else {
                 bp.startTime = startTime;
             }
-            $scope.video.pauseVideo();
+            // $scope.video.pauseVideo();
             $scope.onCurrentSlider = true;
 
             // update the db
