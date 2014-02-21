@@ -46,8 +46,12 @@ function addData(i) {
 
  function callBack2(result) {
     console.log(result);
-    window.location.href = "/video/"+result;
-//    alert(result);
+    $(".notification .message").html("Breakpoint video has been created <br/> and will be played shortly...");
+    $(".notification").fadeIn(function() {
+        setTimeout(function() {
+            window.location.href = "/video/"+result;
+        }, 2000);
+    });
  }
 
 // Called automatically when JavaScript client library is loaded.
@@ -59,8 +63,8 @@ function onClientLoad() {
 function onYouTubeApiLoad() {
     // This API key is intended for use only in this lesson.
     // See http://goo.gl/PdPA1 to get a key for your own applications.
-    gapi.client.setApiKey('AIzaSyBCvmFiLUeMX4TXRMI7Ep26vO066nVyByg');
     //gapi.client.setApiKey('AIzaSyBCvmFiLUeMX4TXRMI7Ep26vO066nVyByg');
+    gapi.client.setApiKey('AIzaSyBIuxGStWI52F5QUf88lV8HHl3hy8Qo3JU');
 
 }
 // LOCAL KEY: gapi.client.setApiKey('AIzaSyBCvmFiLUeMX4TXRMI7Ep26vO066nVyByg');

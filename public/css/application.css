@@ -9,12 +9,36 @@ h1, h2, h3, h4, h5, h6, p {
      color: white;
 }
 
+.Lilcontainer {
+     width: 20%;
+     margin-top: 60px;
+     margin-left: auto;
+     margin-right: auto;
+     padding: 10px;
+}
+
 .container {
      width: 90%;
      margin-top: 60px;
      margin-left: auto;
      margin-right: auto;
      padding: 10px;
+}
+
+.position{
+    position:relative;
+    margin-left: 35%;
+    margin-right: 50%;
+}
+
+#overlap{
+    margin-top:10px;
+    font-size:16px;
+    position:relative;
+    font-family: 'Source Sans Pro', sans-serif;
+    text-align:center;
+    padding:20px;
+
 }
 
 .menubar {
@@ -32,6 +56,17 @@ h1, h2, h3, h4, h5, h6, p {
      left: 0;
      top: 0;
      z-index: 10000;
+}
+
+.btn-circle {
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  padding: 6px;
+  background-color: #303030;
+  font-size: 12px;
+  line-height: 1.42;
+  border-radius: 100%;
 }
 
 .menubar a {
