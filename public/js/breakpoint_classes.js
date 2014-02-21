@@ -173,8 +173,8 @@ var BreakPointPlayer = new JS.Class({
         this.callback = options.callback || function(){};
 
         this.video.breakPointPlayer = this;
-        // this.setResizeListeners();
-        this.setOrientationListeners();
+        this.setResizeListeners();
+        // this.setOrientationListeners();
         this.breakpoints = [];
         this.breakpointsById = {};
 
