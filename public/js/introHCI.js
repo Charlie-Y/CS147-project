@@ -10,4 +10,22 @@ $(document).ready(function() {
  */
 function initializePage() {
 	// add any functionality and listeners you want here
+	$(".circleContainerContainer #clicker1").click(function() {
+			document.getElementById("clicker1").src = "/images/CREATEGREEN.png";
+			var adjusted = $(this).width();
+			$(".circleContainerContainer #1").animate({left: '27%'});
+			$(".circleContainerContainer #2").animate({right: '12%'});
+	});
+	$(".circleContainerContainer #clicker2").click(function() {
+			document.getElementById("clicker2").src = "/images/RECENTLYCREATED.png";
+			var adjusted = $(this).width();
+			$(".circleContainerContainer #3").animate({left: '27%'});
+			$(".circleContainerContainer #4").animate({right: '12%'});
+	});
+	$(".circleContainerContainer #clicker3").click(function() {
+			var adjusted = $(this).width();
+			document.getElementById("clicker3").src = "/images/MIDDLE.png";
+			$(".circleContainerContainer #5").animate({left: '27%'});
+			$(".circleContainerContainer #6").animate({right: '12%'});
+	});
 }
