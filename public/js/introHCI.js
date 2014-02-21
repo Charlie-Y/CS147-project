@@ -13,19 +13,19 @@ function initializePage() {
 	$(".circleContainerContainer #clicker1").click(function() {
 			document.getElementById("clicker1").src = "/images/CREATEGREEN.png";
 			var adjusted = $(this).width();
-			$(".circleContainerContainer #1").animate({left: '27%'});
-			$(".circleContainerContainer #2").animate({right: '12%'});
+			$(".circleContainerContainer #1").animate({left: '25%'});
+			$(".circleContainerContainer #2").animate({right: '25%'});
 	});
 	$(".circleContainerContainer #clicker2").click(function() {
 			document.getElementById("clicker2").src = "/images/RECENTLYCREATED.png";
 			var adjusted = $(this).width();
-			$(".circleContainerContainer #3").animate({left: '27%'});
-			$(".circleContainerContainer #4").animate({right: '12%'});
+			$(".circleContainerContainer #3").animate({left: '25%'});
+			$(".circleContainerContainer #4").animate({right: '25%'});
 	});
 	$(".circleContainerContainer #clicker3").click(function() {
 			var adjusted = $(this).width();
 			document.getElementById("clicker3").src = "/images/MIDDLE.png";
-			$(".circleContainerContainer #5").animate({left: '27%'});
-			$(".circleContainerContainer #6").animate({right: '12%'});
+			$(".circleContainerContainer #5").animate({left: '25%'});
+			$(".circleContainerContainer #6").animate({right: '25%'});
 	});
 }
