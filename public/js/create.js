@@ -46,13 +46,12 @@ function addData(i) {
 
  function callBack2(result) {
     console.log(result);
-    $(".notification .message").html("Breakpoint video has been created and will be played shortly...");
+    $(".notification .message").html("Breakpoint video has been created <br/> and will be played shortly...");
     $(".notification").fadeIn(function() {
         setTimeout(function() {
             window.location.href = "/video/"+result;
-        }, 1500);
+        }, 2000);
     });
-//    alert(result);
  }
 
 // Called automatically when JavaScript client library is loaded.
