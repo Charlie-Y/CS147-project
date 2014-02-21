@@ -3,44 +3,37 @@
 
 /* Higher priority todos */
 
-// Todo make the loaders and savers hit the database 
-// todo - make it work on mobile
+//  1) MOBILE seeking to parts while the video is paused doesn't work and breaks the page. 
+//  2) MOBILE incrementing .1s does not work at all. - b/c the pause crash
+//  3) MOBILE youtube does not provide slower playback speed. 
+//  5) MOBILE cannot edit breakpoints - content-editable does not work. 
+//  11) MOBILE doesn't work on s4
 
-// Mobile only problems
+/* Medium priority todos*/ //lower because they are easier and more relevant
 
-//  1) seeking to parts while the video is paused doesn't work and breaks the page. 
-//  2) incrementing .1s does not work at all. - b/c the pause crash
-//  3) youtube does not provide .5x playback speed. 
-//  4) the keyboard calls the resize listeners 
-//  5) content-editable does not work. 
-//  6) deslecting current breakpiont does not work
-//  7) buttons too small or somthing
-    // should be resized on tablet
-//  8) angular not loading on first
-//  9) zooming broken or something
-//  10) replay once finished is broken
-//  11) slider clicking calculations are all off...
-//  12) doesn't work on s4?
+//  4) MOBILE the keyboard calls the resize listeners - resize properly
 
-/* Lower priority todos*/ //lower because they are easier and more relevant
+//  6) MOBILE deslecting current breakpiont animation
+//  7) MOBILE buttons too small or somthing
+//  8) MOBILE angular not loading on first
+//  10) MOBILE replay once finished is broken
+//  11) MOBILE doesn't work on s4?
 
-// todo - drag and preview functionality
+// todo - Tutorial material
 // todo - scroll to breakpoint
-// todo - display todos on blankness
-// todo - css resize fonts 
-// todo - edit breakpoint names
-// todo - hide side nav button
-// todo - max breakpoints?
+// todo - hide side nav buttons
 // todo - show feedback on various things, like edits etx. 
-// todo - don't overwrite breakpoint fields that done't need to be
 
 /* Lowest priority todos */
 
+//  9) MOBILE zooming broken or something
+
+// todo - drag and preview functionality
+// todo - max breakpoints?
 // todo - maybe impossibly get image thumbnails. based on the dimensions of the final,
     // this might not actually be necessary
 // todo - show buffered times...
 // todo - hover and show times
-    // mobile focus
 // todo - set max aspect ratio on player
 // todo - create draggable element at end of filled slider
 // mark as finished / hide breakpoints 
