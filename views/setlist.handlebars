@@ -25,7 +25,9 @@
 
 	<div class="container">
 		<div class="setlisttitle">{{title}}</div>
-		<div class="setlistdescription">{{description}}</div>
+		<div class="setlistdescription">{{description}}<span class="editbutton" onclick="window.location='/editsetlist/{{setlistId}}'">EDIT</span></div>
+
+
 		<div class="add" onclick="window.location='/addtosetlist/{{setlistId}}'">
 			<div class="ic"><span class="helper"></span><span class="glyphicon glyphicon-plus"></span></div>
 			<div class="icw">ADD<div class="small">videos</div></div>

@@ -124,3 +124,13 @@
 	visibility: hidden;
 	font-size: 1pt;
 }
+
+.editbutton {
+	font-weight: 700;
+	margin-left: 12px;
+	padding: 1px 6px 1px 6px;
+	background: #eb006f;
+	color: #202020;
+	font-size: 11pt;
+	border-radius: 3px;
+}
