@@ -15,25 +15,27 @@
 <body>
 	<img id="jumbo" src="/images/breakdance.gif"/>
 	<img id="logo" src="/images/logo.png"/>
-	<div class="menu">
-		{{#each videos}}
-		<li>{{title}}</li>
-		{{/each}}
-		<a href="/create">
-			<div class="menu-button" id="button1">
-				<span class="glyphicon glyphicon-facetime-video"></span><span class="menu-text"> CREATE</div>
-			</div>
-		</a>
-		<a href="/playlist">
-			<div class="menu-button" id="button2">
-				<span class="glyphicon glyphicon glyphicon-play-circle"></span><span class="menu-text"> PLAY </div>
-			</div>
-		</a>
-		<a href="/help">
-			<div class="menu-button"  id="button3">
-				<span class="glyphicon glyphicon-question-sign"></span><span class="menu-text"> HOW TO </div>
-			</div>
-		</a>
+	<div class="container">
+		<div class="menu">
+			{{#each videos}}
+			<li>{{title}}</li>
+			{{/each}}
+			<a href="/create">
+				<div class="menu-button" id="button1">
+					<span class="glyphicon glyphicon-facetime-video"></span><span class="menu-text"> CREATE</span>
+				</div>
+			</a>
+			<a href="/playlist">
+				<div class="menu-button" id="button2">
+					<span class="glyphicon glyphicon glyphicon-play-circle"></span><span class="menu-text"> PLAY </span>
+				</div>
+			</a>
+			<a href="/help">
+				<div class="menu-button"  id="button3">
+					<span class="glyphicon glyphicon-question-sign"></span><span class="menu-text"> HOW TO </span>
+				</div>
+			</a>
+		</div>
 	</div>
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="/js/bootstrap.min.js"></script>

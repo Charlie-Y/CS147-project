@@ -12,17 +12,14 @@
 }
 
 .container {
-	width: 95%;
+	margin-top: 8%;
+	width: 100%;
 	background-color: none;
 	text-align: center;
 }
 
 h4 {
 	text-shadow: 1px 1px 1px #ffffff;
-}
-
-.menu {
-	margin-top: 45px;
 }
 
 .menu-button {

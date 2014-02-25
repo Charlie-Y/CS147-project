@@ -170,6 +170,7 @@
     right: 0;
     z-index: 5; }
   #player .player-menu {
+    height: 50px;
     color: #cccccc;
     text-align: center;
     padding-top: 5px;
@@ -189,7 +190,7 @@
   #player .player-breakpoints {
     display: block;
     overflow-y: auto;
-    height: 290px;
+    height: 270px;
     width: 130px; }
 
 .breakpoints-ul {
