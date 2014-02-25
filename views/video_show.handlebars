@@ -1,8 +1,11 @@
 <body id="container">
 
 <div id="landscape-view">
+
+
     {{!-- {{> menubar}} --}}
     <!-- All the html and stuff goes here -->
+    
 
 
 <!--  <script type="text/javascript" src="/js/swfobject.js"></script>    
@@ -54,11 +57,10 @@ http://stackoverflow.com/questions/7988476/listening-for-youtube-event-in-javasc
             </div>
         </div>
         <div class="player-sidenav">
-            <a href="" onclick="history.go(-1);return false;">
+            {{> playmenu}}
                 <div class="player-menu" >
-                    Back 
+                    MENU
                 </div>
-            </a> 
             <div class="player-breakpoints" id="player-breakpoints"> 
                 <ul class='breakpoints-ul'>
                     <li class="breakpoint-li">
@@ -114,5 +116,6 @@ http://stackoverflow.com/questions/7988476/listening-for-youtube-event-in-javasc
     <script src="/js/jsclass_core.js"></script>
     <script src="/js/breakpoint_classes.js"></script>
     <script src="/js/video_show.js"></script>
+    <script src="/js/playmenu.js"></script>
 
 </body>
