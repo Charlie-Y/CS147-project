@@ -30,7 +30,8 @@
 }
 .guide {
      line-height: 1.5;
-     margin-bottom: 30px;
+     margin-top:10px;
+     margin-bottom: 20px;
      background: url('/images/diamond.png');
      background-size: contain;
      background-position: center;
