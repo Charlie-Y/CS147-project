@@ -6,7 +6,6 @@ $(document).ready(function() {
 	initializePage();
 });
 
-
 function DeleteVideo(button) {
 	button.click(function() {
 		var jqxhr = $.get(document.URL.replace("confirm", ""))
