@@ -7,16 +7,16 @@ exports.view = function(req, res){
 };
 
 exports.add = function(req, res) {
-	 //console.log("at first");
      var video = req.body.id.videoId;
-     //console.log(video);
      var title = req.body.snippet.title;
-     //console.log(title);
      var desc = req.body.snippet.description;
      var thumbnail = req.body.snippet.thumbnails.high.url;
-     //console.log(desc);
+
+     var sanitized_title = title.toLowerCase().replace(/[{}()"'*.,#@_]/g, '');
+     var sanitized_desc = desc.toLowerCase().replace(/[{}()"'*.,#@_]/g, '');
+     var keyword = sanitized_title.split(" ").concat(sanitized_desc.split(" "));
      console.log(req.body);
-     Video.create ({description: desc, title: title, youtubeid: video, imageURL: thumbnail}, function (err, Video) {
+     Video.create ({description: desc, title: title, youtubeid: video, imageURL: thumbnail, created: Date.now(), keyword: keyword}, function (err, Video) {
      	if(err) console.log(err);
      	console.log(Video);
      	res.json(Video._id);

@@ -402,7 +402,7 @@ $BREAKPOINT_HEIGHT: 45px;
 }
 
 .breakpoint{
-    @include cp-transition-all(0.4s);
+    @include cp-transition-all(0.1s);
     max-height: $BREAKPOINT_HEIGHT;
     display: block;
     font-size: .8em;

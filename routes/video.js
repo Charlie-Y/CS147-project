@@ -18,7 +18,8 @@ exports.watchVideo = function(req, res){
         data.cssFiles = 
             [
                {filename: 'video_show.css'},
-                {filename:'font-awesome.min.css'}
+                {filename:'font-awesome.min.css'},
+                {filename: 'playmenu.css'}
             ];
         data.videoId = videoId;
         data.helpers = {
@@ -37,12 +38,14 @@ exports.watchVideo = function(req, res){
          //    res.render('video_show',data);
 
          // })
-        Video.find({_id: videoId}, function (err, video) {
-            data.video = video[0];
-            console.log(data);
-            data.ytid = data.video.youtubeid;
-           // /* MongoDB operations are asynchronous! So call render.send in a callback after db operation is complete. Otherwise, the page will be rendered before data gets returned. */
-            res.render('video_show',data);
+        Video.update({_id: videoId}, {lastWatched: Date.now()}, function (err, result) {
+            Video.find({_id: videoId}, function (err, video) {
+                data.video = video[0];
+                console.log(data);
+                data.ytid = data.video.youtubeid;
+               // /* MongoDB operations are asynchronous! So call render.send in a callback after db operation is complete. Otherwise, the page will be rendered before data gets returned. */
+                res.render('video_show',data);
+            });
         });
     } else {
         res.render('video_show',

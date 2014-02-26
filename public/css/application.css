@@ -9,6 +9,14 @@ h1, h2, h3, h4, h5, h6, p {
      color: white;
 }
 
+.Lilcontainer {
+     width: 20%;
+     margin-top: 60px;
+     margin-left: auto;
+     margin-right: auto;
+     padding: 10px;
+}
+
 .container {
      width: 90%;
      margin-top: 60px;
@@ -23,23 +31,6 @@ h1, h2, h3, h4, h5, h6, p {
     margin-right: 50%;
 }
 
-.Lilcontainer {
-     width: 20%;
-     margin-top: 60px;
-     margin-left: auto;
-     margin-right: auto;
-     padding: 10px;
-}
-
-
-#greenCircle{
-    width:150px;
-    height:150px;
-    border-radius: 100%;
-    text-align:center;
-    background-color: #303030;
-}
-
 #overlap{
     margin-top:10px;
     font-size:16px;
@@ -48,41 +39,6 @@ h1, h2, h3, h4, h5, h6, p {
     text-align:center;
     padding:20px;
 
-}
-
-.circleContainerContainer {
-    position:relative;
-    top:0;
-}
-
-.greenCircleContainer{
-    position:relative;
-    width:30%;
-    margin-left: 35%;
-    margin-right: 50%;
-    margin-bottom:10px;
-    z-index:2;
-}
-
-.circleContainer{
-    position:absolute;
-    top:0;
-    width:30%;
-    margin-left: 35%;
-    margin-right: 50%;
-    margin-bottom:10px;
-    z-index:1;
-}
-
-
-.helpContainer {
-    position:relative;
-    width:50%;
-    margin-top: 10px;
-    margin-left: 25%;
-    margin-right: 50%;
-    padding: 5px;
-    z-index:0;
 }
 
 .menubar {
@@ -151,7 +107,7 @@ input:focus {
     width: 90%;
     background: rgba(255,255,255,0.87);
     text-align: center;
-    font-size: 14pt;
+    font-size: 12.5pt;
     left: 5%;
     border-radius: 5px;
     padding: 15px;

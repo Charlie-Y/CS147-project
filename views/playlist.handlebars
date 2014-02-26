@@ -42,6 +42,7 @@
 							</div>
 
 							<div class="title">{{title}}</div>
+							<div class="description-button"><span class="glyphicon glyphicon-chevron-right"></span> Show Description</div>
 							<div class="description"> {{description}} </div>
 						</div>
 					{{/each}}
@@ -64,6 +65,7 @@
 							</div>
 						</a>
 							<div class="title">{{title}}</div>
+							<div class="description-button"><span class="glyphicon glyphicon-chevron-right"></span> Show Description</div>
 							<div class="description"> {{description}} </div>
 						</div>
 					{{/each}}
@@ -88,7 +90,7 @@
 							<div class="setlistvideos">
 								<div class="setlistnum">[ {{setlistvids.length}} videos ] </div>
 								{{#setlistvids}}
-								<div class="setlistvideo" onclick="window.location='/video'">{{title_of this}}</div>
+								<div class="setlistvideo" onclick="window.location='/video/{{this}}'">{{title_of this}}</div>
 								{{/setlistvids}}
 							</div>
 							<div class="add" onclick="window.location='/addtosetlist/{{_id}}'"><span class="glyphicon glyphicon-plus-sign"></span> ADD TO SETLIST</div>

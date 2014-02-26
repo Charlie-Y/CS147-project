@@ -192,3 +192,7 @@ hr {
 	line-height: 180px;
 	font-size: 40pt;
 }
+
+.description-button .glyphicon {
+     color: #f70048;
+}

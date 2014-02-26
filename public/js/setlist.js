@@ -9,6 +9,12 @@ $(document).ready(function() {
 		new Remove($(this));
 	});
 
+    $(".description-button").click(function() {
+        console.log("hello");
+        $(this).fadeOut(function() {
+            $(this).next().fadeIn();
+        });
+    });
 })
 
 

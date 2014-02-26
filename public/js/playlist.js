@@ -11,6 +11,13 @@ $(document).ready(function() {
 	$("#query").on('keypress', stopRKey);
 
 	$("#backToFullList").css("display", "none");
+
+    $(".description-button").click(function() {
+        console.log("hello");
+        $(this).fadeOut(function() {
+            $(this).next().fadeIn();
+        });
+    });
 })
 
 function textfieldListener() {
@@ -58,12 +65,20 @@ function searchVideo() {
 							</div>\
 						</a>\
 							<div class="title">'+video.title+'</div>\
+							<div class="description-button"><span class="glyphicon glyphicon-chevron-right"></span> Show Description</div> \
 							<div class="description">'+video.description+'</div>\
 						</div>';
 						html += newitem;
 					}
 				}
 				$(".searchlist").html(html);
+
+			    $(".description-button").click(function() {
+			        console.log("hello");
+			        $(this).fadeOut(function() {
+			            $(this).next().fadeIn();
+			        });
+			    });
 
 				$('<div/>', {
 				    text: 'Search results:',

@@ -19,26 +19,37 @@ function showResponse(response) {
  			xmlhttp = newActiveXObject("Microsoft.XMLHTTP");
  		}
         finalResponse = response;
-   		var html = "<div class='guide'> Click on a video to add breakpoints </div>";
+   		var html = "<div class='guide'> Which tutorial <br/> would you like to follow? </div>";
     	for(i = 0; i < (response.items).length; i++) {
     		//I tried to teach myself Ajax (before today's lecture), and so I basically created a container, 
     		//div and used a thumbnail image, description, and title, to identify the project. I was a little confused
     		//about what we wanted to extract from the user click. Do we want to return the video id? Do we want
     		//to go to the Youtube url for the user to view the video? Would love your input!
-    		html += '<a onclick = "addData('+i+');"><div class="videoitem"> \
-                <div class="thumbnails" style="background: url('+response.items[i].snippet.thumbnails.high.url+'); background-size: cover"> \
+    		html += '<div class="videoitem"> \
+                <div class="thumbnails" onclick = "addData('+i+');" style="background: url('+response.items[i].snippet.thumbnails.high.url+'); background-size: cover"> \
                     <div class="over"><span class="helper"></span><span class="glyphicon glyphicon glyphicon-plus"></span></div> \
                 </div> \
                 <div class="title">'+response.items[i].snippet.title+'</div> \
-    			<div class="description">'+response.items[i].snippet.description+'</div> \
-    			</div></a>';
+    			<div class="description-button"><span class="glyphicon glyphicon-chevron-right"></span> Show Description</div> \
+                <div class="description">'+response.items[i].snippet.description+'</div> \
+    			</div>';
  		}
+
         html += '<a href="#top"><div id="gobacktop"> GO BACK TO TOP <span class="glyphicon glyphicon-arrow-up"></span></div></a>';
  		$(".container").html(html);
  		xmlhttp.open("GET","create",true);
 		xmlhttp.send();
+
+        $(".description-button").click(function() {
+            console.log("hello");
+            $(this).fadeOut(function() {
+                $(this).next().fadeIn();
+            });
+        });
+
  	}
 }
+
 
 function addData(i) {
     $.post("/create", finalResponse.items[i], callBack2);
@@ -46,8 +57,12 @@ function addData(i) {
 
  function callBack2(result) {
     console.log(result);
-    window.location.href = "/video/"+result;
-//    alert(result);
+    $(".notification .message").html("Breakpoint video has been created <br/> and will be played shortly...");
+    $(".notification").fadeIn(function() {
+        setTimeout(function() {
+            window.location.href = "/video/"+result;
+        }, 2000);
+    });
  }
 
 // Called automatically when JavaScript client library is loaded.
@@ -59,8 +74,8 @@ function onClientLoad() {
 function onYouTubeApiLoad() {
     // This API key is intended for use only in this lesson.
     // See http://goo.gl/PdPA1 to get a key for your own applications.
-    gapi.client.setApiKey('AIzaSyBCvmFiLUeMX4TXRMI7Ep26vO066nVyByg');
     //gapi.client.setApiKey('AIzaSyBCvmFiLUeMX4TXRMI7Ep26vO066nVyByg');
+    gapi.client.setApiKey('AIzaSyBIuxGStWI52F5QUf88lV8HHl3hy8Qo3JU');
 
 }
 // LOCAL KEY: gapi.client.setApiKey('AIzaSyBCvmFiLUeMX4TXRMI7Ep26vO066nVyByg');
@@ -133,4 +148,6 @@ $(document).ready(function() {
             $(value).css({opacity: 0.0}).animate({opacity: 1.0}, random);
         });
     });
+
+    $('.bg').css('height', ($(window).height() - 100) + 'px');
 })

@@ -1,7 +1,6 @@
 .help {
-     margin-top: 100px;
+    margin-top: 80px;
 }
-
 
 .Lilcontainer {
      width: 20%;
@@ -11,23 +10,12 @@
      padding: 10px;
 }
 
-
 #greenCircle{
     width:150px;
     height:150px;
     border-radius: 100%;
     text-align:center;
     background-color: #303030;
-}
-
-#overlap{
-    margin-top:10px;
-    font-size:16px;
-    position:relative;
-    font-family: 'Source Sans Pro', sans-serif;
-    text-align:center;
-    padding:20px;
-
 }
 
 .circleContainerContainer {
@@ -39,8 +27,8 @@
     position:relative;
     width:30%;
     margin-left: 35%;
-    margin-right: 50%;
-    margin-bottom:10px;
+    margin-right: 35%;
+    margin-bottom:60px;
     z-index:2;
 }
 
@@ -49,18 +37,12 @@
     top:0;
     width:30%;
     margin-left: 35%;
-    margin-right: 50%;
+    margin-right: 35%;
     margin-bottom:10px;
     z-index:1;
 }
 
-
 .helpContainer {
-    position:relative;
-    width:50%;
-    margin-top: 10px;
-    margin-left: 25%;
-    margin-right: 50%;
-    padding: 5px;
-    z-index:0;
+    width:80%;
+    margin-left: 10%;
 }
