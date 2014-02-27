@@ -126,7 +126,11 @@ function AddToSetlist(button) {
 		} else {
 			var jqxhr = $.post(document.URL, { 'newvids': values })
 				.done(function(data) {
-					$(".notification .message").text(values.length + " videos have been added");
+					if (values.length == 1) {
+						$(".notification .message").text(values.length + " video has been added");
+					} else {
+						$(".notification .message").text(values.length + " videos have been added");
+					}
 					$(".notification").fadeIn(function() {
 						setTimeout(function() {
 							window.location.href = "/setlist/" + data.setlistId + "#bottom";

@@ -46,6 +46,7 @@ var setlist = require('./routes/setlist');
 var createsetlist = require('./routes/createsetlist');
 var addtosetlist = require('./routes/addtosetlist');
 var editsetlist = require('./routes/editsetlist');
+var editvideo = require('./routes/editvideo');
 
 // Example route
 // var user = require('./routes/user');
@@ -109,6 +110,12 @@ app.post('/createsetlist', createsetlist.create);
 
 app.get('/editsetlist/:setlistId', editsetlist.view);
 app.post('/editsetlist/:setlistId', editsetlist.edit);
+
+app.get('/editvideo/:videoId', editvideo.view);
+app.post('/editvideo/:videoId', editvideo.edit);
+app.get('/editvideo/deleteconfirm/:videoId', editvideo.deleteconfirm);
+app.get('/editvideo/delete/:videoId', editvideo.delete);
+
 
 app.get('/addtosetlist/:setlistId', addtosetlist.view);
 app.post('/addtosetlist/:setlistId', addtosetlist.add);

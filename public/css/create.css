@@ -28,6 +28,15 @@
      width: 100%;
      font-weight: 300;
 }
+.guide {
+     line-height: 1.5;
+     margin-top:10px;
+     margin-bottom: 20px;
+     background: url('/images/diamond.png');
+     background-size: contain;
+     background-position: center;
+     background-repeat: no-repeat;
+}
 
 .placeholder .suggestions {
      text-align: center;
@@ -67,4 +76,8 @@
 
 #gobacktop {
      color: #ee5259;
+}
+
+.description-button .glyphicon {
+     color: #f70048;
 }

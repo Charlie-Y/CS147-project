@@ -18,7 +18,8 @@ exports.watchVideo = function(req, res){
         data.cssFiles = 
             [
                {filename: 'video_show.css'},
-                {filename:'font-awesome.min.css'}
+                {filename:'font-awesome.min.css'},
+                {filename: 'playmenu.css'}
             ];
         data.videoId = videoId;
         data.helpers = {
