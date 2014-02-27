@@ -9,6 +9,14 @@
 //  5) MOBILE cannot edit breakpoints - content-editable does not work. 
 //  11) MOBILE doesn't work on s4
 
+// Usability
+
+// new icons for set end. 
+// disable add breakpoint
+// help tooltips
+// set a endtime on the breakpoint
+// feedback on clicking
+
 /* Medium priority todos*/ //lower because they are easier and more relevant
 
 //  4) MOBILE the keyboard calls the resize listeners - resize properly
@@ -460,7 +468,7 @@ var BreakPointPlayer = new JS.Class({
     },
 
     updatedBreakpointsCallback: function( data, status){
-        console.log("status: " + status); 
+        // console.log("status: " + status); 
         // console.log("response data " + JSON.stringify(data));
     },
 

@@ -165,7 +165,8 @@ $BREAKPOINT_HEIGHT: 45px;
         z-index: $slider-breakpoint-z;
     }
 
-    %active-slider-breakpoint-img{// can't extend nested selectors
+    %active-slider-breakpoint-img{
+    // cant extend nested selectors
         border: solid 2px #ff0000;
         top:-2px;
         left:-2px;
@@ -185,7 +186,8 @@ $BREAKPOINT_HEIGHT: 45px;
         // background:white;
     }
 
-    %active-slider-breakpoint-icon{// can't extend nested selectors
+    %active-slider-breakpoint-icon{
+    // can't extend nested selectors
         color:#2920f5;
     }
 
@@ -219,7 +221,7 @@ $BREAKPOINT_HEIGHT: 45px;
     .control-button{
         font-size: 1.2em; // todo responsive
         display: inline-block;
-        padding:15px 12px;
+        padding:15px 10px;
         padding-top:0px;
     }
     // all icons in the button bar
