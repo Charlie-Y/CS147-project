@@ -14,8 +14,12 @@ exports.edit = function(req, res) {
 	var videoId = req.params.videoId;
 	title = req.body.title;
 	description = req.body.description;
+    
+    var sanitized_title = title.toLowerCase().replace(/[{}()"'*.,#@_]/g, '');
+    var sanitized_desc = desc.toLowerCase().replace(/[{}()"'*.,#@_]/g, '');
+    var keyword = sanitized_title.split(" ").concat(sanitized_desc.split(" "));
 
-	Video.update({'_id':videoId}, {$set: {title: title, description: description}}, function (err, video) {
+	Video.update({'_id':videoId}, {$set: {title: title, description: description, keyword: keyword}}, function (err, video) {
 		if (err) console.log(err);
 		console.log(videoId);
 		res.json({"_id": videoId});
