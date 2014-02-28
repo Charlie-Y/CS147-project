@@ -133,6 +133,7 @@ var BreakPointCtrl = function($scope, $timeout) {
 
     $scope.clickedLoopOnCurrent = function(event){
         $scope.loopOnCurrent = !$scope.loopOnCurrent;
+        $scope.onCurrentSlider = true;
     }
 
     // ====== Slider display methods ===== //
@@ -294,6 +295,7 @@ var BreakPointCtrl = function($scope, $timeout) {
         $scope.updateBreakpointsData();
     }
 
+    // todo - move these into the breakpoint_classes.js
     $scope.clickedSetEndTime = function(){
         var bp = $scope.currentBreakpoint;
         if (bp != undefined){

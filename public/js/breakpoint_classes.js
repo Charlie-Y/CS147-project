@@ -714,7 +714,12 @@ var BreakPointVideoControls = new JS.Class({
     clickedAddBreakpoint: function(event){
         // var totallyValidId = Math.floor(Math.random() * 38902);
         var time = Math.round(this.getVideo().getTime());
-        var endTime = this.maxTime();
+
+        // make the loop smaller 
+        var endTime = time + 3;
+        if (endTime > this.maxTime()){
+            endTime = this.maxTime();
+        }
 
         var bp = new BreakPoint(time, endTime, "New Breakpoint" , -1);
         this.breakPointPlayer.addBreakPointWithUpdate(bp);
